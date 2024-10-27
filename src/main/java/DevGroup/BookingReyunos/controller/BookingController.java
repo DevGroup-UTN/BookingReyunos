@@ -27,7 +27,7 @@ public class BookingController {
         BookingDTO newBooking = bookingService.createBooking(bookingDTO);
         return new ResponseEntity<>(newBooking, HttpStatus.CREATED);
     }
-    @GetMapping("/booking/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<BookingDTO> findBookingById(@PathVariable Integer id) {
         Optional<BookingDTO> booking = bookingService.findBookingById(id);
         return booking.map(ResponseEntity::ok)
@@ -39,8 +39,8 @@ public class BookingController {
         return ResponseEntity.ok(bookings);
     }
     @PutMapping("/booking/{id}")
-    public ResponseEntity<BookingDTO> updateBooking(@PathVariable Integer id,@RequestBody BookingDTO bookingDetailsDTO, @RequestParam BigDecimal dailyRate){
-        Optional<BookingDTO> updateBooking = bookingService.updateBooking(id,bookingDetailsDTO,dailyRate);
+    public ResponseEntity<BookingDTO> updateBooking(@PathVariable Integer id, @RequestBody BookingDTO bookingDetailsDTO) {
+        Optional<BookingDTO> updateBooking = bookingService.updateBooking(id, bookingDetailsDTO);
         return updateBooking.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

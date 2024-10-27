@@ -79,31 +79,35 @@ public class BookingService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<BookingDTO> updateBooking(Integer id, BookingDTO bookingDetailsDTO, BigDecimal dailyRate) {
+    public Optional<BookingDTO> updateBooking(Integer id, BookingDTO bookingDetailsDTO) {
         return bookingRepository.findById(id).map(existingBooking -> {
             // Convertir DTO a Entity para actualizar los detalles de la reserva
             existingBooking.setCheckInDate(bookingDetailsDTO.getCheckInDate());
             existingBooking.setCheckOutDate(bookingDetailsDTO.getCheckOutDate());
 
-            // Calcular el precio total
-            BigDecimal totalPrice = calcultotalPrice(bookingDetailsDTO.getCheckInDate(), bookingDetailsDTO.getCheckOutDate(), dailyRate);
+            // Calcular el precio total utilizando dailyRate desde el DTO
+            BigDecimal totalPrice = calcultotalPrice(
+                    bookingDetailsDTO.getCheckInDate(),
+                    bookingDetailsDTO.getCheckOutDate(),
+                    bookingDetailsDTO.getDailyRate()
+            );
             existingBooking.setTotalPrice(totalPrice);
+
             // Guardar la reserva actualizada
             Booking updatedBooking = bookingRepository.save(existingBooking);
+
             // Convertir la reserva actualizada a DTO y retornamos
             return convertBookingToDTO(updatedBooking);
         });
-
-
     }
     //Elimina una reserva desde la base de datos, devuelve un true si la reserva fue encontrada
     // y eliminado, o false si no la encontró
     public boolean deleteBooking(Integer id) {
-        if (bookingRepository.existsById(id)) {
-            bookingRepository.deleteById(id);
-            return true;
-        }
-        return false;
+            if (bookingRepository.existsById(id)) {
+                bookingRepository.deleteById(id);
+                return true;
+            }
+            return false;
     }
 
 }
