@@ -1,26 +1,22 @@
 package DevGroup.BookingReyunos.controller;
 
-import java.util.Date;
-
-import javax.crypto.SecretKey;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import DevGroup.BookingReyunos.dto.UserDTO;
+import DevGroup.BookingReyunos.repository.UserRepository;
 import DevGroup.BookingReyunos.dto.ForgotPasswordRequest;
 import DevGroup.BookingReyunos.dto.ResetPasswordRequest;
 import DevGroup.BookingReyunos.dto.LoginDTO;
-import DevGroup.BookingReyunos.dto.TokenDTO;
 import DevGroup.BookingReyunos.model.User;
 import DevGroup.BookingReyunos.security.JwtUtil;
 import DevGroup.BookingReyunos.service.UserService;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+import java.util.List;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/users")
@@ -32,6 +28,9 @@ public class UserController {
 
     @Value("${jwt.secret}")
     private String secretKey;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Autowired
     public UserController(UserService userService, JwtUtil jwtUtil) {
@@ -64,6 +63,20 @@ public class UserController {
         User user = userService.getUser(id);
         return ResponseEntity.ok(new UserDTO(user));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody UserDTO userDTO) {
+        Optional<User> updatedUser = userService.updateUser(id, userDTO);
+        return updatedUser.map(ResponseEntity::ok)
+                          .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
+    @PostMapping("/bulk")
+    public ResponseEntity<List<User>> getUsersByIds(@RequestBody List<Integer> guestIds) {
+        List<User> users = userRepository.findAllById(guestIds);
+        return ResponseEntity.ok(users);
+    }
+
 
     // Solicitud de restablecimiento de contraseña
     @PostMapping("/forgot-password")

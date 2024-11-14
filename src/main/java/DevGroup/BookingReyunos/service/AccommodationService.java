@@ -7,6 +7,7 @@ import DevGroup.BookingReyunos.model.User;
 import DevGroup.BookingReyunos.repository.AccommodationRepository;
 import DevGroup.BookingReyunos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,9 @@ public class AccommodationService {
 
     @Autowired
     private AccommodationRepository accommodationRepository;
+
+    @Value("${jwt.secret}")
+    private String secretKey;
 
     @Autowired
     private UserRepository userRepository; // Necesitamos el UserRepository

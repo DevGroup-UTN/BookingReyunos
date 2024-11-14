@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -34,8 +36,10 @@ public class User {
 
     // Relaciones
     @OneToMany(mappedBy = "owner")
+    @JsonManagedReference
     private List<Accommodation> accommodations;
     
     @OneToMany(mappedBy = "guest")
+    @JsonManagedReference
     private List<Booking> bookings;
 }

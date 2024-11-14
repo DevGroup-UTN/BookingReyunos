@@ -3,6 +3,9 @@ package DevGroup.BookingReyunos.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -19,9 +22,11 @@ public class Accommodation {
     private BigDecimal pricePerNight;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id") // Define la columna de la FK en la tabla accommodation
+    @JoinColumn(name = "owner_id")
+    @JsonBackReference
     private User owner;
 
-    @OneToMany(mappedBy = "accommodation", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "accommodation")
+    @JsonManagedReference
     private List<Booking> bookings;
 }
