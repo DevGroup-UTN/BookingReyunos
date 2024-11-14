@@ -1,13 +1,13 @@
 package DevGroup.BookingReyunos.controller;
 
 import DevGroup.BookingReyunos.dto.BookingDTO;
-import DevGroup.BookingReyunos.model.Booking;
+import DevGroup.BookingReyunos.security.JwtUtil;
 import DevGroup.BookingReyunos.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,19 +15,24 @@ import java.util.Optional;
 @RequestMapping("/booking")
 public class BookingController {
 
+    private final BookingService bookingService;
+    private final JwtUtil jwtUtil;
+
+    @Value("${jwt.secret}")
+    private String secretKey;
+
     @Autowired
-    BookingService bookingService;
-
-                                            //MÉTODOS
-
-
+    BookingController(BookingService bookingService, JwtUtil jwtUtil) {
+        this.bookingService = bookingService;
+        this.jwtUtil = jwtUtil;
+    }
 
     @PostMapping
     public ResponseEntity<BookingDTO> createBooking(@RequestBody BookingDTO bookingDTO) {
         BookingDTO newBooking = bookingService.createBooking(bookingDTO);
         return new ResponseEntity<>(newBooking, HttpStatus.CREATED);
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<BookingDTO> findBookingById(@PathVariable Integer id) {
         Optional<BookingDTO> booking = bookingService.findBookingById(id);
         return booking.map(ResponseEntity::ok)
@@ -38,14 +43,19 @@ public class BookingController {
         List<BookingDTO> bookings = bookingService.findAllBooking();
         return ResponseEntity.ok(bookings);
     }
-    @PutMapping("/booking/{id}")
+    @GetMapping("/accommodation/{accommodationId}")
+    public ResponseEntity<List<BookingDTO>> findBookingsByAccommodationId(@PathVariable Integer accommodationId) {
+        List<BookingDTO> bookings = bookingService.findBookingsByAccommodationId(accommodationId);
+        return ResponseEntity.ok(bookings);
+    }
+    @PutMapping("/{id}")
     public ResponseEntity<BookingDTO> updateBooking(@PathVariable Integer id, @RequestBody BookingDTO bookingDetailsDTO) {
         Optional<BookingDTO> updateBooking = bookingService.updateBooking(id, bookingDetailsDTO);
         return updateBooking.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/booking/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deleteBooking(@PathVariable Integer id){
         boolean isDeleted = bookingService.deleteBooking(id);
         if(isDeleted){

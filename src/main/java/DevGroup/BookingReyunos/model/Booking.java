@@ -3,10 +3,13 @@ package DevGroup.BookingReyunos.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Data;
 
@@ -22,9 +25,13 @@ public class Booking { // Esta clase entidad representa una reserva hecha por un
     private BigDecimal totalPrice;
 
     @ManyToOne
+    @JoinColumn(name = "guest_id", nullable = false)
+    @JsonBackReference
     private User guest;
 
     @ManyToOne
+    @JoinColumn(name = "accommodation_id", nullable = false)
+    @JsonBackReference
     private Accommodation accommodation;
 
 }

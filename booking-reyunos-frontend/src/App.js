@@ -39,9 +39,9 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/infraestructura" element={<Infraestructura />} />
             <Route path="/programas" element={<Programas />} />
-            <Route path="/" element={<LoginForm />} />
-            <Route path="/" element={<RegisterForm />} />
-            <Route path="/" element={<ForgotPassword />} />
+            <Route path="/login" element={<LoginForm />} />
+            <Route path="/register" element={<RegisterForm />} />
+            <Route path="/forgotpassword" element={<ForgotPassword />} />
           </Routes>
         </div>
         <Footer />

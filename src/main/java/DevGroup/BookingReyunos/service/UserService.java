@@ -1,6 +1,7 @@
 package DevGroup.BookingReyunos.service;
 
 import java.util.Date;
+import java.util.Optional;
 import java.util.UUID;
 import javax.crypto.SecretKey;
 
@@ -19,9 +20,6 @@ import DevGroup.BookingReyunos.exceptions.UserNotFoundException;
 import DevGroup.BookingReyunos.model.Role;
 import DevGroup.BookingReyunos.model.User;
 import DevGroup.BookingReyunos.repository.UserRepository;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 
 @Service
@@ -114,6 +112,24 @@ public class UserService {
         
         System.out.println("Token enviado a: " + email);
     }
+
+    public Optional<User> updateUser(Integer id, UserDTO userDTO) {
+        return userRepository.findById(id).map(existingUser -> {
+            // Actualizar campos solo si no están nulos en el UserDTO
+            if (userDTO.getUsername() != null) {
+                existingUser.setUsername(userDTO.getUsername());
+            }
+            if (userDTO.getEmail() != null) {
+                existingUser.setEmail(userDTO.getEmail());
+            }
+            if (userDTO.getRole() != null) {
+                existingUser.setRole(userDTO.getRole());
+            }
+            
+            return userRepository.save(existingUser);
+        });
+    }
+
 
     // Restablecer contraseña usando el token
     public void resetPassword(String token, String newPassword) {
