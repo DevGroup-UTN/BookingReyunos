@@ -30,16 +30,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Aplicar CORS
-                .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Habilitar CORS
+                .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para permitir autenticación basada en tokens
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**")
-                        .permitAll()
-                        .anyRequest().authenticated() // Bloquear el resto sin autenticación
+                        .requestMatchers("/**").permitAll()
+                        .anyRequest().authenticated() // Proteger cualquier otro endpoint, se requiere autenticación
                 )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // No usar
-                                                                                                              // sesiones
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class) // Filtro JWT
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // No usar sesiones
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class) // Añadir el filtro JWT
                 .build();
     }
 
@@ -55,14 +53,15 @@ public class SecurityConfig {
     }
 
     // Definir la configuración de CORS
+    // Configuración CORS para permitir solicitudes desde el frontend (React)
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:3001");
-        configuration.addAllowedMethod("*"); // Permitir todos los métodos
-        configuration.addAllowedHeader("*"); // Permitir todos los headers
-        configuration.setAllowCredentials(true);
-    
+        configuration.setAllowedOrigins(List.of("http://localhost:3001")); // Permitir el origen del frontend
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Permitir métodos específicos
+        configuration.setAllowedHeaders(List.of("*")); // Permitir todos los headers
+        configuration.setAllowCredentials(true); // Permitir credenciales
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;

@@ -1,11 +1,17 @@
 package DevGroup.BookingReyunos.service;
+
 import DevGroup.BookingReyunos.dto.BookingDTO;
-import DevGroup.BookingReyunos.model.Accommodation;
 import DevGroup.BookingReyunos.model.Booking;
-import DevGroup.BookingReyunos.repository.AccommodationRepository;
 import DevGroup.BookingReyunos.repository.BookingRepository;
+import DevGroup.BookingReyunos.model.User;
+import DevGroup.BookingReyunos.repository.UserRepository;
+import DevGroup.BookingReyunos.model.Accommodation;
+import DevGroup.BookingReyunos.repository.AccommodationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -20,100 +26,128 @@ public class BookingService {
     private BookingRepository bookingRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private AccommodationRepository accommodationRepository;
 
-    private BookingDTO convertBookingToDTO(Booking booking){
+    // Método para convertir de Booking (Entity) a BookingDTO
+    private BookingDTO convertBookingToDTO(Booking booking) {
         BookingDTO bookingDTO = new BookingDTO();
         bookingDTO.setId(booking.getId());
         bookingDTO.setTotalPrice(booking.getTotalPrice());
         bookingDTO.setCheckOutDate(booking.getCheckOutDate());
         bookingDTO.setCheckInDate(booking.getCheckInDate());
+        bookingDTO.setGuestId(booking.getGuest().getId());
+        bookingDTO.setAccommodationId(booking.getAccommodation().getId());
+        bookingDTO.setDailyRate(booking.getAccommodation().getPricePerNight()); // Daily rate del alojamiento
         return bookingDTO;
     }
 
-    private Booking convertBookingToEntity(BookingDTO bookingDTO){
+    // Método para convertir de BookingDTO a Booking (Entity)
+    private Booking convertBookingToEntity(BookingDTO bookingDTO) {
         Booking bookingEntity = new Booking();
         bookingEntity.setId(bookingDTO.getId());
-        bookingEntity.setTotalPrice(bookingDTO.getTotalPrice());
-        bookingEntity.setCheckOutDate(bookingDTO.getCheckOutDate());
         bookingEntity.setCheckInDate(bookingDTO.getCheckInDate());
+        bookingEntity.setCheckOutDate(bookingDTO.getCheckOutDate());
         return bookingEntity;
     }
 
-
-    //Método para calcular el precio en base a los días y la tarifa existente
-    public BigDecimal calcultotalPrice(LocalDate checkIn, LocalDate checkout, BigDecimal pricePorNight){
-        long days = ChronoUnit.DAYS.between(checkIn,checkout);
-        return pricePorNight.multiply(BigDecimal.valueOf(days));
+    // Método para calcular el precio total en base a los días y la tarifa diaria
+    public BigDecimal calcultotalPrice(LocalDate checkIn, LocalDate checkout, BigDecimal dailyRate) {
+        long days = ChronoUnit.DAYS.between(checkIn, checkout);
+        return dailyRate.multiply(BigDecimal.valueOf(days));
     }
 
+    // Método para crear una nueva reserva
     public BookingDTO createBooking(BookingDTO bookingDTO) {
-        // Convertimos de DTO a Entity
         Booking bookingEntity = convertBookingToEntity(bookingDTO);
 
-        Accommodation pricePerNightObj = new Accommodation();
-        // tarifa diaria
-        BigDecimal pricePerNight = pricePerNightObj.getPricePerNight();
+        // Obtener el Accommodation correspondiente al booking
+        Integer accommodationId = bookingDTO.getAccommodationId();
+        Optional<Accommodation> accommodation = accommodationRepository.findById(accommodationId);
+
+        if (accommodation.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Accommodation not found for the provided ID");
+        }
+
+        BigDecimal dailyRate = accommodation.get().getPricePerNight();
 
         // Calcular el precio total
-        BigDecimal totalPrice = calcultotalPrice(bookingEntity.getCheckInDate(), bookingEntity.getCheckOutDate(), pricePerNight);
+        BigDecimal totalPrice = calcultotalPrice(bookingEntity.getCheckInDate(), bookingEntity.getCheckOutDate(), dailyRate);
 
-        //guardar el precio total en entidad Booking
         bookingEntity.setTotalPrice(totalPrice);
+        bookingEntity.setAccommodation(accommodation.get());
 
-        // Guardar la reserva
         Booking savedBooking = bookingRepository.save(bookingEntity);
-
-        // Convertimos de Entity a DTO y devolvemos
         return convertBookingToDTO(savedBooking);
     }
 
+    // Método para buscar reservas por ID de alojamiento
+    public List<BookingDTO> findBookingsByAccommodationId(Integer accommodationId) {
+        List<Booking> bookings = bookingRepository.findByAccommodationId(accommodationId);
+        return bookings.stream()
+                .map(this::convertBookingToDTO)
+                .collect(Collectors.toList());
+    }
 
-    //Método para buscar reserva por ID
-    public Optional<BookingDTO> findBookingById(Integer id){
+    // Método para buscar una reserva por ID
+    public Optional<BookingDTO> findBookingById(Integer id) {
         return bookingRepository.findById(id).map(this::convertBookingToDTO);
     }
 
-    public List<BookingDTO> findAllBooking(){
+    // Método para obtener todas las reservas
+    public List<BookingDTO> findAllBooking() {
         List<Booking> bookings = bookingRepository.findAll();
         return bookings.stream()
                 .map(this::convertBookingToDTO)
                 .collect(Collectors.toList());
     }
 
-    public Optional<BookingDTO> updateBooking(Integer id, BookingDTO bookingDetailsDTO) {
+    // Método para actualizar una reserva existente
+    public Optional<BookingDTO> updateBooking(Integer id, BookingDTO bookingDetailsDTO) { 
         return bookingRepository.findById(id).map(existingBooking -> {
-            // Actualizar fechas de la reserva
             existingBooking.setCheckInDate(bookingDetailsDTO.getCheckInDate());
             existingBooking.setCheckOutDate(bookingDetailsDTO.getCheckOutDate());
-
-            // Obtener el alojamiento relacionado
-            Accommodation accommodation = accommodationRepository.findById(existingBooking.getAccommodation().getId())
-                    .orElseThrow(() -> new RuntimeException("Accommodation not found"));
-
-            // Obtener la tarifa diaria
-            BigDecimal pricePerNight = accommodation.getPricePerNight();
-
+    
+            // Obtener el usuario guest por guestId
+            Integer guestId = bookingDetailsDTO.getGuestId();
+            if (guestId != null) {
+                Optional<User> userGuest = userRepository.findById(guestId);
+                if (userGuest.isPresent()) {
+                    existingBooking.setGuest(userGuest.get());
+                } else {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Guest not found for the provided ID");
+                }
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Guest ID cannot be null");
+            }
+    
+            // Obtener el Accommodation correspondiente
+            Integer accommodationId = bookingDetailsDTO.getAccommodationId();
+            Optional<Accommodation> accommodation = accommodationRepository.findById(accommodationId);
+            if (accommodation.isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Accommodation not found for the provided ID");
+            }
+    
+            BigDecimal dailyRate = accommodation.get().getPricePerNight();
+    
             // Calcular el precio total
-            BigDecimal totalPrice =  calcultotalPrice(
+            BigDecimal totalPrice = calcultotalPrice(
                     bookingDetailsDTO.getCheckInDate(),
                     bookingDetailsDTO.getCheckOutDate(),
-                    pricePerNight
+                    dailyRate
             );
-
-            // Actualizar el precio total en la reserva
             existingBooking.setTotalPrice(totalPrice);
-
-            // Guardar la reserva actualizada
+            existingBooking.setAccommodation(accommodation.get());
+    
             Booking updatedBooking = bookingRepository.save(existingBooking);
-
-            // Convertir la reserva actualizada a DTO y retornar
             return convertBookingToDTO(updatedBooking);
         });
     }
+    
 
-    //Elimina una reserva desde la base de datos, devuelve un true si la reserva fue encontrada
-    // y eliminado, o false si no la encontró
+    // Método para eliminar una reserva por ID
     public boolean deleteBooking(Integer id) {
         if (bookingRepository.existsById(id)) {
             bookingRepository.deleteById(id);
@@ -121,5 +155,4 @@ public class BookingService {
         }
         return false;
     }
-
 }
