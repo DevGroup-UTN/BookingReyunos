@@ -31,6 +31,9 @@ public class BookingService {
     @Autowired
     private AccommodationRepository accommodationRepository;
 
+    @Autowired
+    private EmailService emailService;
+
     // Método para convertir de Booking (Entity) a BookingDTO
     private BookingDTO convertBookingToDTO(Booking booking) {
         BookingDTO bookingDTO = new BookingDTO();
@@ -79,7 +82,25 @@ public class BookingService {
         bookingEntity.setTotalPrice(totalPrice);
         bookingEntity.setAccommodation(accommodation.get());
 
+        // Guardar la reserva
         Booking savedBooking = bookingRepository.save(bookingEntity);
+
+        // Enviar correo de confirmación
+        String userEmail = userRepository.findById(bookingDTO.getGuestId())
+                .map(User::getEmail)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found for the provided ID"));
+
+        String subject = "Confirmación de Reserva";
+        String body = "Estimado usuario, su reserva ha sido confirmada con éxito.\n\n" +
+                "Detalles de la reserva:\n" +
+                "Alojamiento: " + accommodation.get().getName() + "\n" +
+                "Fecha de entrada: " + bookingDTO.getCheckInDate() + "\n" +
+                "Fecha de salida: " + bookingDTO.getCheckOutDate() + "\n" +
+                "Precio total: " + totalPrice + "\n\n" +
+                "Gracias por elegirnos.";
+
+        emailService.sendEmail(userEmail, subject, body);
+
         return convertBookingToDTO(savedBooking);
     }
 
@@ -149,10 +170,24 @@ public class BookingService {
 
     // Método para eliminar una reserva por ID
     public boolean deleteBooking(Integer id) {
-        if (bookingRepository.existsById(id)) {
+        Optional<Booking> bookingOptional = bookingRepository.findById(id);
+
+        if (bookingOptional.isPresent()) {
+            Booking booking = bookingOptional.get();
+
+            // Obtener el correo del usuario
+            String userEmail = booking.getGuest().getEmail();
+
+            // Eliminar la reserva
             bookingRepository.deleteById(id);
+
+            // Enviar correo de cancelación usando el método en EmailService
+            emailService.sendCancellationEmail(userEmail);
+
             return true;
         }
+
         return false;
     }
+
 }
