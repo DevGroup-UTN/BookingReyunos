@@ -1,50 +1,65 @@
+/* Asegúrate de que el body y el html ocupen todo el alto de la ventana */
+html, body {
+    height: 100%; /* Ocupa el 100% de la altura de la ventana */
+    margin: 0;
+    padding: 0;
+}
+
+/* El contenedor principal de la página debe ser flexible y ocupar todo el espacio disponible */
+.main-content {
+    min-height: 100%; /* Asegura que el contenido principal ocupe al menos la altura de la pantalla */
+    padding-bottom: 100px; /* Da espacio suficiente para el footer */
+}
+
+/* El footer debe estar al final de la página si el contenido es poco, pero desplazarse cuando haya suficiente contenido */
 footer {
     background-color: #333;
     display: flex;
-    flex-wrap: wrap; /* Permite que los divs se ajusten y pasen a la siguiente línea si no hay espacio */
+    flex-wrap: wrap;
     color: white;
-    padding: 0px 0;
+    padding: 0 0;
     width: 100%;
-    margin-top: 40px;
+    margin-top: auto; /* Esto empuja el footer al fondo si hay poco contenido */
+    position: relative; /* Asegura que no se mueva por encima de otros elementos */
 }
 
+/* Resto de tus estilos de footer (ya lo tienes bien configurado) */
 .footer-div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 33.4%; /* Cada div ocupa un tercio del footer */
+    width: 33.4%;
 }
 
 .footer-div-1{
     padding: 20px;
 }
 
-a{
+a {
     color: #f0f0f0;
     padding: 0 0.5em;
 }
 
 .footer-div-4 {
-    background-color: #212121; /* Color de fondo */
-    width: 100%; /* Ocupa toda la fila */
-    text-align: center; /* Centrar texto horizontalmente */
-    font-size: 0.75em; /* Tamaño de fuente */
-    padding: 20px; /* Espaciado interno */
-    margin-top: 20px; /* Espacio superior */
-    white-space: normal; /* Permite que el texto se divida en varias líneas */
+    background-color: #212121;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75em;
+    padding: 20px;
+    margin-top: 20px;
+    white-space: normal;
 }
 
 .icon-margin {
     margin-right: 0.5em;
 }
 
-/* Estilos específicos para el div de redes sociales */
 .footer-div.socials {
-    display: flex; 
-    flex-direction: row; /* Mantiene los íconos en una fila */
-    justify-content: center; /* Centra los íconos horizontalmente */
-    align-items: center; /* Alinea los íconos verticalmente */
-    gap: 20px; /* Espacio entre los íconos */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
 .footer-a {
@@ -63,12 +78,12 @@ a{
 }
 
 .social-icon:hover {
-    font-size: 4.3em; /* Aumenta el tamaño del icono al pasar el mouse */
-    color: #9e9e9e; /* Cambia a otro color al pasar el mouse */
+    font-size: 4.3em;
+    color: #9e9e9e;
 }
 
 .footer-img {
     max-height: 200px;
     max-width: 200px;
-    margin-top: 10px; /* Espacio superior para la imagen */
+    margin-top: 10px;
 }

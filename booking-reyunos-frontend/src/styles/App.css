@@ -1,56 +1,16 @@
+/* Estilo base */
+:root {
+  --font-color: #10148f;
+  --hover-color: #0000ff;
+}
+
 .App {
   text-align: center;
 }
 
-.h1 {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 2em;
-  text-align: center;
-  color: #ff3232;
-  margin-bottom: 20px;
-}
-
-.whatsapp {
-  width: 5vw; /* Ajusta el ancho para que sea igual al alto */
-  height: 5vw; /* Alto fijo */
-  display: flex;
-  position: fixed;
-  font-size: 40px; 
-  padding: 0;
-  bottom: 20px; /* Cambia según sea necesario */
-  right: 20px; /* Cambia según sea necesario */
-  background-color: rgb(21, 139, 15);
-  border-radius: 50%; /* Asegúrate de que sea 50% para un círculo */
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center; /* Centra el contenido verticalmente */
-  z-index: 1000; /* Asegura que el ícono esté por encima de otros elementos */
-}
-
-
-.accommodations-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 20px;
-  padding: 10px;
-}
-
-.accommodation {
-  display: flex;
-  align-items: flex-start;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 10px;
-  width: 700px;
-  background-color: #f9f9f9;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
 .close-button{
   border-radius: 50%;
-  background-color: #ff3232;
+  background-color: var(--font-color);
   color: #f9f9f9;
   padding: 0 5px;
   position: absolute;
@@ -60,56 +20,6 @@
   font-size: 24px;
   cursor: pointer;
   z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
-}
-
-.accommodation h3 {
-  margin: 10px 0 5px;
-  color: #ff3232;
-  font-size: 1.5em;
-  font-weight: bold;
-  text-align: left;
-}
-
-.accommodation-image {
-  width: 250px;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin: 0 20px;
-}
-
-.accommodation-details {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.accommodation p {
-  margin: 5px 0;
-  color: #555;
-}
-
-.accommodation:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.image-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.arrow-button {
-  background-color: transparent;
-  border: none;
-  font-size: 2em;
-  cursor: pointer;
-  margin: 0 5px;
-}
-
-.arrow-button:hover {
-  color: #ff3232;
 }
 
 /* Estilos para el formulario de Login */
@@ -137,7 +47,7 @@
 
 .login-form button {
   margin-top: 10px; /* Espacio superior */
-  background-color: #ff3232; /* Color de fondo */
+  background-color: var(--font-color); /* Color de fondo */
   color: white; /* Color del texto */
   border: none; /* Sin bordes */
   padding: 10px; /* Espaciado interno */
@@ -148,7 +58,7 @@
 }
 
 .login-form button:hover {
-  background-color: #e60000; /* Color de fondo al pasar el mouse */
+  background-color: var(--hover-color); /* Color de fondo al pasar el mouse */
 }
 
 .login-options {
@@ -156,13 +66,13 @@
 }
 
 .login-options a {
-  color: #ff3232; /* Color del enlace */
+  color: var(--font-color); /* Color del enlace */
   text-decoration: none; /* Sin subrayado */
   transition: color 0.3s ease; /* Transición suave para el color */
 }
 
 .login-options a:hover {
-  color: #e60000; /* Color del enlace al pasar el mouse */
+  color: var(--hover-color); /* Color del enlace al pasar el mouse */
 }
 
 /* Estilos para el formulario de Olvidé la Contraseña */
@@ -190,7 +100,7 @@
 
 .forgot-password-form button {
   margin-top: 10px; /* Espacio superior */
-  background-color: #ff3232; /* Color de fondo */
+  background-color: var(--font-color); /* Color de fondo */
   color: white; /* Color del texto */
   border: none; /* Sin bordes */
   padding: 10px; /* Espaciado interno */
@@ -202,12 +112,51 @@
 }
 
 .forgot-password-form button:hover {
-  background-color: #e60000; /* Color de fondo al pasar el mouse */
+  background-color: var(--hover-color); /* Color de fondo al pasar el mouse */
 }
 
 /* Mensaje de error o éxito */
 .forgot-password-form p {
   margin-top: 10px; /* Espacio superior */
-  color: #ff3232; /* Color del mensaje */
+  color: var(--font-color); /* Color del mensaje */
   font-weight: bold; /* Negrita */
+}
+
+
+.h1 {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 2em;
+  text-align: center;
+  color: var(--font-color);
+  margin-bottom: 20px;
+}
+
+.whatsapp {
+  width: 5vw; /* Ajusta el ancho para que sea igual al alto */
+  height: 5vw; /* Alto fijo */
+  display: flex;
+  position: fixed;
+  font-size: 40px;
+  padding: 0;
+  bottom: 20px; /* Cambia según sea necesario */
+  right: 20px; /* Cambia según sea necesario */
+  background-color: rgb(21, 139, 15);
+  border-radius: 50%; /* Asegúrate de que sea 50% para un círculo */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  z-index: 1000; /* Asegura que el ícono esté por encima de otros elementos */
+  transition: transform 0.3s ease; /* Animación para el ícono */
+}
+
+.whatsapp:hover {
+  transform: scale(1.1); /* Efecto de aumento cuando se pasa el cursor */
+}
+
+/* Ajustes para pantallas pequeñas (mobile-first) */
+@media (max-width: 768px) {
+  .whatsapp {
+    width: 60px; /* Tamaño fijo */
+    height: 60px; /* Tamaño fijo */
+    font-size: 30px; /* Ajustamos el tamaño del icono */
+  }
 }

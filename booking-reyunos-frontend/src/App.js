@@ -1,13 +1,13 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext'; // Importa el AuthProvider
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Terminos from './pages/Terminos';
+import MyAccommodation from './pages/MyAccommodation';
 import Privacidad from './pages/Privacidad';
 import Cookies from './pages/Cookies';
-import Accommodation from './components/Accommodation';
+import Accommodation from './pages/Accommodation';
 import Dashboard from './pages/Dashboard';
 import Contacto from './components/Contacto';
 import Infraestructura from './components/Infraestructura';
@@ -30,8 +30,9 @@ function App() {
             <FontAwesomeIcon icon={faWhatsapp} color="#f0f0f0" />
           </a>
           <Routes>
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home />} />
             <Route path="/accommodations" element={<Accommodation />} />
+            <Route path='/myAccommodations' element={<MyAccommodation />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/privacidad" element={<Privacidad />} />

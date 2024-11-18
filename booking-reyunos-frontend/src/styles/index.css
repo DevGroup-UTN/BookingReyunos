@@ -1,14 +1,26 @@
 /* Estilo base */
+:root{
+  --font-color: #10148f;
+  --hover-color: #0000ff;
+}
+
 body {
   margin: 0;
+  height: 100vh;
+  background-image: url('https://arqueogenetica.idevea.mendoza-conicet.gob.ar/wp-content/uploads/2024/05/Fusion1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(3, 1, 11, 0.925);
+  background-blend-mode: overlay;
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
 }
 
 /* Navbar */
 .navbar {
   display: flex;
   position: fixed;
+  height: 50px;
   top: 0;
   left: 0;
   width: 100%;
@@ -19,12 +31,11 @@ body {
   z-index: 1000; /* Asegura que esté encima del contenido */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra para separación visual */
 }
-/* Ajuste para evitar que la navbar se superponga con el contenido */
+
 .main-content {
-  margin-top: 60px; /* Espacio igual a la altura de la navbar */
+  margin-top: 80px; /* Espacio igual a la altura de la navbar */
 }
 
-/* Links alineados a la izquierda */
 .nav-links a {
   color: white;
   text-decoration: none;
@@ -32,7 +43,16 @@ body {
 }
 
 .nav-links a:hover {
-  color: #ff3232;
+  color: var(--font-color);
+  background-color: #ccc;
+  padding: 5px 8px;
+}
+
+.utn {
+  width: 100px;
+  color: var(--font-color);
+  height: 60px;
+  padding-right: 0;
 }
 
 /* Botón Login a la derecha */
@@ -46,7 +66,54 @@ body {
 }
 
 .login-button:hover {
-  color: #ff3232;
+  color: var(--font-color);
+}
+
+/* Menú desplegable del usuario */
+.user-info {
+  position: relative;
+  cursor: pointer;
+}
+
+.user-name {
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 8px;
+  margin-right: 40px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: rgb(161, 161, 161);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.dropdown-menu a,
+.dropdown-menu button {
+  color: var(--font-color);
+  font-size: 14px;
+  text-decoration: none;
+  padding: 8px 10px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.dropdown-menu a:hover,
+.dropdown-menu button:hover {
+  background-color: var(--hover-color);
+  color: white;
 }
 
 /* Sidebar del Login */
@@ -108,8 +175,16 @@ body {
     font-size: 2em; /* Aumentamos el tamaño para fácil acceso */
   }
 
-  .login-button{
-    content: "👤";
+  .login-button {
+    font-size: 1.5em; /* Aumentamos el tamaño del texto */
+  }
+
+  /* Cambiar el contenido a un icono en lugar de texto en móviles */
+  .login-button::before {
+    content: "👤"; /* Agregar el icono del usuario */
+    font-size: 1.5em;
+    display: inline-block;
+    margin-right: 8px;
   }
 
   .navbar {
