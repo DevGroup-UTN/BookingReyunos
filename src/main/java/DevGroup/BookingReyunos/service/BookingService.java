@@ -69,7 +69,8 @@ public class BookingService {
         // Obtener el Accommodation correspondiente al booking
         Integer accommodationId = bookingDTO.getAccommodationId();
         Optional<Accommodation> accommodation = accommodationRepository.findById(accommodationId);
-
+        Integer guestId = bookingDTO.getGuestId();
+        Optional<User> user = userRepository.findById(guestId);
         if (accommodation.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Accommodation not found for the provided ID");
         }
@@ -80,6 +81,7 @@ public class BookingService {
         BigDecimal totalPrice = calcultotalPrice(bookingEntity.getCheckInDate(), bookingEntity.getCheckOutDate(), dailyRate);
 
         bookingEntity.setTotalPrice(totalPrice);
+        bookingEntity.setGuest(user.get());
         bookingEntity.setAccommodation(accommodation.get());
 
         // Guardar la reserva
