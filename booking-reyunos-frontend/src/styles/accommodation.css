@@ -60,21 +60,21 @@
   }
   
   /* Contenedor para la imagen y botones */
-  .image-container {
+  .image-container-accommodation {
     margin-inline: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   
-  .arrow-button {
-    background-color: #00000085;
+  .arrow-button-accommodation {
+    background-color: #0008;
     border: none;
     color: var(--hover-color);
     font-size: 1.5em;
     border-radius: 5px;
-    margin-inline: -50.5px !important;
-    padding-inline: 5px;
+    margin-inline: -49px !important;
+    padding-inline: 7px;
     padding-top: 20px;
     padding-bottom: 20px;
     cursor: pointer;
@@ -82,7 +82,7 @@
     z-index: 10;
   }
   
-  .arrow-button:hover {
+  .arrow-button-accommodation:hover {
     color: #bbbbff;
   }
 

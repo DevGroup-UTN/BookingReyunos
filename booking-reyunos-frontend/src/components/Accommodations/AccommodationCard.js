@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import ReservationCalendar from './ReservationCalendar'; // Importar el componente del calendario
 
 function AccommodationCard({ accommodation, user }) {
@@ -46,14 +48,15 @@ function AccommodationCard({ accommodation, user }) {
 
   return (
     <div className="accommodation">
-      <div className="image-container">
-        <button onClick={prevImage} className="arrow-button">&#9664;</button>
+      <div className="image-container-accommodation">
+        <button onClick={prevImage} className="arrow-button-accommodation"><FontAwesomeIcon icon={faChevronLeft} /></button>
         <img 
           src={images[currentImageIndex]} 
           alt={accommodation.name} 
           className="accommodation-image"
         />
-        <button onClick={nextImage} className="arrow-button">&#9654;</button>
+        <button onClick={nextImage} 
+        className="arrow-button-accommodation"><FontAwesomeIcon icon={faChevronRight} /></button>
       </div>
       <div className="accommodation-details">
         <h3>{accommodation.name}</h3>
