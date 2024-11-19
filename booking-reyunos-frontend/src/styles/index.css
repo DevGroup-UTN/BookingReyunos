@@ -1,18 +1,22 @@
 /* Estilo base */
-:root{
+:root {
   --font-color: #10148f;
-  --hover-color: #0000ff;
+  --hover-color: #0044ff;
 }
 
-body {
+html, body {
+  height: 100%;
   margin: 0;
-  height: 100vh;
+  padding: 0;
+}
+body {
+  min-height: 100vh;
   background-image: url('https://arqueogenetica.idevea.mendoza-conicet.gob.ar/wp-content/uploads/2024/05/Fusion1.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgba(3, 1, 11, 0.925);
-  background-attachment: scroll;
+  background-attachment: scroll !important;
   background-blend-mode: overlay;
   font-family: Arial, sans-serif;
 }
@@ -167,6 +171,10 @@ body {
 
 /* Estilo para dispositivos móviles */
 @media (max-width: 768px) {
+  body, nav{
+    max-width: 100vw;
+  }
+
   .login-sidebar {
     width: 95%; /* Ocupa todo el ancho en móvil */
     padding: 15px; /* Reducimos padding para móviles */
@@ -182,7 +190,6 @@ body {
 
   /* Cambiar el contenido a un icono en lugar de texto en móviles */
   .login-button::before {
-    content: "👤"; /* Agregar el icono del usuario */
     font-size: 1.5em;
     display: inline-block;
     margin-right: 8px;

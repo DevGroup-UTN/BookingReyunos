@@ -44,11 +44,11 @@
 }
 
 .arrow-button:first-child {
-  left: 49px;
+  left: 0px;
 }
 
 .arrow-button:last-child {
-  right: 49px;
+  right: 0;
 }
 
 /* Texto descriptivo */
@@ -264,4 +264,21 @@
   height: 400px;
   border: 0;
   border-radius: 10px;
+}
+
+.flyer-container{
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  padding-top: 30px;
+}
+.flyer {
+  vertical-align: baseline;
+  padding: 0;
+  border-radius: 15px;
+  margin: 20px;
+  height: 750px;
+  width: auto;
+  align-items: center;
 }

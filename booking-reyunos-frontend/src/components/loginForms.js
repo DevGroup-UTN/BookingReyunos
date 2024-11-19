@@ -126,11 +126,6 @@ function LoginForm({ onClose }) {
         onClose();
       }}><FontAwesomeIcon icon={faTimes} /></button>
 
-      {userRole ? (
-        <button className="hamburger-menu" onClick={toggleMenu}>
-          <FontAwesomeIcon icon={faBars} />
-        </button>
-      ) : null}
       {renderContent()} {/* Renderiza el contenido dinámicamente */}
     </div>
   );

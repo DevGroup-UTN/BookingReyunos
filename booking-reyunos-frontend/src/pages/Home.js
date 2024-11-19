@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import '../styles/index.css';
 import '../styles/home.css';
 
 function Home() {
@@ -85,6 +84,11 @@ function Home() {
             <span>Contacto</span>
           </a>
         </div>
+      </div>
+      <div className='flyer-container'>
+        <a href='https://www.frsr.utn.edu.ar/desarrollo-territorial/'>
+          <img className='flyer' src='https://picsv3.pxsol.com/1472/company/library/user/9936621264e117bfc35d1de23e14d657994efc4895.jpg?ixlib=js-2.3.2&s=46a1e9c0c724dd4159aafa807532eaa2'></img>
+        </a>
       </div>
       {/* Mapa de Google */}
       <div className="mapa_google">

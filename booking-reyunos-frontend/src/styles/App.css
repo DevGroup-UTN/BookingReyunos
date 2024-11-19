@@ -26,7 +26,13 @@
 .login-form {
   margin-top: 20px; /* Espacio superior */
 }
+.mobile-login-button{
+  display: none;
+}
 
+.login-form h2{
+  color: #bbbbff;
+}
 .login-form div {
   margin-bottom: 15px; /* Espacio entre los campos del formulario */
 }
@@ -151,12 +157,54 @@
 .whatsapp:hover {
   transform: scale(1.1); /* Efecto de aumento cuando se pasa el cursor */
 }
+.mobile-menu-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
 
 /* Ajustes para pantallas pequeñas (mobile-first) */
 @media (max-width: 768px) {
+  .login-container{
+    margin-left: 10px;
+  }
   .whatsapp {
     width: 60px; /* Tamaño fijo */
     height: 60px; /* Tamaño fijo */
     font-size: 30px; /* Ajustamos el tamaño del icono */
+  }
+  .login-form h2{
+    margin-right: 50%;
+    align-items: start;
+  }
+  .login-button{
+    display: none;
+  }
+  .mobile-login-button{
+    display: flex;
+  }
+  
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+  }
+
+  .mobile-menu-button {
+    color: #fff;
+    display: block;
+  }
+
+
+  .nav-links.open {
+    display: flex;
   }
 }
