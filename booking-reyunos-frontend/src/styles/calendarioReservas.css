@@ -1,0 +1,42 @@
+.reservation-calendar {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-right: 100px;
+  }
+  
+  .confirm-button {
+    background-color: var(--font-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .confirm-button:hover {
+    background-color: var(--hover-color);
+  }
+
+.available-date {
+  background-color: green; /* Verde para fechas disponibles */
+  color: white;
+}
+
+.unavailable-date {
+  background-color: #dc3545; /* Rojo para fechas ocupadas */
+  color: white;
+  pointer-events: none; /* Deshabilitar la interacción */
+}
+
+.past-date {
+  background-color: #6c757d; /* Gris para fechas pasadas */
+  color: white;
+  pointer-events: none; /* Deshabilitar la interacción */
+}
+
+.react-calendar__tile--active {
+  background-color: #f0ad4e; /* Color para la fecha seleccionada */
+}

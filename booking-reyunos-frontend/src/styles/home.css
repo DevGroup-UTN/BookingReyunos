@@ -1,11 +1,267 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
 
-  .image {
-    display:flex;
-    margin: 5px 65px;
-    width: 90%;
-    height: auto;
-    max-height: 480px;
-    object-fit: fill;
+/* Carrusel */
+.carrusel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  height: 25em;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.carrusel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.arrow-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  font-size: 1.5em;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.arrow-button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.arrow-button:first-child {
+  left: 49px;
+}
+
+.arrow-button:last-child {
+  right: 49px;
+}
+
+/* Texto descriptivo */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  margin: 100px 100px;
+  align-items: center;
+}
+.bienvenida{
+  margin-left: 1.5em;
+  margin-bottom: 0;
+  color: #333;
+}
+.h4-home{
+  margin-top: 1px;
+  margin-left: 3em;
+  font-size: 12px;
+  color: #555;
+}
+.titulo-home {
+  margin-left: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 1.8em;
+  text-align: left;
+  color: #773;
+}
+
+.CTDR-container {
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #999;
+  max-width: 600px;
+  margin-bottom: -300px;
+  margin-right: 300px;
+  line-height: 1.6;
+  border-radius: 10px;
+  box-shadow: 8px -8px 8px #111;
+}
+.p-home {
+  font-size: 12px;
+  margin-left: 50px;
+  color: #111;
+}
+.imagen-reyunos{
+  margin-top: -300px;
+  margin-left: 300px;
+  right: 0;
+  top: 0;
+}
+.imagen-reyunos img{
+  border-radius: 10px;
+}
+
+.links{
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  padding: 0;
+  align-items: center;
+  justify-content: space-around;
+  display: flex;
+  margin: 2rem;
+}
+.alojamientos, .programas, .contacto{
+  border: 0;
+  font: inherit;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  width: 250px;
+  height: 250px;
+  position: relative;
+}
+.programas{
+  margin-inline: -120px;
+}
+.alojamientos img{
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: auto;
+  transition: 0.3s;
+}
+.alojamientos span{
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background: #a28aff;
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  clip-path: polygon(0% 0%, 75% 0%, 85% 50%, 75% 100%, 0% 100%);
+  transition: 0.3s;
+  font-size: 16px;
+}
+.alojamientos:hover{
+  span{
+    width: 100%;
+    clip-path: none;
   }
-  
- 
+}
+.programas img{
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: auto;
+  transition: 0.3s;
+}
+.programas span{
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background: #a28aff;
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  clip-path: polygon(0% 0%, 75% 0%, 85% 50%, 75% 100%, 0% 100%);
+  transition: 0.3s;
+  font-size: 16px;
+}
+.programas:hover{
+  span{
+    width: 100%;
+    clip-path: none;
+  }
+}
+
+.contacto img{
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: auto;
+  transition: 0.3s;
+}
+
+.contacto span{
+  border: 0;
+  font: inherit;
+  vertical-align: baseline;
+  margin: 0;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  background: #a28aff;
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  clip-path: polygon(0% 0%, 75% 0%, 85% 50%, 75% 100%, 0% 100%);
+  transition: 0.3s;
+  font-size: 16px;
+}
+.contacto:hover{
+  span{
+    width: 100%;
+    clip-path: none;
+  }
+}
+/* Mapa */
+.mapa_google {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.google_map {
+  width: 100%;
+  height: 400px;
+  border: 0;
+  border-radius: 10px;
+}

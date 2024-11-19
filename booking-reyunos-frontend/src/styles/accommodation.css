@@ -1,0 +1,110 @@
+:root {
+    --font-color: #10148f;
+    --hover-color: #0044ff;
+  }
+
+/* Contenedor para la lista de alojamientos */
+.accommodations-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 10px;
+  }
+  
+  /* Estilos para cada alojamiento */
+  .accommodation {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    width: 700px;
+    background-color: #979595;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .accommodation h3 {
+    margin: 10px 0 5px;
+    color: var(--font-color);
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  .accommodation-image {
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 15% 20px;
+  }
+  
+  .accommodation-details {
+    flex-grow: 1;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .accommodation p {
+    margin: 5px 0;
+    color: var(--hover-color);
+  }
+  
+  .accommodation:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Contenedor para la imagen y botones */
+  .image-container-accommodation {
+    margin-inline: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .arrow-button-accommodation {
+    background-color: #0008;
+    border: none;
+    color: var(--hover-color);
+    font-size: 1.5em;
+    border-radius: 5px;
+    margin-inline: -49px !important;
+    padding-inline: 7px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    margin: 0;
+    z-index: 10;
+  }
+  
+  .arrow-button-accommodation:hover {
+    color: #bbbbff;
+  }
+
+  .titulo {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 2em;
+    color: #bbbbff;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .reserve-button {
+    background-color: var(--font-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
+  .reserve-button:hover {
+    background-color: var(--hover-color);
+  }

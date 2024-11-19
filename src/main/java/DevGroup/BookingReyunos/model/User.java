@@ -5,6 +5,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @ToString
 
 @Entity
+@Table(name = "users")
 public class User { 
 // esta entidad representa a los usuarios del sistema, que pueden ser administradores, propietarios o huéspedes.
     @Id
