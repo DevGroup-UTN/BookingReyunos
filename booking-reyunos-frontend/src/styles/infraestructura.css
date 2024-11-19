@@ -1,8 +1,17 @@
+.infra-container{
+    padding: 10px 10px;
+    border-radius: 15px;
+    justify-content: center;
+    width: 80%;
+    background-color: rgba(255, 255, 255, 0.24);
+    margin-left: 10vw;
+}
+
 /* Centrar título */
-h1 {
+.infra-h1 {
     text-align: center;
     margin-top: 20px;
-    color: #888;
+    color:var(--font-color);
 }
 
 /* Contenedor de imágenes con flexbox, centradas */
@@ -17,7 +26,7 @@ h1 {
 }
 
 /* Estilo para las imágenes */
-.images {
+.infra-images {
     width: 280px;
     height: 250px;
     object-fit: cover;
@@ -28,23 +37,24 @@ h1 {
 }
 
 /* Efecto hover para ampliar la imagen */
-.images:hover {
+.infra-images:hover {
     transform: scale(1.1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilo del párrafo */
-p {
+.infra-p {
+    
     margin-left: 1em;
     width: 80%;
     text-align: justify;
     line-height: 1.6;
-    color: #888;
+    color: #000055;
 }
 
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
-    p {
+    .infra-p {
         width: 90%;
     }
 
