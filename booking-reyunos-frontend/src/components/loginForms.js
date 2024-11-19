@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons'; // Importamos el ícono de las 3 rayas
 import ForgotPassword from './ForgotPassword';
 import RegisterForm from './RegisterForm';
 import '../styles/App.css';
@@ -15,6 +15,8 @@ function LoginForm({ onClose }) {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [view, setView] = useState('login'); // Controla la vista
+  const [userRole, setUserRole] = useState(null); // Nuevo estado para guardar el rol del usuario
+  const [menuOpen, setMenuOpen] = useState(false); // Estado para controlar si el menú está abierto o cerrado
   const navigate = useNavigate();
 
   const resetForm = () => {
@@ -24,6 +26,7 @@ function LoginForm({ onClose }) {
     setMessage('');
     setView('login'); // Siempre vuelve a la vista de login
   };
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') { // Verifica si la tecla presionada es "Esc"
@@ -50,6 +53,7 @@ function LoginForm({ onClose }) {
 
       const userData = response.data;
       login(userData);
+      setUserRole(userData.role); // Guardamos el rol del usuario
       setMessage(`Bienvenido, ${userData.username}`);
       onClose(); // Cierra el menú
       resetForm(); // Reinicia el formulario
@@ -58,6 +62,17 @@ function LoginForm({ onClose }) {
       console.error('Error al iniciar sesión:', error);
       setMessage('Error: Credenciales inválidas');
     }
+  };
+
+  const handleLogout = () => {
+    // Aquí iría la lógica para cerrar sesión (borrar token, etc.)
+    login(null); // Llama a login con null para borrar los datos del usuario
+    setUserRole(null); // Limpiar el rol
+    navigate('/'); // Redirige a la página principal
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen); // Cambia el estado del menú
   };
 
   const renderContent = () => {
@@ -109,7 +124,13 @@ function LoginForm({ onClose }) {
       <button className="close-button" onClick={() => {
         resetForm();
         onClose();
-      }}><FontAwesomeIcon icon={faTimes} /></button> {      }
+      }}><FontAwesomeIcon icon={faTimes} /></button>
+
+      {userRole ? (
+        <button className="hamburger-menu" onClick={toggleMenu}>
+          <FontAwesomeIcon icon={faBars} />
+        </button>
+      ) : null}
       {renderContent()} {/* Renderiza el contenido dinámicamente */}
     </div>
   );

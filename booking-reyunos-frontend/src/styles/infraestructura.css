@@ -2,7 +2,7 @@
 h1 {
     text-align: center;
     margin-top: 20px;
-    color: #333;
+    color: #888;
 }
 
 /* Contenedor de imágenes con flexbox, centradas */
@@ -35,11 +35,11 @@ h1 {
 
 /* Estilo del párrafo */
 p {
-
+    margin-left: 1em;
     width: 80%;
     text-align: justify;
     line-height: 1.6;
-    color: #555;
+    color: #888;
 }
 
 /* Responsividad para pantallas pequeñas */

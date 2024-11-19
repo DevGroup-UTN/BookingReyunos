@@ -1,35 +1,56 @@
+/* Estilo base */
+:root{
+  --font-color: #10148f;
+  --hover-color: #0000ff;
+}
+
+/* Contenedor principal del Dashboard */
 .dashboard-container {
-    padding: 20px;
-  }
-  
-  .calendar-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .calendar-table th, .calendar-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  .calendar-table th {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .available {
-    background-color: #e0ffe0;
-    color: #2d7a2d;
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
-  .reserved {
-    background-color: #ffcccc;
-    color: #a33a3a;
-    padding: 5px;
-    border-radius: 5px;
-  }
-  
+  padding: 20px;
+}
+
+/* Estilo para la tabla del calendario */
+.calendar-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+h2 {
+  color: #ddd;
+  text-align: center;
+}
+
+td {
+  color: #ddd;
+}
+
+/* Estilo para las celdas de la tabla (th y td) */
+.calendar-table th,
+.calendar-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Estilo para los encabezados de la tabla */
+.calendar-table th {
+  background-color: #4CAF50; /* Verde de fondo */
+  color: white; /* Color blanco para el texto */
+}
+
+/* Estilo para las celdas disponibles */
+.available {
+  background-color: #e0ffe0; /* Fondo verde claro */
+  color: #2d7a2d; /* Texto verde oscuro */
+  padding: 5px;
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para las celdas reservadas */
+.reserved {
+  background-color: #ffcccc; /* Fondo rojo claro */
+  color: #a33a3a; /* Texto rojo oscuro */
+  padding: 5px;
+  border-radius: 5px; /* Bordes redondeados */
+}

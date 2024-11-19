@@ -1,4 +1,7 @@
-/* registro.css */
+:root{
+  --font-color: #10148f;
+  --hover-color: #0000ff;
+}
 
 .registro-form {
     margin-top: 20px; /* Espacio superior */
@@ -24,7 +27,7 @@
   
   .registro-form button {
     margin-top: 10px; /* Espacio superior */
-    background-color: #ff3232; /* Color de fondo */
+    background-color: var(--font-color); /* Color de fondo */
     color: white; /* Color del texto */
     border: none; /* Sin bordes */
     padding: 10px; /* Espaciado interno */
@@ -35,13 +38,13 @@
   }
   
   .registro-form button:hover {
-    background-color: #e60000; /* Color de fondo al pasar el mouse */
+    background-color: var(--hover-color); /* Color de fondo al pasar el mouse */
   }
   
   /* Mensaje de error o éxito */
   .registro-form p {
     margin-top: 10px; /* Espacio superior */
-    color: #ff3232; /* Color del mensaje */
+    color: var(--font-color); /* Color del mensaje */
     font-weight: bold; /* Negrita */
   }
   
