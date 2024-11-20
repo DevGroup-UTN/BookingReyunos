@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LoginForm from './loginForms';
 import { useAuth } from '../context/AuthContext';
-import '../styles/index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -40,7 +39,7 @@ function Navbar() {
   return (
     <>
       <nav className="navbar">
-        <div>
+        <div className='logo-utn-nav'>
           <img
             className="utn"
             src="https://files-public-web.s3-us-west-2.amazonaws.com/1472/company/library/user/51742008549581e7db8aba6fb75df56232d673d813.png"
@@ -60,6 +59,14 @@ function Navbar() {
           <Link to="/programas" onClick={closeMobileMenu}>Programas</Link>
           <Link to="/infraestructura" onClick={closeMobileMenu}>Infraestructura</Link>
           <Link to="/contacto" onClick={closeMobileMenu}>Contacto</Link>
+        </div>
+
+        <div className='logo-utn-mobile'>
+          <img
+            className="utn"
+            src="https://files-public-web.s3-us-west-2.amazonaws.com/1472/company/library/user/51742008549581e7db8aba6fb75df56232d673d813.png"
+            alt="Logo"
+          />
         </div>
 
         {user ? (
@@ -93,12 +100,12 @@ function Navbar() {
             )}
           </div>
         ) : (
-          <div>
+          <div className='user-info'>
             <button className="login-button" onClick={toggleLogin}>
               Iniciar Sesión
             </button>
             <button className="mobile-login-button" onClick={toggleLogin}>
-                <FontAwesomeIcon icon={faUser} />
+              <FontAwesomeIcon icon={faUser} />
             </button>
           </div>
           

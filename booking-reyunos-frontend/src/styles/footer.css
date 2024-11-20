@@ -86,4 +86,33 @@ a {
     max-height: 200px;
     max-width: 200px;
     margin-top: 10px;
+    margin-left: 40px;
+}
+
+@media (max-width: 780px){
+    footer{
+        width: 213vw;
+    }
+    .social-icon{
+        margin: 0;
+    }
+    .footer-div.socials, .footer-div, .footer-div-1{
+        flex-direction: row;
+        padding-inline: 10px;
+        gap: 0;
+    }
+    .footer-div{
+        padding: 0;
+        width: 150px;
+        height: 150px;
+        margin-right: 100px;
+    }
+    .footer-img {
+        width: 150px;
+        height: 130px;
+    }
+    .footer-div.socials{
+        margin-inline: -10px;
+        font-size: 0.9em;
+    }
 }

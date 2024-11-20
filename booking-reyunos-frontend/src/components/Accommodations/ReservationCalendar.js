@@ -25,7 +25,7 @@ function ReservationCalendar({ accommodationId, onConfirm }) {
   useEffect(() => {
     // Obtener las reservas completas desde el backend
     axios
-      .get(`http://localhost:8080/booking/accommodation/${accommodationId}`)
+      .get(`https://ctdr-utnreyunos.netlify.app//booking/accommodation/${accommodationId}`)
       .then((response) => {
         // Extraer todas las fechas ocupadas de las reservas
         const occupiedDates = response.data.flatMap((booking) =>

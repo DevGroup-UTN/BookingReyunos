@@ -30,6 +30,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
@@ -92,7 +93,7 @@
 }
 .p-home {
   font-size: 12px;
-  margin-left: 50px;
+  margin-inline: 30px;
   color: #111;
 }
 .imagen-reyunos{
@@ -147,7 +148,6 @@
 .alojamientos span{
   border: 0;
   font: inherit;
-  vertical-align: baseline;
   margin: 0;
   display: block;
   padding: 10px;
@@ -281,4 +281,88 @@
   height: 750px;
   width: auto;
   align-items: center;
+}
+
+@media (max-width: 768px){
+  .home-container{
+    width: 100%;
+  }
+  .carrusel{
+    margin-top: 20px;
+    height: 43vh;
+    margin-left: 65px;
+    width: 170%;
+  }
+  .carrusel-image{
+    border-radius: 15px;
+  }
+  .main-container{
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 0;
+    margin-left: 80px;
+    height: 800px;
+    width: 800px;
+  }
+  .CTDR-container{
+    background-blend-mode:overlay;
+    background-color: #999999e5;
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    align-items: baseline;
+    overflow: scroll;
+    justify-content: baseline;
+    padding: 0;
+    margin-bottom: 0;
+  }
+  .imagen-reyunos{
+    position: static;
+    width: 300px;
+    height: 300px;
+    margin-right: 100px;
+    padding: 0;
+  }
+  .imagen-reyunos img{
+    margin: 0;
+    width: 550px;
+    height: 550px;
+  }
+  .arrow-button:first-child{
+    font-size: 1rem;
+    background-color: #00000075;
+  }
+  .arrow-button:last-child{
+    font-size: 1rem;
+    background-color: #00000075;
+  }
+  .main-container{
+    max-width: 80vw;
+  }
+    /* Estilos de los links (alojamientos, programas, contacto */
+    .links{
+      width: 200vw;
+      position: relative;
+      margin-inline: 30px;
+    }
+    .alojamientos, .programas, .contacto{
+      border-radius: 15px;
+      margin-inline: 10px;
+    }
+    .flyer{
+      width: 700px;
+      height: 700px;
+      transition: 0.3s;
+    }
+    .flyer:hover{
+      width: 650px;
+      height: 650px;
+      margin-left: 50px;
+      transition: 0.3s;
+    }
+    .google_map{
+      width: 200vw;
+    }
 }

@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/registro.css';
-import LoginForm from './loginForms';
 
 function Registro({ onClose }) {
   const [username, setUsername] = useState('');
@@ -13,7 +12,7 @@ function Registro({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/users/register', {
+      const response = await axios.post('https://bookingreyunos-production.up.railway.app/users/register', {
         username,
         email,
         password,

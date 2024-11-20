@@ -1,17 +1,26 @@
 .infra-container{
+    position: relative;
     padding: 10px 10px;
     border-radius: 15px;
-    justify-content: center;
     width: 80%;
-    background-color: rgba(255, 255, 255, 0.24);
+    background-color: #bbbbbbb5;
     margin-left: 10vw;
+    padding-bottom: 7vh;
 }
 
 /* Centrar título */
 .infra-h1 {
+    -webkit-text-stroke: var(--font-color) 1.5px;
     text-align: center;
+    text-shadow: 6px -4px 2px #11116666;
     margin-top: 20px;
     color:var(--font-color);
+}
+.infra-h2{
+    text-decoration: underline #b7b700;
+    color: #b7b700;
+    -webkit-text-stroke: #550 0.5px;
+    font-weight: bold;
 }
 
 /* Contenedor de imágenes con flexbox, centradas */
@@ -32,33 +41,58 @@
     object-fit: cover;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ddd;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
+.planos-images{
+    border-radius: 15px;
+    width: 50vw;
+    height: 60vh;
+    margin: 20px;
+    background-color: #ddd;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
 /* Efecto hover para ampliar la imagen */
-.infra-images:hover {
+.infra-images:hover, .planos-images:hover {
+    transition: 0.3s;
     transform: scale(1.1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Estilo del párrafo */
 .infra-p {
-    
-    margin-left: 1em;
-    width: 80%;
-    text-align: justify;
+    font-weight: 600;
+    display: inline-block;
+    margin-inline: 1em;
+    width: 95%;
     line-height: 1.6;
     color: #000055;
 }
 
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
+    .infra-container{
+        margin-top: 13vh;
+        width: 190vw;
+        background-color: #999999d5;
+    }
+    .infra-h2{
+        color: #b7b74e;
+        text-decoration-color: #b7b74e;
+    }
     .infra-p {
+        color: #000093;
         width: 90%;
     }
-
-    .images {
-        width: 150px;
+    .infra-images {
+        width: 200px;
+        height: 200px;
+    }
+    .planos-images{
+        width: 150vw;
+        height: 50vh;
     }
 }

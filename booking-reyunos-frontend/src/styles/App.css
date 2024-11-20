@@ -8,18 +8,28 @@
   text-align: center;
 }
 
-.close-button{
+.login-close-button{
   border-radius: 50%;
   background-color: var(--font-color);
   color: #f9f9f9;
-  padding: 0 5px;
+  padding: 2px 7px;
   position: absolute;
   top: 10px;
+  align-content: center;
+  text-align: center;
   right: 10px;
   border: none;
   font-size: 24px;
   cursor: pointer;
+  transition: 0.3s;
   z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+}
+.login-close-button:hover{
+  font-size: 26px;
+  padding: 3px 8px;
+  margin-top: -3.45px;
+  margin-right: 3px;
+  transition: 0.3s;
 }
 
 /* Estilos para el formulario de Login */
@@ -31,7 +41,7 @@
 }
 
 .login-form h2{
-  color: #bbbbff;
+  color: #0b0b4b;
 }
 .login-form div {
   margin-bottom: 15px; /* Espacio entre los campos del formulario */
@@ -50,7 +60,9 @@
   border: 1px solid #ccc; /* Bordes */
   border-radius: 5px; /* Bordes redondeados */
 }
-
+.login-sidebar{
+  background-color: #aaaaaa;
+}
 .login-form button {
   margin-top: 10px; /* Espacio superior */
   background-color: var(--font-color); /* Color de fondo */
@@ -164,12 +176,22 @@
   font-size: 24px;
   cursor: pointer;
 }
+.logo-utn-mobile{
+  display: none;
+}
 
 /* Ajustes para pantallas pequeñas (mobile-first) */
 @media (max-width: 768px) {
   .login-container{
     margin-left: 10px;
   }
+  .logo-utn-nav{
+    display: none;
+  }
+  .logo-utn-mobile{
+    display: flex;
+  }
+
   .whatsapp {
     width: 60px; /* Tamaño fijo */
     height: 60px; /* Tamaño fijo */

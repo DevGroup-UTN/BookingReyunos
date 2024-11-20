@@ -46,7 +46,7 @@ function LoginForm({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/users/login', {
+      const response = await axios.post('https://bookingreyunos-production.up.railway.app/users/login', {
         username,
         password,
       });
@@ -121,7 +121,7 @@ function LoginForm({ onClose }) {
 
   return (
     <div className="login-container">
-      <button className="close-button" onClick={() => {
+      <button className="login-close-button" onClick={() => {
         resetForm();
         onClose();
       }}><FontAwesomeIcon icon={faTimes} /></button>
