@@ -170,11 +170,38 @@ body {
 }
 
 /* Estilo para dispositivos móviles */
-@media (max-width: 768px) {
-  body, nav{
-    max-width: 100vw;
+@media (max-width: 780px) {
+  body{
+    background-position: center;
+    background-position-x: left;
+    background-size: cover;
+    background-repeat:unset;
   }
-
+  .navbar{
+    width: 100%;
+    height: 70px;
+    align-items: center;
+  }
+  .logo-utn-nav{
+    align-self: baseline;
+  }
+  .utn{
+    height: 110%;
+  }
+  .user-info, .user-name{
+    display: block;
+    margin-right: 30px;
+    justify-content: center;
+  }
+  .mobile-menu-button{
+    font-size: 2.5em !important;
+  }
+  .mobile-login-button{
+    background-color: transparent;
+    border: none;
+    font-size: 2.5em;
+    color: white;
+  }
   .login-sidebar {
     width: 95%; /* Ocupa todo el ancho en móvil */
     padding: 15px; /* Reducimos padding para móviles */
@@ -185,7 +212,7 @@ body {
   }
 
   .login-button {
-    font-size: 1.5em; /* Aumentamos el tamaño del texto */
+    font-size: 3em; /* Aumentamos el tamaño del texto */
   }
 
   /* Cambiar el contenido a un icono en lugar de texto en móviles */
@@ -195,11 +222,25 @@ body {
     margin-right: 8px;
   }
 
-  .navbar {
-    flex-direction: column; /* Navbar en columna en móviles */
-  }
 
-  .nav-links {
+  .nav-links{
+    background-color:rgb(161, 161, 161) !important;
+    margin-right: 430px;
     margin-top: 10px;
+    border-radius: 10px;
+    height: 25vh;
+    width: 100vw;
+  }
+  .nav-links a{
+    border: outset 2px #333333;
+    border-radius: 5px;
+    padding: 1px 0 1px 10px;
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: 500;
+    color: var(--font-color);
+  }
+  .nav-links a:hover{
+    color: var(--hover-color);
   }
 }
