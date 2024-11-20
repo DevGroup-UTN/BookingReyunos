@@ -8,18 +8,28 @@
   text-align: center;
 }
 
-.close-button{
+.login-close-button{
   border-radius: 50%;
   background-color: var(--font-color);
   color: #f9f9f9;
-  padding: 0 5px;
+  padding: 2px 7px;
   position: absolute;
   top: 10px;
+  align-content: center;
+  text-align: center;
   right: 10px;
   border: none;
   font-size: 24px;
   cursor: pointer;
+  transition: 0.3s;
   z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+}
+.login-close-button:hover{
+  font-size: 26px;
+  padding: 3px 8px;
+  margin-top: -3.45px;
+  margin-right: 3px;
+  transition: 0.3s;
 }
 
 /* Estilos para el formulario de Login */
@@ -181,6 +191,7 @@
   .logo-utn-mobile{
     display: flex;
   }
+
   .whatsapp {
     width: 60px; /* Tamaño fijo */
     height: 60px; /* Tamaño fijo */

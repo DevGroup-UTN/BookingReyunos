@@ -121,7 +121,7 @@ function LoginForm({ onClose }) {
 
   return (
     <div className="login-container">
-      <button className="close-button" onClick={() => {
+      <button className="login-close-button" onClick={() => {
         resetForm();
         onClose();
       }}><FontAwesomeIcon icon={faTimes} /></button>

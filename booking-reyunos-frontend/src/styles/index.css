@@ -28,7 +28,7 @@ body {
 .navbar {
   display: flex;
   position: fixed;
-  height: 50px;
+  height: 70px;
   top: 0;
   left: 0;
   width: 100%;
@@ -48,12 +48,17 @@ body {
   color: white;
   text-decoration: none;
   margin: 0 10px;
+  padding: 8px 8px;
+  border-radius: 15px;
+  transition: 0.3s;
 }
 
 .nav-links a:hover {
   color: var(--font-color);
   background-color: #ccc;
-  padding: 5px 8px;
+  border-radius: 15px;
+  padding: 8px 8px;
+  transition: 0.3s;
 }
 
 .utn {
@@ -75,6 +80,10 @@ body {
 
 .login-button:hover {
   color: var(--font-color);
+  background-color: #ccc;
+  border-radius: 15px;
+  padding: 8px 8px;
+  transition: 0.3s;
 }
 
 /* Menú desplegable del usuario */
@@ -144,7 +153,7 @@ body {
 }
 
 /* Botón de cerrar */
-.close-button {
+.login-close-button {
   background: none;
   border: none;
   font-size: 1.5em;
@@ -209,11 +218,12 @@ body {
     color: white;
   }
   .login-sidebar {
+    margin-right: 25px;
     width: 95%; /* Ocupa todo el ancho en móvil */
     padding: 15px; /* Reducimos padding para móviles */
   }
 
-  .close-button {
+  .login-close-button {
     font-size: 2em; /* Aumentamos el tamaño para fácil acceso */
   }
 
@@ -231,10 +241,10 @@ body {
 
   .nav-links{
     background-color:rgb(161, 161, 161) !important;
-    margin-right: 430px;
+    margin-right: 400px;
     margin-top: 10px;
     border-radius: 10px;
-    height: 25vh;
+    height: 28vh;
     width: 100vw;
   }
   .nav-links a{
