@@ -61,12 +61,9 @@ public class UserService {
         }
 
         // Crear nuevo usuario a partir del DTO
-        UserRoleDTO userRoleDTO = new UserRoleDTO();
-        userRoleDTO.setRole("GUEST");
         User user = new User();
         user.setUsername(userDTO.getUsername().toLowerCase());
         user.setEmail(userDTO.getEmail());
-        user.setRole(userDTO.getRole());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Cifrar la contraseña
 
         // Guardar el usuario en la base de datos

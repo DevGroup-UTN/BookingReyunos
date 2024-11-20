@@ -13,7 +13,6 @@ function Registro({ onClose }) {
     e.preventDefault();
     try {
       const response = await axios.post('https://bookingreyunos-production.up.railway.app/users/register', {
-        role : "GUEST",
         username,
         email,
         password,
