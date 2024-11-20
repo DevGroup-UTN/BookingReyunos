@@ -1,6 +1,5 @@
 DevGroup\BookingReyunos\dto\ReviewDTO.class
 DevGroup\BookingReyunos\dto\ForgotPasswordRequest.class
-DevGroup\BookingReyunos\model\Role.class
 DevGroup\BookingReyunos\security\JwtUtil.class
 DevGroup\BookingReyunos\service\BookingService.class
 DevGroup\BookingReyunos\controller\UserController.class
@@ -28,7 +27,6 @@ DevGroup\BookingReyunos\dto\TokenDTO.class
 DevGroup\BookingReyunos\exceptions\InvalidCredentialsException.class
 DevGroup\BookingReyunos\model\UserBuyer.class
 DevGroup\BookingReyunos\dto\AccommodationDTO.class
-DevGroup\BookingReyunos\dto\UserRoleDTO.class
 DevGroup\BookingReyunos\service\UserService.class
 DevGroup\BookingReyunos\model\Booking.class
 DevGroup\BookingReyunos\security\JwtRequestFilter.class

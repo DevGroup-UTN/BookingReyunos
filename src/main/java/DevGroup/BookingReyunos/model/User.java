@@ -34,7 +34,7 @@ public class User {
     private String resetToken;
 
     @Enumerated(EnumType.STRING)
-    private Role role; // ADMIN, OWNER, GUEST.
+    private String role; // ADMIN, OWNER, GUEST.
 
     // Relaciones
     @OneToMany(mappedBy = "owner")

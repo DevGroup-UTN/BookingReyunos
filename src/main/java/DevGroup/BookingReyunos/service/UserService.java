@@ -12,10 +12,8 @@ import org.springframework.stereotype.Service;
 
 import DevGroup.BookingReyunos.dto.LoginDTO;
 import DevGroup.BookingReyunos.dto.UserDTO;
-import DevGroup.BookingReyunos.dto.UserRoleDTO;
 import DevGroup.BookingReyunos.exceptions.InvalidCredentialsException;
 import DevGroup.BookingReyunos.exceptions.UserNotFoundException;
-import DevGroup.BookingReyunos.model.Role;
 import DevGroup.BookingReyunos.model.User;
 import DevGroup.BookingReyunos.repository.UserRepository;
 
@@ -35,24 +33,7 @@ public class UserService {
     @Autowired
     private JavaMailSender emailSender; // Para enviar correos
 
-    public void assignRole(UserRoleDTO userRoleDTO) {
-        String username = userRoleDTO.getUsername();
-        if (username == null || username.isEmpty()) {
-            throw new RuntimeException("Username must not be null or empty");
-        }
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-
-        try {
-            Role role = Role.valueOf(userRoleDTO.getRole());
-            user.setRole(role);
-            userRepository.save(user);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid role specified: " + userRoleDTO.getRole());
-        }
-    }
-
+    
     // Método para registrar un nuevo usuario
     public User register(UserDTO userDTO) {
         // Verificar si el username ya está en uso
@@ -64,7 +45,7 @@ public class UserService {
         User user = new User();
         user.setUsername(userDTO.getUsername().toLowerCase());
         user.setEmail(userDTO.getEmail());
-        user.setRole(Role.GUEST);
+        user.setRole("GUEST");
         user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Cifrar la contraseña
 
         // Guardar el usuario en la base de datos
