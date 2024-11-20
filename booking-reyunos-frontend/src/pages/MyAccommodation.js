@@ -26,7 +26,7 @@ const MyAccommodation = () => {
       }
 
       axios
-        .get(`http://localhost:8080/accommodations/owner/${user.id}`, {
+        .get(`https://bookingreyunos-production.up.railway.app/accommodations/owner/${user.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -76,7 +76,7 @@ const MyAccommodation = () => {
 
     try {
       await axios.put(
-        `http://localhost:8080/accommodations/${editingAccommodation.id}`,
+        `https://bookingreyunos-production.up.railway.app/accommodations/${editingAccommodation.id}`,
         formData,
         {
           headers: {
