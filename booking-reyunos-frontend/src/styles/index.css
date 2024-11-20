@@ -266,6 +266,17 @@ body {
   }
   .accommodation-container{
     width: 200vw;
+    margin-left: 30px;
+  }
+  .react-calendar.react-calendar--selectRange{
+    margin-left: -175px;
+  }
+  .h3-calendar{
+    text-decoration: underline;
+    margin-left: -150px !important;
+  }
+  .confirm-button{
+    margin-left: -85px;
   }
 }
 

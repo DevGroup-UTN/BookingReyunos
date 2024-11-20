@@ -62,7 +62,7 @@ public class UserService {
 
         // Crear nuevo usuario a partir del DTO
         User user = new User();
-        user.setUsername(userDTO.getUsername());
+        user.setUsername(userDTO.getUsername().toLowerCase());
         user.setEmail(userDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Cifrar la contraseña
 
@@ -73,7 +73,7 @@ public class UserService {
     // Método para autenticar a un usuario y generar un token JWT
     public User authenticate(LoginDTO loginDTO) {
         // Buscar el usuario por su nombre de usuario
-        User user = userRepository.findByUsername(loginDTO.getUsername())
+        User user = userRepository.findByUsername(loginDTO.getUsername().toLowerCase())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
     
         // Verificar la contraseña
