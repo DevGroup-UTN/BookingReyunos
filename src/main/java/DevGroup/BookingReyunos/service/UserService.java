@@ -64,6 +64,7 @@ public class UserService {
         User user = new User();
         user.setUsername(userDTO.getUsername().toLowerCase());
         user.setEmail(userDTO.getEmail());
+        user.setRole(Role.GUEST);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Cifrar la contraseña
 
         // Guardar el usuario en la base de datos

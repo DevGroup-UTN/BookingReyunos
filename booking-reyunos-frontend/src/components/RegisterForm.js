@@ -16,7 +16,6 @@ function Registro({ onClose }) {
         username,
         email,
         password,
-        role : "OWNER",
       });
       setMessage('Registro exitoso. Puedes iniciar sesión ahora.');
     } catch (error) {
