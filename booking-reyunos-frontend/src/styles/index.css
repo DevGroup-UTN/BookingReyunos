@@ -184,7 +184,7 @@ body {
 /* Estilo para dispositivos móviles */
 @media (max-width: 780px) {
   html, body{
-    width: 100%;
+    width: 100vw;
   }
   body{
     background-position: center;
@@ -258,6 +258,14 @@ body {
   }
   .nav-links a:hover{
     color: var(--hover-color);
+  }
+  /* Estilos para los alojamientos */
+  h2.titulo {
+    justify-content: center;
+    margin-left: 100px;
+  }
+  .accommodation-container{
+    width: 200vw;
   }
 }
 
