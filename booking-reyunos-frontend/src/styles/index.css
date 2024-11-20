@@ -260,3 +260,9 @@ body {
     color: var(--hover-color);
   }
 }
+
+@media (max-width: 360px) {
+  .nav-links{
+    height: 33vh;
+  }
+}
