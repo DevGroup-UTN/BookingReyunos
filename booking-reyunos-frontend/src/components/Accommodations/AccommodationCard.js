@@ -26,7 +26,7 @@ function AccommodationCard({ accommodation, user }) {
   const checkOutDate = endDate.toISOString().split('T')[0]; // '2024-11-18'
 
     axios
-      .post('http://localhost:8080/booking', {
+      .post('https://ctdr-utnreyunos.netlify.app//booking', {
         accommodationId: accommodation.id,
         guestId: user.id,
         checkInDate: checkInDate,

@@ -8,7 +8,7 @@ function ForgotPassword({ onClose }) {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/users/forgot-password', { email });
+      await axios.post('https://ctdr-utnreyunos.netlify.app//users/forgot-password', { email });
       setMessage('Si el email es válido, recibirás instrucciones para restablecer tu contraseña.');
     } catch (error) {
       setMessage('Error: No se pudo enviar el email.');
