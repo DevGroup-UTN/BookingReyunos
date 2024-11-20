@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/images")
@@ -24,27 +25,31 @@ public class ImageController {
 
     //Subir un imagen
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadImage(@RequestParam("file")MultipartFile file){
-        try{
-            if(file.isEmpty()){
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) {
+        try {
+            if (file.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El archivo está vacío");
-
             }
-            //Crear el directorio si no existe
+
+            // Crear el directorio si no existe
             File directory = new File(uploadDirectory);
-            if (!directory.exists()){
+            if (!directory.exists()) {
                 directory.mkdirs();
             }
-            //Guardar el archivo
-            String fileName = file.getOriginalFilename();
-            Path filePath = Paths.get(uploadDirectory,fileName);
+
+            // Crear un nombre unico para el archivo
+            String uniqueFileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+            // Ruta donde se va guardar el archivo
+            Path filePath = Paths.get(uploadDirectory, uniqueFileName);
             Files.write(filePath, file.getBytes());
 
-            return ResponseEntity.ok("Se ha subido el archivo correctamente: " + fileName);
-        } catch (IOException e){
+            // Retornar la URL de acceso al archivo
+            String fileUrl = "/images/" + uniqueFileName;
+            return ResponseEntity.ok("Archivo subido exitosamente: " + fileUrl);
+        } catch (IOException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir la imagen");
-
         }
     }
 

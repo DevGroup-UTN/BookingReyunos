@@ -29,4 +29,7 @@ public class Accommodation {
     @OneToMany(mappedBy = "accommodation")
     @JsonManagedReference
     private List<Booking> bookings;
+
+    //Ruta de las imagenes
+    private String imagePath;
 }
