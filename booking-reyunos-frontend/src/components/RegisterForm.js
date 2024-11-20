@@ -13,10 +13,12 @@ function Registro({ onClose }) {
     e.preventDefault();
     try {
       const response = await axios.post('https://bookingreyunos-production.up.railway.app/users/register', {
+        role : "GUEST",
         username,
         email,
         password,
       });
+      console.log(response.data);
       setMessage('Registro exitoso. Puedes iniciar sesión ahora.');
     } catch (error) {
       setMessage('Error: No se pudo registrar. Intenta nuevamente.');
