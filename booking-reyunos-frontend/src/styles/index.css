@@ -3,9 +3,12 @@
   --font-color: #10148f;
   --hover-color: #0044ff;
 }
-
+*{
+  box-sizing: border-box;
+}
 html, body {
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -171,6 +174,9 @@ body {
 
 /* Estilo para dispositivos móviles */
 @media (max-width: 780px) {
+  html, body{
+    width: 100%;
+  }
   body{
     background-position: center;
     background-position-x: left;
