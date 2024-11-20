@@ -19,13 +19,13 @@ const OwnerDashboard = () => {
 
       try {
         // Obtener alojamientos del propietario
-        const accomData = await axios.get(`https://ctdr-utnreyunos.netlify.app/:8080/accommodations/owner/${user.id}`);
+        const accomData = await axios.get(`https://bookingreyunos-production.up.railway.app/accommodations/owner/${user.id}`);
         setAccommodations(accomData.data);
 
         // Obtener reservas de cada alojamiento
         const allBookings = [];
         for (const accommodation of accomData.data) {
-          const resData = await axios.get(`https://ctdr-utnreyunos.netlify.app//booking/accommodation/${accommodation.id}`);
+          const resData = await axios.get(`https://bookingreyunos-production.up.railway.app/booking/accommodation/${accommodation.id}`);
           allBookings.push(...resData.data);
         }
         setReservations(allBookings);
@@ -43,7 +43,7 @@ const OwnerDashboard = () => {
         const guestIds = allBookings.map((booking) => booking.guestId);
         const uniqueGuestIds = [...new Set(guestIds)]; // Eliminar duplicados
         // Hacer un POST al backend para obtener los usuarios correspondientes
-        const response = await axios.post('https://ctdr-utnreyunos.netlify.app//users/bulk', uniqueGuestIds);
+        const response = await axios.post('https://bookingreyunos-production.up.railway.app/users/bulk', uniqueGuestIds);
         const usersMap = response.data.reduce((acc, user) => {
           acc[user.id] = user.username;
           return acc;
@@ -59,13 +59,13 @@ const OwnerDashboard = () => {
     fetchDashboardData();
   }, [user]); // Dependencia del usuario
 
-  const eliminarReserva = (bookingId) => axios.delete(`https://ctdr-utnreyunos.netlify.app//booking/${bookingId}`);
+  const eliminarReserva = (bookingId) => axios.delete(`https://bookingreyunos-production.up.railway.app/booking/${bookingId}`);
 
   // Funciones para enviar correos
   const sendEmail = async (subject, message, guestId) => {
     try {
       // Lógica para enviar el correo (suponiendo que tengas un endpoint en el backend para ello)
-      await axios.post('https://ctdr-utnreyunos.netlify.app/send-email', { subject, message, guestId });
+      await axios.post('https://bookingreyunos-production.up.railway.app/send-email', { subject, message, guestId });
       alert('Correo enviado');
     } catch (error) {
       console.error('Error al enviar correo:', error);
