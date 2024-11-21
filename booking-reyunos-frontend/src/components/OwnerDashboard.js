@@ -139,7 +139,7 @@ const OwnerDashboard = () => {
 
   return (
     <div className="dashboard-container" onClick={handleClickOutside}>
-      <h2>Dashboard del Propietario</h2>
+      <h2 className='dashboard-h2'>Dashboard del Propietario</h2>
       {message && <p className="error-message">{message}</p>} {/* Mensaje de error */}
       <table className="calendar-table">
         <thead>
@@ -153,9 +153,9 @@ const OwnerDashboard = () => {
         <tbody>
           {accommodations.map((accommodation) => (
             <tr key={accommodation.id}>
-              <td>{accommodation.name}</td>
+              <td className='dashboard-td'>{accommodation.name}</td>
               {dates.map((date) => (
-                <td key={`${accommodation.id}-${date}`}>
+                <td className='dashboard-td' key={`${accommodation.id}-${date}`}>
                   {renderCellContent(accommodation.id, date)}
                 </td>
               ))}

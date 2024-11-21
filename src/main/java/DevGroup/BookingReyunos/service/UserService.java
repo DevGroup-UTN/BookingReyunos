@@ -5,10 +5,12 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import DevGroup.BookingReyunos.dto.LoginDTO;
 import DevGroup.BookingReyunos.dto.UserDTO;
@@ -105,6 +107,9 @@ public class UserService {
             if (userDTO.getRole() != null) {
                 existingUser.setRole(userDTO.getRole());
             }
+            if (userDTO.getPhone() != null) {
+                existingUser.setPhone(userDTO.getPhone());
+            }
             
             return userRepository.save(existingUser);
         });
@@ -122,5 +127,13 @@ public class UserService {
         userRepository.save(user);
         
         System.out.println("Contraseña actualizada con éxito.");
+    }
+        public void changePassword(Integer userId, String currentPassword, String newPassword) {
+        User user = getUser(userId);
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La contraseña actual no es correcta.");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 }

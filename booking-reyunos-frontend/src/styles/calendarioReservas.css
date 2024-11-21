@@ -5,8 +5,18 @@
     margin-right: -22px;
     position:sticky;
   }
+  /* Estilos para el fondo del calendario */
+.reservation-calendar-container{
+  width: 120%;
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #44440077;
+  box-shadow: 5px -3px 2px #000000;
+  border-radius: 15px;
+  margin-left: -200px;
+}
   .react-calendar {
-    margin-left: -170px;
+    margin-left: 25px;
     border: 1px solid #000000;
     box-shadow: 2px -2px 1px;
     border-radius: 10px;
@@ -21,8 +31,10 @@
 }
 
   .h3-calendar{
+    margin-left: 75px !important;
+    color: #8888ff !important;
+    -webkit-text-stroke: 0.8px #002;
     text-decoration: underline;
-    margin-left: -125px !important;
   }
   .react-calendar__navigation__arrow.react-calendar__navigation__prev2-button{
     border-top-left-radius: 9px !important;
@@ -48,6 +60,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 125px;
     margin-top: 10px;
   }
   

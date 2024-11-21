@@ -74,23 +74,25 @@ function ReservationCalendar({ accommodationId, onConfirm }) {
 
   return (
     <div className="reservation-calendar">
-      <h3 className='h3-calendar'>Selecciona tus Fechas</h3>
-      <Calendar
-        selectRange // Permitir selección de rango
-        onChange={setSelectedDates} // Actualizar fechas seleccionadas
-        tileDisabled={tileDisabled} // Deshabilitar fechas ocupadas
-        tileClassName={tileClassName} // Aplicar las clases personalizadas
-        minDate={new Date()} // No permitir fechas pasadas
-      />
-      {selectedDates && (
-        <p>
-          Fechas seleccionadas: {selectedDates[0].toLocaleDateString()} -{' '}
-          {selectedDates[1]?.toLocaleDateString() || '...'}
-        </p>
-      )}
-      <button onClick={handleConfirm} className="confirm-button">
-        Confirmar Reserva
-      </button>
+      <div className='reservation-calendar-container'>
+        <h3 className='h3-calendar'>Selecciona tus Fechas</h3>
+        <Calendar
+          selectRange // Permitir selección de rango
+          onChange={setSelectedDates} // Actualizar fechas seleccionadas
+          tileDisabled={tileDisabled} // Deshabilitar fechas ocupadas
+          tileClassName={tileClassName} // Aplicar las clases personalizadas
+          minDate={new Date()} // No permitir fechas pasadas
+        />
+        {selectedDates && (
+          <p>
+            Fechas seleccionadas: {selectedDates[0].toLocaleDateString()} -{' '}
+            {selectedDates[1]?.toLocaleDateString() || '...'}
+          </p>
+        )}
+        <button onClick={handleConfirm} className="confirm-button">
+          Confirmar Reserva
+        </button>
+      </div>
     </div>
   );
 }

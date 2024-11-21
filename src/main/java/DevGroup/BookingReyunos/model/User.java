@@ -30,6 +30,7 @@ public class User {
     private String password;
     private String email;
     private String resetToken;
+    private String phone;
 
     private String role; // ADMIN, OWNER, GUEST.
 
