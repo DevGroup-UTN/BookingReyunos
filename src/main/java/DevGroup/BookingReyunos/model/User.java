@@ -1,8 +1,6 @@
 package DevGroup.BookingReyunos.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -33,7 +31,6 @@ public class User {
     private String email;
     private String resetToken;
 
-    @Enumerated(EnumType.STRING)
     private String role; // ADMIN, OWNER, GUEST.
 
     // Relaciones
