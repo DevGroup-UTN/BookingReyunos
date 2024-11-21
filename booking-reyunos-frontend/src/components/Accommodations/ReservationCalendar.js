@@ -25,7 +25,7 @@ function ReservationCalendar({ accommodationId, onConfirm }) {
   useEffect(() => {
     // Obtener las reservas completas desde el backend
     axios
-      .get(`https://ctdr-utnreyunos.netlify.app//booking/accommodation/${accommodationId}`)
+      .get(`https://bookingreyunos-production.up.railway.app/booking/accommodation/${accommodationId}`)
       .then((response) => {
         // Extraer todas las fechas ocupadas de las reservas
         const occupiedDates = response.data.flatMap((booking) =>
@@ -74,23 +74,25 @@ function ReservationCalendar({ accommodationId, onConfirm }) {
 
   return (
     <div className="reservation-calendar">
-      <h3>Selecciona tus fechas</h3>
-      <Calendar
-        selectRange // Permitir selección de rango
-        onChange={setSelectedDates} // Actualizar fechas seleccionadas
-        tileDisabled={tileDisabled} // Deshabilitar fechas ocupadas
-        tileClassName={tileClassName} // Aplicar las clases personalizadas
-        minDate={new Date()} // No permitir fechas pasadas
-      />
-      {selectedDates && (
-        <p>
-          Fechas seleccionadas: {selectedDates[0].toLocaleDateString()} -{' '}
-          {selectedDates[1]?.toLocaleDateString() || '...'}
-        </p>
-      )}
-      <button onClick={handleConfirm} className="confirm-button">
-        Confirmar Reserva
-      </button>
+      <div className='reservation-calendar-container'>
+        <h3 className='h3-calendar'>Selecciona tus Fechas</h3>
+        <Calendar
+          selectRange // Permitir selección de rango
+          onChange={setSelectedDates} // Actualizar fechas seleccionadas
+          tileDisabled={tileDisabled} // Deshabilitar fechas ocupadas
+          tileClassName={tileClassName} // Aplicar las clases personalizadas
+          minDate={new Date()} // No permitir fechas pasadas
+        />
+        {selectedDates && (
+          <p>
+            Fechas seleccionadas: {selectedDates[0].toLocaleDateString()} -{' '}
+            {selectedDates[1]?.toLocaleDateString() || '...'}
+          </p>
+        )}
+        <button onClick={handleConfirm} className="confirm-button">
+          Confirmar Reserva
+        </button>
+      </div>
     </div>
   );
 }

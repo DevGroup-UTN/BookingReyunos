@@ -1,6 +1,5 @@
 package DevGroup.BookingReyunos.dto;
 
-import DevGroup.BookingReyunos.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,14 +10,18 @@ import lombok.NoArgsConstructor;
 public class LoginDTO {
     private Integer id;
     private String username;
+    private String email;
     private String password;
+    private String phone;
     private String token;
-    private Role role;
+    private String role;
 
-    public LoginDTO(Integer id, String username, String token, Role role){
+    public LoginDTO(Integer id, String username, String email, String token, String role, String phone){
         this.id = id;
         this.username = username;
+        this.email = email;
         this.token = token;
         this.role = role;
+        this.phone = phone;
     }
 }

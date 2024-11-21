@@ -17,7 +17,7 @@ function Accommodation() {
   }, []);
 
   return (
-    <div>
+    <div className='accommodation-container'>
       <h2 className="titulo">Alojamientos Disponibles</h2>
       <div className="accommodations-list">
         {accommodations.map((acc) => (

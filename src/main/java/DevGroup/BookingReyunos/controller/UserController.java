@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import DevGroup.BookingReyunos.dto.UserDTO;
+import DevGroup.BookingReyunos.dto.ChangePasswordDTO;
 import DevGroup.BookingReyunos.repository.UserRepository;
 import DevGroup.BookingReyunos.dto.ForgotPasswordRequest;
 import DevGroup.BookingReyunos.dto.ResetPasswordRequest;
@@ -53,7 +54,7 @@ public class UserController {
         // Generar el token JWT usando la clave secreta definida en application.properties
         String token = jwtUtil.generateToken(user);
 
-        LoginDTO response = new LoginDTO(user.getId(),user.getUsername(), token, user.getRole());
+        LoginDTO response = new LoginDTO(user.getId(), user.getUsername(), user.getEmail(), token, user.getRole(), user.getPhone());
         return ResponseEntity.ok(response);
     }
     
@@ -90,5 +91,11 @@ public class UserController {
     public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordRequest request) {
         userService.resetPassword(request.getToken(), request.getNewPassword());
         return ResponseEntity.ok("Contraseña restablecida exitosamente.");
+    }
+    // Cambio de contraseña
+    @PutMapping("/{id}/change-password")
+    public ResponseEntity<String> changePassword(@PathVariable Integer id, @RequestBody ChangePasswordDTO request) {
+        userService.changePassword(id, request.getCurrentPassword(), request.getNewPassword());
+        return ResponseEntity.ok("Contraseña cambiada exitosamente.");
     }
 }

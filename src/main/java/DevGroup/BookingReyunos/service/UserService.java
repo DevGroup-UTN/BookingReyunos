@@ -5,17 +5,17 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import DevGroup.BookingReyunos.dto.LoginDTO;
 import DevGroup.BookingReyunos.dto.UserDTO;
-import DevGroup.BookingReyunos.dto.UserRoleDTO;
 import DevGroup.BookingReyunos.exceptions.InvalidCredentialsException;
 import DevGroup.BookingReyunos.exceptions.UserNotFoundException;
-import DevGroup.BookingReyunos.model.Role;
 import DevGroup.BookingReyunos.model.User;
 import DevGroup.BookingReyunos.repository.UserRepository;
 
@@ -35,24 +35,7 @@ public class UserService {
     @Autowired
     private JavaMailSender emailSender; // Para enviar correos
 
-    public void assignRole(UserRoleDTO userRoleDTO) {
-        String username = userRoleDTO.getUsername();
-        if (username == null || username.isEmpty()) {
-            throw new RuntimeException("Username must not be null or empty");
-        }
-
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User not found"));
-
-        try {
-            Role role = Role.valueOf(userRoleDTO.getRole());
-            user.setRole(role);
-            userRepository.save(user);
-        } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Invalid role specified: " + userRoleDTO.getRole());
-        }
-    }
-
+    
     // Método para registrar un nuevo usuario
     public User register(UserDTO userDTO) {
         // Verificar si el username ya está en uso
@@ -62,8 +45,9 @@ public class UserService {
 
         // Crear nuevo usuario a partir del DTO
         User user = new User();
-        user.setUsername(userDTO.getUsername());
+        user.setUsername(userDTO.getUsername().toLowerCase());
         user.setEmail(userDTO.getEmail());
+        user.setRole("GUEST");
         user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Cifrar la contraseña
 
         // Guardar el usuario en la base de datos
@@ -73,7 +57,7 @@ public class UserService {
     // Método para autenticar a un usuario y generar un token JWT
     public User authenticate(LoginDTO loginDTO) {
         // Buscar el usuario por su nombre de usuario
-        User user = userRepository.findByUsername(loginDTO.getUsername())
+        User user = userRepository.findByUsername(loginDTO.getUsername().toLowerCase())
                 .orElseThrow(() -> new UserNotFoundException("User not found"));
     
         // Verificar la contraseña
@@ -123,6 +107,9 @@ public class UserService {
             if (userDTO.getRole() != null) {
                 existingUser.setRole(userDTO.getRole());
             }
+            if (userDTO.getPhone() != null) {
+                existingUser.setPhone(userDTO.getPhone());
+            }
             
             return userRepository.save(existingUser);
         });
@@ -140,5 +127,13 @@ public class UserService {
         userRepository.save(user);
         
         System.out.println("Contraseña actualizada con éxito.");
+    }
+        public void changePassword(Integer userId, String currentPassword, String newPassword) {
+        User user = getUser(userId);
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La contraseña actual no es correcta.");
+        }
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 }

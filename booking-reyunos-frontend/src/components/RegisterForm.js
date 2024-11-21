@@ -17,6 +17,7 @@ function Registro({ onClose }) {
         email,
         password,
       });
+      console.log(response.data);
       setMessage('Registro exitoso. Puedes iniciar sesión ahora.');
     } catch (error) {
       setMessage('Error: No se pudo registrar. Intenta nuevamente.');

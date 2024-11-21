@@ -5,6 +5,53 @@
     margin-right: -22px;
     position:sticky;
   }
+  /* Estilos para el fondo del calendario */
+.reservation-calendar-container{
+  width: 120%;
+  padding: 10px;
+  border: 1px solid #000000;
+  background-color: #44440077;
+  box-shadow: 5px -3px 2px #000000;
+  border-radius: 15px;
+  margin-left: -200px;
+}
+  .react-calendar {
+    margin-left: 25px;
+    border: 1px solid #000000;
+    box-shadow: 2px -2px 1px;
+    border-radius: 10px;
+    background-color: #fafafa;
+    font-family: Arial, sans-serif;
+  }
+  .react-calendar__tile {
+  padding: 10px;
+  text-align: center;
+  background: none;
+  transition: all 0.2s ease-in-out;
+}
+
+  .h3-calendar{
+    margin-left: 75px !important;
+    color: #8888ff !important;
+    -webkit-text-stroke: 0.8px #002;
+    text-decoration: underline;
+  }
+  .react-calendar__navigation__arrow.react-calendar__navigation__prev2-button{
+    border-top-left-radius: 9px !important;
+    background-color: #ffffaa !important;
+  }
+  .react-calendar__navigation__arrow.react-calendar__navigation__next2-button{
+    border-top-right-radius: 9px !important;
+  }
+  .react-calendar__tile:last-child{
+    border-bottom-right-radius: 10px;
+  }
+  .react-calendar__tile:nth-last-child(7) {
+    border-bottom-left-radius: 10px;
+  }
+  .react-calendar__navigation__arrow.react-calendar__navigation__prev-button, .react-calendar__navigation__arrow.react-calendar__navigation__next-button, .react-calendar__navigation__arrow.react-calendar__navigation__next2-button, .react-calendar__navigation__label, .react-calendar__month-view__weekdays, .react-calendar.react-calendar--selectRange{
+    background-color: #ffffaa !important;
+  }
   
   .confirm-button {
     background-color: var(--font-color);
@@ -13,6 +60,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-left: 125px;
     margin-top: 10px;
   }
   
@@ -24,19 +72,22 @@
   background-color: green; /* Verde para fechas disponibles */
   color: white;
 }
+.available-date:hover{
+  background-color: #00ff00 !important;
+}
 
 .unavailable-date {
-  background-color: red; /* Rojo para fechas ocupadas */
+  background-color: red !important; /* Rojo para fechas ocupadas */
   color: white;
   pointer-events: none; /* Deshabilitar la interacción */
 }
 
 .past-date {
-  background-color: #6c757d; /* Gris para fechas pasadas */
+  background-color: #6c757d !important; /* Gris para fechas pasadas */
   color: white;
   pointer-events: none; /* Deshabilitar la interacción */
 }
 
 .react-calendar__tile--active {
-  background-color: #f0ad4e; /* Color para la fecha seleccionada */
+  background-color: #e7b672; /* Color para la fecha seleccionada */
 }

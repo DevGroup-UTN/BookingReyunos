@@ -17,7 +17,7 @@
     padding: 20px;
     margin: 10px;
     width: 700px;
-    background-color: #979595;
+    background-color: var(--card-color);
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
@@ -46,6 +46,7 @@
   
   .accommodation p {
     margin: 5px 0;
+    white-space: pre-wrap;
     color: var(--hover-color);
   }
   
@@ -103,3 +104,4 @@
   .reserve-button:hover {
     background-color: var(--hover-color);
   }
+

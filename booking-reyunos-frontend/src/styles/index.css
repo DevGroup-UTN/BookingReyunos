@@ -2,6 +2,7 @@
 :root {
   --font-color: #10148f;
   --hover-color: #0044ff;
+  --card-color: #979595;
 }
 *{
   box-sizing: border-box;
@@ -181,10 +182,11 @@ body {
   z-index: 1003;
 }
 
+
 /* Estilo para dispositivos móviles */
 @media (max-width: 780px) {
   html, body{
-    width: 100%;
+    width: 100vw;
   }
   body{
     background-position: center;
@@ -258,5 +260,30 @@ body {
   }
   .nav-links a:hover{
     color: var(--hover-color);
+  }
+  /* Estilos para los alojamientos */
+  .h2.titulo {
+    justify-content: center;
+    margin-left: 100px;
+  }
+  .accommodation-container{
+    width: 200vw;
+    margin-left: 30px;
+  }
+  .react-calendar.react-calendar--selectRange{
+    margin-left: 10px;
+  }
+  .h3-calendar{
+    text-decoration: underline;
+    margin-left: -150px !important;
+  }
+  .confirm-button{
+    margin-left: -85px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-links{
+    height: 33vh;
   }
 }
