@@ -12,7 +12,7 @@ footer {
     color: white;
     padding: 0 0;
     width: 100%;
-    margin-top: auto; /* Esto empuja el footer al fondo si hay poco contenido */
+    margin-top: auto !important; /* Esto empuja el footer al fondo si hay poco contenido */
     position: relative; /* Asegura que no se mueva por encima de otros elementos */
 }
 

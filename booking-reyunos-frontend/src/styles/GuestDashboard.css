@@ -1,12 +1,101 @@
 .guest-dashboard-container {
-    width: 80%;
-    height: 30rem;
+    width: 65rem;
+    height: 40rem;
     position: relative;
     padding: 10px 20px;
     border-radius: 15px;
     margin-left: 6rem;
-    background-color: var(--card-color);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
+}
+.guest-form-container{
+    width: 100%;
 }
 .guest-dashboard-title{
-    text-align: center;
+    background-color: #111122f8;
+    border: solid var(--font-color) 1px;
+    border-radius: 10px;
+    max-width:fit-content;
+    margin-left: 400px;
+    padding: 10px 12px;
+    color: #f8f8ff66;
+    text-shadow: 6px -4px 2px #11116666;
+    -webkit-text-stroke: var(--font-color) 0.5px;
+    text-decoration: underline;
+}
+#guest-dashboard-title{
+    padding-inline: 80px;
+}
+.guest-dashboard-form{
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    margin-left: 200px;
+}
+.guest-dashboard-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.guest-dashboard-label, .guest-dashboard-input {
+    font-size: 1.1rem;
+    margin-inline: 20px;
+    padding-block: 0.1rem;
+}
+
+.guest-dashboard-label {
+    background-color: rgba(0, 190, 255, 0.2);
+    border: solid var(--font-color) 1px;
+    width: 600px;
+    padding: 5px ;
+    border-radius: 10px;
+    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+}
+
+.guest-dashboard-input {
+    width: 50%;
+    position: static;
+    margin-left: 40px;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+#guest-dashboard-input4{
+    margin-left: 123px;
+}
+#guest-dashboard-input5{
+    margin-left: 122px;
+}
+#guest-dashboard-input1{
+    margin-left: 206px;
+}
+#guest-dashboard-input3 {
+    margin-left: 202px;
+}
+#guest-dashboard-input2 {
+    margin-left: 215px;
+}
+.guest-update-button{
+    margin-left: 240px;
+    border-radius: 5px;
+    border: solid #000 1px;
+    font-size: 1rem;
+    padding: 5px 13px;
+    box-shadow: 4px -3px 2px #000;
+    color: white;
+    background-color: var(--font-color);
+    transition: 0.3s;
+}
+.guest-update-button:hover{
+    background-color: var(--hover-color);
+    scale: 1.1;
+    transition: 0.3s;
+}
+#guest-update-button-1{
+    padding-inline: 30px;
 }
