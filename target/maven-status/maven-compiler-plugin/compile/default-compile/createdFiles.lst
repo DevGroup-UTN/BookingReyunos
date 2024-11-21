@@ -28,6 +28,7 @@ DevGroup\BookingReyunos\exceptions\InvalidCredentialsException.class
 DevGroup\BookingReyunos\model\UserBuyer.class
 DevGroup\BookingReyunos\dto\AccommodationDTO.class
 DevGroup\BookingReyunos\service\UserService.class
+DevGroup\BookingReyunos\dto\ChangePasswordDTO.class
 DevGroup\BookingReyunos\model\Booking.class
 DevGroup\BookingReyunos\security\JwtRequestFilter.class
 DevGroup\BookingReyunos\dto\ResetPasswordRequest.class
