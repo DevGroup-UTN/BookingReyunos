@@ -109,3 +109,9 @@ a {
         font-size: 0.9em;
     }
 }
+
+@media (max-width: 360px){
+    footer{
+        width: 328vw;
+    }
+}

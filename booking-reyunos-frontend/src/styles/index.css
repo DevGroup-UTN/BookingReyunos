@@ -8,9 +8,8 @@
   box-sizing: border-box;
 }
 html, body {
-  overflow-x: hidden;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -187,14 +186,13 @@ body {
 /* Estilo para dispositivos móviles */
 @media (max-width: 780px) {
   html, body{
-    overflow-x: auto;
-    width: 100vw;
+    width: auto;
   }
   body{
     background-position: center;
     background-position-x: left;
     background-size: cover;
-    background-repeat:unset;
+    background-repeat: no-repeat;
   }
   .navbar{
     width: 100%;
@@ -286,6 +284,7 @@ body {
 
 @media (max-width: 360px) {
   .nav-links{
-    height: 33vh;
+    margin-right: 810px;
+    height: 32vh;
   }
 }
