@@ -1,5 +1,5 @@
 .guest-dashboard-container {
-    width: 65rem;
+    width: 60rem;
     height: 40rem;
     position: relative;
     padding: 10px 20px;
@@ -17,7 +17,7 @@
     border: solid var(--font-color) 1px;
     border-radius: 10px;
     max-width:fit-content;
-    margin-left: 400px;
+    margin-left: 350px;
     padding: 10px 12px;
     color: #f8f8ff66;
     text-shadow: 6px -4px 2px #11116666;
@@ -34,7 +34,7 @@
     flex-direction: column;
     gap: 5px;
     width: 100%;
-    margin-left: 200px;
+    margin-left: 150px;
 }
 .guest-dashboard-form {
     display: flex;

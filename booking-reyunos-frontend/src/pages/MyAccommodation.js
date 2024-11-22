@@ -109,7 +109,7 @@ const MyAccommodation = () => {
       {message && <p className="error-message">{message}</p>}
       <div className="accommodations-list">
         {accommodations.map((accommodation) => (
-          <div key={accommodation.id} className="accommodation">
+          <div key={accommodation.id} className="my-accommodation">
             <div className="image-container">
               <img
                 src={accommodation.image || 'default-image.jpg'}

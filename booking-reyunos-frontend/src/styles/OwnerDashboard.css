@@ -10,15 +10,23 @@
 }
 
 /* Estilo para la tabla del calendario */
-.calendar-table {
+.calendar-table-owner {
+  background-color: #444466aa;
+  border: 1px solid #ddd;
+  border-radius: 15px;
   width: 100%;
-  border-collapse: collapse;
   margin-top: 20px;
 }
 
 .dashboard-h2 {
   color: #ddd;
-  text-align: center;
+  background-color: var(--font-color);
+  padding: 5px 20px;
+  margin-left: 35vw;
+  box-shadow: 3px -3px 3px #555555;
+  border-radius: 5px;
+  border: solid #002 1px;
+  max-width: fit-content;
 }
 
 .dashboard-td {
@@ -26,17 +34,30 @@
 }
 
 /* Estilo para las celdas de la tabla (th y td) */
-.calendar-table th,
-.calendar-table td {
-  border: 1px solid #ddd;
+.calendar-table-owner th,
+.calendar-table-owner td {
   padding: 10px;
+  border: solid #222 1px;
   text-align: center;
+}
+.calendar-table-owner tr:last-child td:nth-last-child(8){
+  border-bottom-left-radius: 12px;
+}
+.calendar-table-owner tr:last-child td:last-child{
+  border-bottom-right-radius: 12px;
 }
 
 /* Estilo para los encabezados de la tabla */
-.calendar-table th {
+.calendar-table-owner th {
   background-color: #4CAF50; /* Verde de fondo */
+  border: solid #222 1px;
   color: white; /* Color blanco para el texto */
+}
+.calendar-table-owner th:first-child{
+  border-top-left-radius: 12px;
+}
+.calendar-table-owner th:last-child{
+  border-top-right-radius: 12px;
 }
 
 /* Estilo para las celdas disponibles */
