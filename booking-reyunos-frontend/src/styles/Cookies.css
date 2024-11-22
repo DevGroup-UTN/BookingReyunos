@@ -9,6 +9,10 @@
     background-color: rgba(130, 158, 235, 0.733);
     border-radius: 15px;
 }
+.imgCookies{
+    max-width: 100%;
+    height: auto;
+}
 
 .styleCookies p,
 .styleCookies ul,
@@ -33,4 +37,40 @@
 .styleCookies table {
     border-collapse: collapse; /* Hace que las tablas colapsen los bordes, si es necesario */
     text-align: left; /* Alinea el contenido de las celdas a la izquierda */
+}
+
+/* Para pantallas pequeñas (móviles) */
+@media (max-width: 768px) {
+    .styleCookies {
+        padding: 20px 10px; /* Reduce el relleno */
+        font-size: 12px; /* Ajusta el tamaño del texto */
+    }
+
+    .styleCookies p,
+    .styleCookies ul,
+    .styleCookies table {
+        text-align: center; /* Centra el texto en pantallas pequeñas */
+    }
+
+    .styleCookies ul {
+        padding-left: 10px; /* Reduce el margen para listas */
+    }
+
+    .styleCookies table {
+        font-size: 12px; /* Asegura que las tablas sean legibles */
+        overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+        display: block; /* Hace que las tablas sean más manejables en pantallas pequeñas */
+    }
+}
+
+/* Para pantallas medianas (tablets) */
+@media (max-width: 1024px) {
+    .styleCookies {
+        padding: 30px 15px; /* Ajusta el relleno */
+        font-size: 13px; /* Ajusta el tamaño del texto */
+    }
+
+    .styleCookies table {
+        font-size: 13px;
+    }
 }
