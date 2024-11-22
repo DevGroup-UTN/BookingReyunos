@@ -141,10 +141,10 @@ const OwnerDashboard = () => {
     <div className="dashboard-container" onClick={handleClickOutside}>
       <h2 className='dashboard-h2'>Dashboard del Propietario</h2>
       {message && <p className="error-message">{message}</p>} {/* Mensaje de error */}
-      <table className="calendar-table">
-        <thead>
+      <table className="calendar-table-owner">
+        <thead className='thead-owner'>
           <tr>
-            <th>Alojamiento</th>
+            <th className='th-1'>Alojamiento</th>
             {dates.map((date) => (
               <th key={date}>{date}</th>
             ))}

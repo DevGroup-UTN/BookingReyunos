@@ -8,7 +8,6 @@
   box-sizing: border-box;
 }
 html, body {
-  overflow-x: hidden;
   width: 100%;
   height: 100%;
   margin: 0;
@@ -21,7 +20,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgba(3, 1, 11, 0.925);
-  background-attachment: scroll !important;
+  background-attachment:fixed;
   background-blend-mode: overlay;
   font-family: Arial, sans-serif;
 }
@@ -100,6 +99,14 @@ body {
   font-weight: bold;
   padding: 8px;
   margin-right: 40px;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+.user-name:hover{
+  background-color: #ccc;
+  border-radius: 10px;
+  color: var(--font-color);
+  transition: 0.3s;
 }
 
 .dropdown-menu {
@@ -187,14 +194,13 @@ body {
 /* Estilo para dispositivos móviles */
 @media (max-width: 780px) {
   html, body{
-    overflow-x: auto;
-    width: 100vw;
+    width: auto;
   }
   body{
     background-position: center;
     background-position-x: left;
     background-size: cover;
-    background-repeat:unset;
+    background-repeat: no-repeat;
   }
   .navbar{
     width: 100%;
@@ -286,6 +292,7 @@ body {
 
 @media (max-width: 360px) {
   .nav-links{
-    height: 33vh;
+    margin-right: 810px;
+    height: 32vh;
   }
 }
