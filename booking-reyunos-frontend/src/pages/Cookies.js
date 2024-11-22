@@ -57,7 +57,7 @@ function Cookies(){
     ];
     return(
         <div className="styleCookies">
-            <FotoLogo/>
+            <FotoLogo className="imgCookies"/>
             <h1 className="TitulooCookies">Politicas de Privacidad y Cookies</h1>
             <p>
                 <strong>
@@ -416,4 +416,4 @@ function Cookies(){
     );
 }
 
-export default Cookies
+export default Cookies;
