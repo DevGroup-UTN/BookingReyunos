@@ -3,11 +3,14 @@ package DevGroup.BookingReyunos.controller;
 import DevGroup.BookingReyunos.dto.AccommodationDTO;
 import DevGroup.BookingReyunos.service.AccommodationService;
 import DevGroup.BookingReyunos.exceptions.AccommodationNotFoundException;
+import DevGroup.BookingReyunos.service.CloudinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -16,6 +19,10 @@ public class AccommodationController {
 
     @Autowired
     private AccommodationService accommodationService;
+
+    @Autowired
+    private CloudinaryService cloudinaryService;
+
 
     // Obtener todos los alojamientos
     @GetMapping
@@ -73,5 +80,21 @@ public class AccommodationController {
         } catch (AccommodationNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+
+    //Imagenes
+    @PostMapping("/upload-image")
+    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
+        // Simular el almacenamiento externo (ejemplo con Cloudinary, AWS S3, etc.)
+        String imageUrl = uploadToExternalService(file); // Implementar esta función
+
+        return ResponseEntity.ok(imageUrl); // Devuelve la URL generada
+    }
+
+    private String uploadToExternalService(MultipartFile file) {
+        // Implementar la integración con el servicio que prefieras (Cloudinary, AWS, etc.)
+        return "https://example.com/images/" + file.getOriginalFilename(); // Simulado
+
     }
 }

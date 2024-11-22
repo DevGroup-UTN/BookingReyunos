@@ -32,4 +32,7 @@ public class Accommodation {
 
     //Ruta de las imagenes
     private String imagePath;
+
+    private String imageUrl; //URL de la imagen guardada de forma remota en la bd
+
 }

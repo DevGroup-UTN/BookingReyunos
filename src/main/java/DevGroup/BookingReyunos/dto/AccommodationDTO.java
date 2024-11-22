@@ -12,4 +12,6 @@ public class AccommodationDTO {
     private BigDecimal pricePerNight;
     private Integer ownerId;  // ID del propietario
     private List<Integer> bookingIds;  // IDs de las reservas asociadas
+
+    private String imageUrl;
 }
