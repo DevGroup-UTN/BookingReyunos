@@ -9,10 +9,12 @@ C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingRey
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\UserController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\service\EmailService.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\BookingDTO.java
+C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\ImageController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\LoginDTO.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\ForgotPasswordRequest.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\repository\BookingRepository.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\AccommodationController.java
+C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\EmailController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\AccommodationDTO.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\security\JwtRequestFilter.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\ReviewDTO.java
@@ -21,6 +23,7 @@ C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingRey
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\service\UserService.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\UserDTO.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\ChangePasswordDTO.java
+C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\EmailRequestDTO.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\exceptions\UserNotFoundException.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\MercadoPagoController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\model\Booking.java

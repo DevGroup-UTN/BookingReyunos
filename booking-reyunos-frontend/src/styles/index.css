@@ -2,7 +2,8 @@
 :root {
   --font-color: #10148f;
   --hover-color: #0044ff;
-  --card-color: #979595;
+  --card-color: #9795c5;
+  --card-color-transparent: #979595dd;
 }
 *{
   box-sizing: border-box;

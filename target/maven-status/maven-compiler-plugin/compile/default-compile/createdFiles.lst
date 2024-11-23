@@ -9,6 +9,8 @@ DevGroup\BookingReyunos\exceptions\UserNotFoundException.class
 DevGroup\BookingReyunos\service\AccommodationService.class
 DevGroup\BookingReyunos\repository\ReviewRepository.class
 DevGroup\BookingReyunos\repository\UserRepository.class
+DevGroup\BookingReyunos\controller\ImageController.class
+DevGroup\BookingReyunos\dto\EmailRequestDTO.class
 DevGroup\BookingReyunos\security\SecurityConfig.class
 DevGroup\BookingReyunos\dto\LoginDTO.class
 DevGroup\BookingReyunos\controller\AccommodationController.class
@@ -31,4 +33,5 @@ DevGroup\BookingReyunos\service\UserService.class
 DevGroup\BookingReyunos\dto\ChangePasswordDTO.class
 DevGroup\BookingReyunos\model\Booking.class
 DevGroup\BookingReyunos\security\JwtRequestFilter.class
+DevGroup\BookingReyunos\controller\EmailController.class
 DevGroup\BookingReyunos\dto\ResetPasswordRequest.class
