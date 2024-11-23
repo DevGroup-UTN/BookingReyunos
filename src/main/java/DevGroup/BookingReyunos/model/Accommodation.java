@@ -32,4 +32,9 @@ public class Accommodation {
 
     //Ruta de las imagenes
     private String imagePath;
+
+
+    @Column(name = "imageUrl", columnDefinition = "TEXT")
+    private String imageUrl; //URL de la imagen guardada de forma remota en la bd
+
 }
