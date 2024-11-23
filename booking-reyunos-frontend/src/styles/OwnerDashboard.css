@@ -9,13 +9,61 @@
   padding: 20px;
 }
 
+.calendar-table-owner-container {
+  max-width: 1160px;
+  margin-top: 10px;
+  background-color: #0055;
+  border: solid rgb(35, 35, 128) 1px;
+  max-height:min-content;
+  padding: 5px 10px;
+  justify-items: center;
+  border-radius: 15px;
+  overflow-x: auto;
+  margin-left: 40px;
+}
+.calendar-table-owner-container::-webkit-scrollbar{
+  background-color: #adadff; /* Color del "pulgar" */
+  border-radius: 10px; /* Redondear bordes */
+  border: 1px solid #f4f4f4; /* Espaciado entre el pulgar y la pista */
+}
 /* Estilo para la tabla del calendario */
 .calendar-table-owner {
   background-color: #444466aa;
-  border: 1px solid #ddd;
   border-radius: 15px;
-  width: 100%;
-  margin-top: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: max-content;
+  margin-left: auto;
+}
+.date-range-form{
+  border: solid #adadff 1px;
+  background-color: #9a9aee49;
+  align-items: center;
+  color: #ddd;
+  margin-left: 21vw;
+  border-radius: 10px;
+  padding: 5px 15px;
+  width: fit-content;
+}
+.date-range-form label{
+  margin-right: 20px;
+}
+
+.date-range-form input{
+  background-color: #9292ff;
+  border-radius: 5px;
+  color: #333;
+  margin-left: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  font-variant: small-caps;
+}
+.date-range-form button{
+  background-color: var(--font-color);
+  color: #ddd;
+  padding: 5px 10px;
+  border-radius: 8px;
 }
 
 .dashboard-h2 {
@@ -40,7 +88,7 @@
   border: solid #222 1px;
   text-align: center;
 }
-.calendar-table-owner tr:last-child td:nth-last-child(8){
+.calendar-table-owner tr:last-child td:first-child{
   border-bottom-left-radius: 12px;
 }
 .calendar-table-owner tr:last-child td:last-child{
@@ -74,4 +122,35 @@
   color: #a33a3a; /* Texto rojo oscuro */
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
+}
+
+.dashboard-container .modal-content{
+  background-color: var(--card-color-transparent);
+  border: solid #002 1px;
+}
+.modal-content button{
+  border-radius: 5px;
+  margin-inline: 5px;
+}
+.dashboard-container .modal-content p{
+  border: solid #002 1px;
+  background-color: #ddddffcc;
+  padding: 4px 8px;
+  margin: 5px;
+}
+.owner-p:first-of-type{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.owner-p:last-of-type{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.dashboard-container .modal-content h3{
+  max-width: fit-content;
+  padding: 5px 10px;
+  margin-left: 6.5rem;
+  background-color: #aaaaeecc;
+  border: solid #002 1px;
+  border-radius: 5px;
 }
