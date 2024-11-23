@@ -1,9 +1,11 @@
 package DevGroup.BookingReyunos.controller;
 
 import DevGroup.BookingReyunos.dto.AccommodationDTO;
+import DevGroup.BookingReyunos.model.Accommodation;
 import DevGroup.BookingReyunos.service.AccommodationService;
 import DevGroup.BookingReyunos.exceptions.AccommodationNotFoundException;
 import DevGroup.BookingReyunos.service.CloudinaryService;
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -84,17 +86,25 @@ public class AccommodationController {
 
 
     //Imagenes
-    @PostMapping("/upload-image")
-    public ResponseEntity<String> uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
-        // Simular el almacenamiento externo (ejemplo con Cloudinary, AWS S3, etc.)
-        String imageUrl = uploadToExternalService(file); // Implementar esta función
+    // Subir imagen y asociarla a un alojamiento
+    @PostMapping("/{id}/uploadImage")
+    public ResponseEntity<String> uploadAccommodationImage(
+            @PathVariable Integer id,
+            @RequestParam("file") MultipartFile file) {
+        try {
+            // Subir la imagen a Cloudinary
+            String imageUrl = cloudinaryService.uploadImage(file);
 
-        return ResponseEntity.ok(imageUrl); // Devuelve la URL generada
+            // Asociar la URL de la imagen al alojamiento
+            accommodationService.addImageToAccommodation(id, imageUrl);
+
+            return new ResponseEntity<>("Image uploaded successfully. URL: " + imageUrl, HttpStatus.OK);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Error uploading image: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (AccommodationNotFoundException e) {
+            return new ResponseEntity<>("Accommodation not found", HttpStatus.NOT_FOUND);
+        }
+
     }
 
-    private String uploadToExternalService(MultipartFile file) {
-        // Implementar la integración con el servicio que prefieras (Cloudinary, AWS, etc.)
-        return "https://example.com/images/" + file.getOriginalFilename(); // Simulado
-
-    }
 }
