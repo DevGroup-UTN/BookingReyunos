@@ -8,6 +8,7 @@ import DevGroup.BookingReyunos.model.User;
 import DevGroup.BookingReyunos.repository.AccommodationRepository;
 import DevGroup.BookingReyunos.repository.BookingRepository;
 import DevGroup.BookingReyunos.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class AccommodationService {
         dto.setName(accommodation.getName());
         dto.setDescription(accommodation.getDescription());
         dto.setPricePerNight(accommodation.getPricePerNight());
+        dto.setImageUrl(accommodation.getImageUrl());
 
         if (accommodation.getOwner() != null) {
             dto.setOwnerId(accommodation.getOwner().getId()); // Asignamos el ID del propietario
@@ -52,6 +54,7 @@ public class AccommodationService {
         accommodation.setName(dto.getName());
         accommodation.setDescription(dto.getDescription());
         accommodation.setPricePerNight(dto.getPricePerNight());
+        accommodation.setImageUrl(dto.getImageUrl());
 
         // Buscamos al propietario usando el ID proporcionado en el DTO
         User owner = userRepository.findById(dto.getOwnerId())
