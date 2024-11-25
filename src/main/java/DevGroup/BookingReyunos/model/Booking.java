@@ -3,8 +3,11 @@ package DevGroup.BookingReyunos.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import DevGroup.BookingReyunos.repository.BookingRepository;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +36,8 @@ public class Booking { // Esta clase entidad representa una reserva hecha por un
     @JoinColumn(name = "accommodation_id", nullable = false)
     @JsonBackReference
     private Accommodation accommodation;
+    private boolean isBlocked;
+
 
 }
 

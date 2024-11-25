@@ -23,7 +23,7 @@ function AccommodationCard({ accommodation, user }) {
   const handleReservationConfirm = (selectedDates) => {
     const [startDate, endDate] = selectedDates;
     const checkInDate = startDate.toISOString().split('T')[0]; // '2024-11-17'
-  const checkOutDate = endDate.toISOString().split('T')[0]; // '2024-11-18'
+    const checkOutDate = endDate.toISOString().split('T')[0]; // '2024-11-18'
 
     axios
       .post('https://bookingreyunos-production.up.railway.app/booking', {
@@ -42,7 +42,6 @@ function AccommodationCard({ accommodation, user }) {
         console.error('Error creating reservation:', error);
         alert('Hubo un error al procesar su reserva. Por favor, inténtelo nuevamente.');
       });
-      console.log();
   };
   
 

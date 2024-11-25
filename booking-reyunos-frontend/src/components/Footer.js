@@ -39,13 +39,13 @@ function Footer() {
       <div className='footer-div-4'>
         <div>Al utilizar este sitio web, acepta el uso de cookies. </div>
         <div>
-        <a target="_blank" rel="nofollow" href="/cookies" class="footer_link">Política de cookies</a> 
+        <a target="_blank" rel="nofollow" href="/cookies" className="footer_link">Política de cookies</a> 
         | 
-        <a target="_blank" rel="nofollow" href="/terminos" class="footer_link">Términos y condiciones</a>
+        <a target="_blank" rel="nofollow" href="/terminos" className="footer_link">Términos y condiciones</a>
         |
-        <a target="_blank" rel="nofollow" href="/privacidad" class="footer_link">Política de privacidad</a>
+        <a target="_blank" rel="nofollow" href="/privacidad" className="footer_link">Política de privacidad</a>
         </div>
-        <span class="framework_f">Tag: <span class="tag_cookie">devgroupreyunos</span> </span>
+        <span className="framework_f">Tag: <span className="tag_cookie">devgroupreyunos</span> </span>
       </div>
     </footer>
   );
