@@ -109,6 +109,19 @@ public class AccommodationService {
         }
         accommodationRepository.deleteById(id);
     }
+
+    public void addImageToAccommodation(Integer id, String imageUrl) {
+        // Buscar el alojamiento por ID
+        Accommodation accommodation = accommodationRepository.findById(id)
+                .orElseThrow(() -> new AccommodationNotFoundException("Alojamiento no encontrado con ID: " + id));
+
+        // Actualizar la URL de la imagen
+        accommodation.setImageUrl(imageUrl);
+
+        // Guardar el alojamiento actualizado
+        accommodationRepository.save(accommodation);
+    }
+    
     public void closeDates(Integer accommodationId, LocalDate startDate, LocalDate endDate) {
         // Validación de fechas
         if (startDate.isAfter(endDate)) {
