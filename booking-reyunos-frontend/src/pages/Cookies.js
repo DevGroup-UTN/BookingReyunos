@@ -5,7 +5,7 @@ export function FotoLogo(){
     return (
         <div className="styleFotoLogo">
             <img
-                src="https://files-public-web.s3-us-west-2.amazonaws.com/1472/company/library/user/51742008549581e7db8aba6fb75df56232d673d813.png" 
+                src="/images/logo-utn-nav.png" 
                 alt="Logo"
             />
 
