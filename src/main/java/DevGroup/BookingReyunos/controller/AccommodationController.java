@@ -94,7 +94,7 @@ public class AccommodationController {
             String imageUrl = cloudinaryService.uploadImage(file);
 
             // Asociar la URL de la imagen al alojamiento
-            accommodationService.addImageToAccommodation(id, imageUrl);
+            accommodationService.addImageToAccommodation(id,imageUrl);
 
             return new ResponseEntity<>("Image uploaded successfully. URL: " + imageUrl, HttpStatus.OK);
         } catch (IOException e) {
