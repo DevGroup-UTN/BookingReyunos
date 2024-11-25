@@ -33,7 +33,6 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
     public UserController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil; // Inicialización en el constructor

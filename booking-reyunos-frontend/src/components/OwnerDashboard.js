@@ -20,7 +20,6 @@ const OwnerDashboard = () => {
   const [freeStartDate, setFreeStartDate] = useState(''); // Fecha de inicio
   const [freeEndDate, setFreeEndDate] = useState(''); // Fecha de fin
   const [selectedAccommodationId, setSelectedAccommodationId] = useState(null); // ID del alojamiento
-  const [isClosingReservation, setIsClosingReservation] = useState(false); // Controla los botones del modal de modificacion de reservas de un alojamiento seleccionado
   const [currentAction, setCurrentAction] = useState(null); // Estado para la acción actual ("close" o "open")
 
   useEffect(() => {
@@ -69,8 +68,6 @@ const OwnerDashboard = () => {
     fetchDashboardData();
   }, [user]); // Dependencia del usuario
 
-  const eliminarReserva = (bookingId) => axios.delete(`https://bookingreyunos-production.up.railway.app/booking/${bookingId}`);
-
   // Funciones para enviar correos
   const sendEmail = async (subject, message, guestId) => {
     try {
@@ -81,12 +78,6 @@ const OwnerDashboard = () => {
       console.error('Error al enviar correo:', error);
       alert('No se pudo enviar el correo');
     }
-  };
-
-  // Manejador de clic en el nombre del usuario
-  const handleGuestClick = (guestId) => {
-    setSelectedGuestId(guestId.email);
-    setMenuVisible(!menuVisible);
   };
 
   // Manejador de clic fuera del menú
@@ -140,11 +131,7 @@ const OwnerDashboard = () => {
     sendEmail('Eliminación de Reserva', 'Saludos estimado usuario. Le informamos por el presente que el propietario a pedido la cancelación de la reserva por motivos personales. Para más información por favor comuníquese con nosotros a nuestro whatsapp: +5492604021708. Disculpe las molestia.', selectedGuestId);
   };
 
-  // Función para modificar la reserva
-  const handleModificarReserva = (bookingId) => {
-    setMenuVisible(false);
-    sendEmail('Modificación de reserva', 'Tu reserva ha sido modificada', selectedGuestId);
-  };
+
   
   const generateDateRange = (start, end) => {
     const startDate = new Date(start);
@@ -173,13 +160,8 @@ const OwnerDashboard = () => {
   
     generateDateRange(startDate, endDate); // Genera el rango basado en el input
   };
-  
 
-  // Función para ver detalles de la reserva
-  const handleVerDetalles = (bookingId) => {
-    setMenuVisible(false);
-    sendEmail('Detalles de reserva', 'Aquí están los detalles de tu reserva', selectedGuestId);
-  };
+
   /* Funcion para abrir un modal con los detalles de la reserva */
   const handleOpenModal = (reservation) => {
     setSelectedReservation(reservation);
