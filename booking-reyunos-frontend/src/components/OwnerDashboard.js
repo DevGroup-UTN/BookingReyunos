@@ -16,7 +16,12 @@ const OwnerDashboard = () => {
   const [selectedGuestId, setSelectedGuestId] = useState(null); // ID del guest seleccionado
   const [selectedReservation, setSelectedReservation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isModalFreeOpen, setIsModalFreeOpen] = useState(false); // Controla la visibilidad del modal
+  const [freeStartDate, setFreeStartDate] = useState(''); // Fecha de inicio
+  const [freeEndDate, setFreeEndDate] = useState(''); // Fecha de fin
+  const [selectedAccommodationId, setSelectedAccommodationId] = useState(null); // ID del alojamiento
+  const [isClosingReservation, setIsClosingReservation] = useState(false); // Controla los botones del modal de modificacion de reservas de un alojamiento seleccionado
+  const [currentAction, setCurrentAction] = useState(null); // Estado para la acción actual ("close" o "open")
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -89,6 +94,46 @@ const OwnerDashboard = () => {
     setMenuVisible(false);
   };
 
+  const handleOpenModalFree = (accommodationId) => {
+    setSelectedAccommodationId(accommodationId); // Asigna el ID del alojamiento
+    setIsModalFreeOpen(true); // Abre el modal
+  };
+
+  const handleCloseModalFree = () => {
+    setIsModalFreeOpen(false); // Cierra el modal
+    setFreeStartDate(''); // Resetea las fechas
+    setFreeEndDate('');
+  };
+
+  const handleConfirmCloseDates = async () => {
+    try {
+      // Valida que las fechas estén completas
+      if (!freeStartDate || !freeEndDate) {
+        alert("Por favor, ingrese ambas fechas.");
+        return;
+      }
+  
+      const startDate = new Date(freeStartDate).toISOString().split('T')[0];
+      const endDate = new Date(freeEndDate).toISOString().split('T')[0];
+  
+      // Envía al backend
+      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking', {
+        accommodationId: selectedAccommodationId,
+        checkInDate: startDate,
+        checkOutDate: endDate,
+      });
+  
+      alert('Fechas cerradas exitosamente.');
+      handleCloseModalFree(); // Cierra el modal después de confirmar
+    } catch (error) {
+      console.error('Error al cerrar las fechas:', error);
+      alert('No se pudieron cerrar las fechas. Por favor, inténtalo de nuevo.');
+    }
+  };
+  
+  
+
+
   // Función para eliminar la reserva
   const handleEliminarReserva = (bookingId) => {
     setMenuVisible(false);
@@ -100,32 +145,35 @@ const OwnerDashboard = () => {
     setMenuVisible(false);
     sendEmail('Modificación de reserva', 'Tu reserva ha sido modificada', selectedGuestId);
   };
-  const generateDateRange = (start = new Date(), end = null) => {
+  
+  const generateDateRange = (start, end) => {
     const startDate = new Date(start);
-    const endDate = end ? new Date(end) : new Date(startDate);
-    endDate.setDate(endDate.getDate() + 6); // Por defecto, mostrar una semana
-
+    const endDate = new Date(end); // Usar la fecha proporcionada por el usuario
     const datesArray = [];
+  
     while (startDate <= endDate) {
       datesArray.push(startDate.toISOString().split('T')[0]);
-      startDate.setDate(startDate.getDate() + 1);
+      startDate.setDate(startDate.getDate() + 1); // Avanza un día
     }
-    setDates(datesArray);
+  
+    setDates(datesArray); // Actualiza el estado con las fechas generadas
   };
+  
   const handleDateRangeSubmit = (e) => {
     e.preventDefault();
     if (!startDate || !endDate) {
       alert('Por favor selecciona ambas fechas.');
       return;
     }
-
+  
     if (new Date(endDate) < new Date(startDate)) {
       alert('La fecha final debe ser posterior a la inicial.');
       return;
     }
-
-    generateDateRange(startDate, endDate);
+  
+    generateDateRange(startDate, endDate); // Genera el rango basado en el input
   };
+  
 
   // Función para ver detalles de la reserva
   const handleVerDetalles = (bookingId) => {
@@ -142,6 +190,21 @@ const OwnerDashboard = () => {
     setIsModalOpen(false);
     setSelectedReservation(null);
   };  
+    // Restablecer el modal al estado inicial
+  const handleResetModal = () => {
+    setCurrentAction(null); // Regresa al estado inicial
+    setFreeStartDate(''); // Limpia los campos
+    setFreeEndDate('');
+  };
+
+
+  const handleCloseReservations = () => {
+    setCurrentAction("close"); // Cambiar a cerrar reservas
+  };
+
+  const handleOpenReservations = () => {
+    setCurrentAction("open"); // Cambiar a abrir reservas
+  };
 
   const renderCellContent = (accommodationId, date) => {
     const formattedDate = new Date(date + 'T00:00:00'); 
@@ -158,7 +221,7 @@ const OwnerDashboard = () => {
         {guests[reservation.guestId] || 'Usuario no disponible'}
       </div>
     ) : (
-      <div className="available">Disponible</div>
+      <div className="available" >Disponible</div>
     );
   };
   
@@ -200,7 +263,7 @@ const OwnerDashboard = () => {
           <tbody>
             {accommodations.map((accommodation) => (
               <tr key={accommodation.id}>
-                <td className='dashboard-td'>{accommodation.name}</td>
+                <td className='dashboard-td' ><div className='accomodation-cell' onClick={() => handleOpenModalFree(accommodation.Id)}>{accommodation.name}</div></td>
                 {dates.map((date) => (
                   <td className='dashboard-td' key={`${accommodation.id}-${date}`}>
                     {renderCellContent(accommodation.id, date)}
@@ -220,7 +283,7 @@ const OwnerDashboard = () => {
             <p className='owner-p'><strong>Check-Out:</strong> {selectedReservation.checkOutDate}</p>
             <p className='owner-p'><strong>Alojamiento:</strong> {selectedReservation.accommodationId}</p>
             <button onClick={() => {
-              handleEliminarReserva(selectedReservation.id);
+              handleEliminarReserva(selectedReservation.accommodationId);
               handleCloseModal();
             }}>
               Eliminar Reserva
@@ -229,6 +292,82 @@ const OwnerDashboard = () => {
           </div>
         </div>
       )}
+      {isModalFreeOpen && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      {/* Estado inicial con los botones */}
+      {currentAction === null && (
+        <div className="modal-buttons">
+          <button onClick={handleCloseReservations}>
+            Cerrar Reservas
+          </button>
+          <button onClick={handleOpenReservations}>
+            Abrir Reservas
+          </button>
+          <button onClick={handleCloseModalFree}>Cancelar</button>
+        </div>
+      )}
+
+      {/* Formulario para cerrar reservas */}
+      {currentAction === "close" && (
+        <div className="cerrar-reservas">
+          <h3 className="modal-h3-owner-dashboard">Cerrar Fechas para el Alojamiento</h3>
+          <div className="modal-field">
+            <label>Fecha Inicio:</label>
+            <input
+              className="input-alojamiento-1"
+              type="date"
+              value={freeStartDate}
+              onChange={(e) => setFreeStartDate(e.target.value)}
+            />
+          </div>
+          <div className="modal-field">
+            <label>Fecha Fin:</label>
+            <input
+              type="date"
+              className="input-alojamiento-2"
+              value={freeEndDate}
+              onChange={(e) => setFreeEndDate(e.target.value)}
+            />
+          </div>
+          <div className="modal-buttons">
+            <button onClick={handleConfirmCloseDates}>Confirmar</button>
+            <button onClick={handleResetModal}>Regresar</button>
+          </div>
+        </div>
+      )}
+
+      {/* Formulario para abrir reservas */}
+      {currentAction === "open" && (
+        <div className="abrir-reservas">
+          <h3 className="modal-h3-owner-dashboard">Abrir Fechas para el Alojamiento</h3>
+          <div className="modal-field">
+            <label>Fecha Inicio:</label>
+            <input
+              className="input-alojamiento-1"
+              type="date"
+              value={freeStartDate}
+              onChange={(e) => setFreeStartDate(e.target.value)}
+            />
+          </div>
+          <div className="modal-field">
+            <label>Fecha Fin:</label>
+            <input
+              type="date"
+              className="input-alojamiento-2"
+              value={freeEndDate}
+              onChange={(e) => setFreeEndDate(e.target.value)}
+            />
+          </div>
+          <div className="modal-buttons">
+            <button onClick={handleConfirmCloseDates}>Confirmar</button>
+            <button onClick={handleResetModal}>Regresar</button>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
+  )}
 
     </div>
   );
