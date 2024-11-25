@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -39,7 +40,6 @@ public class AccommodationService {
         dto.setDescription(accommodation.getDescription());
         dto.setPricePerNight(accommodation.getPricePerNight());
         dto.setImageUrl(accommodation.getImageUrl());
-
         if (accommodation.getOwner() != null) {
             dto.setOwnerId(accommodation.getOwner().getId()); // Asignamos el ID del propietario
         }
@@ -109,13 +109,19 @@ public class AccommodationService {
         accommodationRepository.deleteById(id);
     }
 
-    public void addImageToAccommodation(Integer id, String imageUrl) {
+    public void addImageToAccommodation(Integer id,String imageUrl) {
         // Buscar el alojamiento por ID
         Accommodation accommodation = accommodationRepository.findById(id)
                 .orElseThrow(() -> new AccommodationNotFoundException("Alojamiento no encontrado con ID: " + id));
 
-        // Actualizar la URL de la imagen
-        accommodation.setImageUrl(imageUrl);
+
+        if (accommodation.getImageUrl() == null) {
+            accommodation.setImageUrl(new ArrayList<>());
+        }
+
+        // Agregar la nueva URL a la lista existente
+        accommodation.getImageUrl().add(imageUrl);
+
 
         // Guardar el alojamiento actualizado
         accommodationRepository.save(accommodation);
