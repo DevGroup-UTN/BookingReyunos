@@ -1,11 +1,9 @@
 package DevGroup.BookingReyunos.controller;
 
 import DevGroup.BookingReyunos.dto.AccommodationDTO;
-import DevGroup.BookingReyunos.model.Accommodation;
 import DevGroup.BookingReyunos.service.AccommodationService;
 import DevGroup.BookingReyunos.exceptions.AccommodationNotFoundException;
 import DevGroup.BookingReyunos.service.CloudinaryService;
-import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

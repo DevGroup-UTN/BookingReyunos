@@ -2,6 +2,7 @@ C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingRey
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\model\Review.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\BookingController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\security\JwtUtil.java
+C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\CloseDatesRequest.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\BookingReyunosApplication.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\service\UserDetService.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\TokenDTO.java
@@ -9,7 +10,6 @@ C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingRey
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\UserController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\service\EmailService.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\BookingDTO.java
-C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\ImageController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\LoginDTO.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\ForgotPasswordRequest.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\repository\BookingRepository.java
@@ -34,4 +34,5 @@ C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingRey
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\model\Accommodation.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\security\SecurityConfig.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\service\AccommodationService.java
+C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\service\CloudinaryService.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\repository\ReviewRepository.java

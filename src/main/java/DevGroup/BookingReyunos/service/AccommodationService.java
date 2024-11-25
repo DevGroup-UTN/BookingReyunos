@@ -8,7 +8,6 @@ import DevGroup.BookingReyunos.model.User;
 import DevGroup.BookingReyunos.repository.AccommodationRepository;
 import DevGroup.BookingReyunos.repository.BookingRepository;
 import DevGroup.BookingReyunos.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -121,7 +120,7 @@ public class AccommodationService {
         // Guardar el alojamiento actualizado
         accommodationRepository.save(accommodation);
     }
-    
+
     public void closeDates(Integer accommodationId, LocalDate startDate, LocalDate endDate) {
         // Validación de fechas
         if (startDate.isAfter(endDate)) {

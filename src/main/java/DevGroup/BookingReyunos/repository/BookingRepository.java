@@ -15,7 +15,7 @@ public interface BookingRepository extends JpaRepository<Booking,Integer> {
     List<Booking> findByAccommodationId(Integer accommodationId);
     @Transactional
     @Modifying
-    @Query("DELETE FROM Booking b WHERE b.accommodationId = :accommodationId " +
+    @Query("DELETE FROM Booking b WHERE b.accommodation.id = :accommodationId " +
            "AND b.checkInDate >= :startDate AND b.checkOutDate <= :endDate " +
            "AND b.isBlocked = true")
     void deleteByAccommodationIdAndBlockedDates(Integer accommodationId, LocalDate startDate, LocalDate endDate);
