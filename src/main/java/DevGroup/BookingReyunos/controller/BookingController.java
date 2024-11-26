@@ -80,7 +80,7 @@ public class BookingController {
     @PostMapping("/open-dates")
     public ResponseEntity<String> openDates(@RequestBody CloseDatesRequest request) {
         try {
-            accommodationService.openDates(request.getAccommodationId(), request.getStartDate(), request.getEndDate());
+            accommodationService.openDates(request);
             return ResponseEntity.ok("Fechas abiertas exitosamente.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al abrir las fechas: " + e.getMessage());

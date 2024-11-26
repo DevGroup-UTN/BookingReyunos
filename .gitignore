@@ -39,4 +39,4 @@ node_modules/
 booking-reyunos-frontend/node_modules/
 
 ### MVN WRAPPER ###
-.mvn/
+.mvn/wrapper

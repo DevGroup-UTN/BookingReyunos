@@ -83,7 +83,6 @@ public class BookingService {
         bookingEntity.setTotalPrice(totalPrice);
         bookingEntity.setGuest(user.get());
         bookingEntity.setAccommodation(accommodation.get());
-
         // Guardar la reserva
         Booking savedBooking = bookingRepository.save(bookingEntity);
 
