@@ -108,10 +108,10 @@ const OwnerDashboard = () => {
       const endDate = new Date(freeEndDate).toISOString().split('T')[0];
   
       // Envía al backend
-      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking', {
+      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking/close-dates', {
         accommodationId: selectedAccommodationId,
-        checkInDate: startDate,
-        checkOutDate: endDate,
+        startDate: startDate,
+        endDate: endDate,
       });
   
       alert('Fechas cerradas exitosamente.');

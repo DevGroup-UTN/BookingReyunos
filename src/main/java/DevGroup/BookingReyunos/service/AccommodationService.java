@@ -1,6 +1,7 @@
 package DevGroup.BookingReyunos.service;
 
 import DevGroup.BookingReyunos.dto.AccommodationDTO;
+import DevGroup.BookingReyunos.dto.CloseDatesRequest;
 import DevGroup.BookingReyunos.exceptions.AccommodationNotFoundException;
 import DevGroup.BookingReyunos.model.Accommodation;
 import DevGroup.BookingReyunos.model.Booking;
@@ -121,29 +122,35 @@ public class AccommodationService {
         accommodationRepository.save(accommodation);
     }
 
-    public void closeDates(Integer accommodationId, LocalDate startDate, LocalDate endDate) {
-        // Validación de fechas
-        if (startDate.isAfter(endDate)) {
+    public void closeDates(CloseDatesRequest request) {
+    // Validación de fechas
+        if (request.getStartDate().isAfter(request.getEndDate())) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
         }
 
+        // Obtener el alojamiento mediante el ID
+        Accommodation accommodation = accommodationRepository.findById(request.getAccommodationId())
+                .orElseThrow(() -> new IllegalArgumentException("Alojamiento no encontrado"));
+
         // Crear y guardar bloqueos de fechas
-        LocalDate currentDate = startDate;
-        while (!currentDate.isAfter(endDate)) {
+        LocalDate currentDate = request.getStartDate();
+        while (!currentDate.isAfter(request.getEndDate())) {
             Booking booking = new Booking();
+            booking.setAccommodation(accommodation); // Asignar el alojamiento
             booking.setCheckInDate(currentDate);
-            booking.setCheckOutDate(currentDate); // Puedes ajustar esto según tus necesidades
-            booking.setBlocked(true); // Supongamos que tienes un flag para indicar fechas bloqueadas
+            booking.setCheckOutDate(currentDate); // Puedes ajustar esto si deseas bloquear más de un día
+            booking.setBlocked(true); // Marcar como bloqueado
             bookingRepository.save(booking);
             currentDate = currentDate.plusDays(1); // Avanza un día
         }
     }
+
     public void openDates(Integer accommodationId, LocalDate startDate, LocalDate endDate){
         // Validación de fechas
         if (startDate.isAfter(endDate)) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
         }
-        
-            bookingRepository.deleteByAccommodationIdAndBlockedDates(accommodationId, startDate, endDate);
+  
+        bookingRepository.deleteByAccommodationIdAndBlockedDates(accommodationId, startDate, endDate);
     }
 }
