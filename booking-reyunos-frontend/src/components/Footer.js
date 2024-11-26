@@ -44,8 +44,6 @@ function Footer() {
         <a target="_blank" rel="nofollow" href="/terminos" class="footer_link">Términos y condiciones</a>
         |
         <a target="_blank" rel="nofollow" href="/privacidad" class="footer_link">Política de privacidad</a>
-        |
-        <a href="" rel="nofollow" target="_blank">Textos</a>
         </div>
         <span class="framework_f">Tag: <span class="tag_cookie">devgroupreyunos</span> </span>
       </div>

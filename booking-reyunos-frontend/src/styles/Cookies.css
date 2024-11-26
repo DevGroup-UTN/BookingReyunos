@@ -4,7 +4,7 @@
     font-size: 14px;
     max-width: 1180px;
     margin: 10px auto;
-    display: block !important;
+    display:flexbox ;
     width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
     background-color: rgba(130, 158, 235, 0.733);
     border-radius: 15px;

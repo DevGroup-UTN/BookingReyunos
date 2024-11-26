@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/Cookies.css';
 
-export function FotoLogo(){
+export function FotoLogoCookies(){
     return (
         <div className="styleFotoLogo">
             <img
@@ -57,7 +57,7 @@ function Cookies(){
     ];
     return(
         <div className="styleCookies">
-            <FotoLogo className="imgCookies"/>
+            <FotoLogoCookies className="imgCookies"/>
             <h1 className="TitulooCookies">Politicas de Privacidad y Cookies</h1>
             <p>
                 <strong>

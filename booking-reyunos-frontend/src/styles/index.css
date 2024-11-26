@@ -20,7 +20,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-color: rgba(3, 1, 11, 0.925);
-  background-attachment: scroll !important;
+  background-attachment: fixed;
   background-blend-mode: overlay;
   font-family: Arial, sans-serif;
 }
