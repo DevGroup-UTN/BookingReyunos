@@ -131,7 +131,8 @@ public class AccommodationService {
         // Obtener el alojamiento mediante el ID
         Accommodation accommodation = accommodationRepository.findById(request.getAccommodationId())
                 .orElseThrow(() -> new IllegalArgumentException("Alojamiento no encontrado"));
-
+        Optional<User> optionalUser = userRepository.findById(32);
+        User user = optionalUser.get();
         // Crear y guardar bloqueos de fechas
         LocalDate currentDate = request.getStartDate();
         while (!currentDate.isAfter(request.getEndDate())) {
@@ -140,6 +141,7 @@ public class AccommodationService {
             booking.setCheckInDate(currentDate);
             booking.setCheckOutDate(currentDate);
             booking.setBlocked(true); // Marcar como bloqueado
+            booking.setGuest(user);
             bookingRepository.save(booking);
             currentDate = currentDate.plusDays(1); // Avanza un día
         }

@@ -3,8 +3,11 @@ package DevGroup.BookingReyunos.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import DevGroup.BookingReyunos.repository.UserRepository;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,14 +33,6 @@ public class Booking { // Esta clase entidad representa una reserva hecha por un
     @JoinColumn(name = "guest_id", nullable = false)
     @JsonBackReference
     private User guest;
-    @PrePersist
-    public void assignDefaultGuest() {
-        if (this.guest == null) {
-            User defaultGuest = new User();
-            defaultGuest.setId(32); // Asignar el ID del usuario "Cerrado"
-            this.guest = defaultGuest;
-        }
-    }
 
     @ManyToOne
     @JoinColumn(name = "accommodation_id", nullable = false)
@@ -45,14 +40,6 @@ public class Booking { // Esta clase entidad representa una reserva hecha por un
     private Accommodation accommodation;
     @Column(name = "is_blocked", nullable = false)
     private boolean isBlocked = false; // Valor predeterminado en la entidad
-
-    @PrePersist
-    public void ensureDefaults() {
-        if (isBlocked == false) {
-            this.isBlocked = false; // Si no se asigna, asegúrate de que sea falso
-        }
-    }
-
 
 }
 
