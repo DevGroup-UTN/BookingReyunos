@@ -10,11 +10,7 @@ function Contacto() {
     Phone: '',
     Country: '',
     State: '',
-    Start: '',
-    End: '',
     Query: '',
-    Group1_Adults: 1,
-    Group1_Children: 0,
   });
 
   const handleChange = (e) => {
@@ -24,7 +20,6 @@ function Contacto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes enviar el formulario usando fetch o axios
     console.log('Datos enviados:', formData);
   };
 

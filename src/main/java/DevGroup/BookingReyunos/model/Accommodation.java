@@ -33,8 +33,9 @@ public class Accommodation {
     //Ruta de las imagenes
     private String imagePath;
 
-
-    @Column(name = "imageUrl", columnDefinition = "TEXT")
-    private String imageUrl; //URL de la imagen guardada de forma remota en la bd
+    //Creamos una lista de url para alamcenarlas en una nueva tabla y columna
+    @ElementCollection
+    @CollectionTable(name = "accommodation_images", joinColumns = @JoinColumn(name = "accommodation_id"))
+    private List<String> imageUrl; //URL de la imagen guardada de forma remota en la bd
 
 }
