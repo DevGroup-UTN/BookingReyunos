@@ -138,19 +138,19 @@ public class AccommodationService {
             Booking booking = new Booking();
             booking.setAccommodation(accommodation); // Asignar el alojamiento
             booking.setCheckInDate(currentDate);
-            booking.setCheckOutDate(currentDate); // Puedes ajustar esto si deseas bloquear más de un día
+            booking.setCheckOutDate(currentDate);
             booking.setBlocked(true); // Marcar como bloqueado
             bookingRepository.save(booking);
             currentDate = currentDate.plusDays(1); // Avanza un día
         }
     }
 
-    public void openDates(Integer accommodationId, LocalDate startDate, LocalDate endDate){
+    public void openDates(CloseDatesRequest request){
         // Validación de fechas
-        if (startDate.isAfter(endDate)) {
+        if (request.getStartDate().isAfter(request.getEndDate())) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
         }
   
-        bookingRepository.deleteByAccommodationIdAndBlockedDates(accommodationId, startDate, endDate);
+        bookingRepository.deleteByAccommodationIdAndBlockedDates(request.getAccommodationId(), request.getStartDate(), request.getEndDate());
     }
 }

@@ -106,7 +106,7 @@ const OwnerDashboard = () => {
   
       const startDate = new Date(freeStartDate).toISOString().split('T')[0];
       const endDate = new Date(freeEndDate).toISOString().split('T')[0];
-  
+      console.log("startdate: " + startDate + "endDate: " + endDate);
       // Envía al backend
       const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking/close-dates', {
         accommodationId: selectedAccommodationId,
