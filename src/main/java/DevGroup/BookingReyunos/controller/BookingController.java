@@ -71,7 +71,7 @@ public class BookingController {
     @PostMapping("/close-dates")
     public ResponseEntity<String> closeDates(@RequestBody CloseDatesRequest request) {
         try {
-            accommodationService.closeDates(request.getAccommodationId(), request.getStartDate(), request.getEndDate());
+            accommodationService.closeDates(request); // Llama al servicio para cerrar las fechas
             return ResponseEntity.ok("Fechas cerradas exitosamente.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al cerrar las fechas: " + e.getMessage());
