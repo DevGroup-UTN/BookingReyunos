@@ -129,29 +129,38 @@ public class AccommodationService {
     }
 
     public void closeDates(CloseDatesRequest request) {
-    // Validación de fechas
+        // Validación de fechas
         if (request.getStartDate().isAfter(request.getEndDate())) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
         }
-
+    
         // Obtener el alojamiento mediante el ID
         Accommodation accommodation = accommodationRepository.findById(request.getAccommodationId())
                 .orElseThrow(() -> new IllegalArgumentException("Alojamiento no encontrado"));
-        Optional<User> optionalUser = userRepository.findById(32);
-        User user = optionalUser.get();
+    
+        // Obtener el usuario "CERRADO"
+        User user = userRepository.findById(32)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario 'Cerrado' no encontrado"));
+    
         // Crear y guardar bloqueos de fechas
         LocalDate currentDate = request.getStartDate();
         while (!currentDate.isAfter(request.getEndDate())) {
-            Booking booking = new Booking();
-            booking.setAccommodation(accommodation); // Asignar el alojamiento
-            booking.setCheckInDate(currentDate);
-            booking.setCheckOutDate(currentDate);
-            booking.setBlocked(true); // Marcar como bloqueado
-            booking.setGuest(user);
-            bookingRepository.save(booking);
+            List<Booking> listBooking = bookingRepository.findByAccommodationId(accommodation.getId());
+            // Verificar si ya existe una reserva para esta fecha y este alojamiento
+            if (listBooking != null) {
+                // Si no existe una reserva, crear un bloqueo
+                Booking booking = new Booking();
+                booking.setAccommodation(accommodation); // Asignar el alojamiento
+                booking.setCheckInDate(currentDate);
+                booking.setCheckOutDate(currentDate);
+                booking.setBlocked(true); // Marcar como bloqueado
+                booking.setGuest(user); // Asignar usuario "CERRADO"
+                bookingRepository.save(booking);
+            }
             currentDate = currentDate.plusDays(1); // Avanza un día
         }
     }
+    
 
     public void openDates(CloseDatesRequest request){
         // Validación de fechas
