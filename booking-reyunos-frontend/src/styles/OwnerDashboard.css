@@ -129,10 +129,17 @@
 }
 
 /* Estilo para las celdas reservadas */
-.reserved {
+.blocked {
   cursor: pointer;
   background-color: #ffcccc; /* Fondo rojo claro */
   color: #a33a3a; /* Texto rojo oscuro */
+  padding: 5px;
+  border-radius: 5px; /* Bordes redondeados */
+}
+.pending {
+  cursor: pointer;
+  background-color: #ffeecc; /* Fondo rojo claro */
+  color: #a2762e; /* Texto rojo oscuro */
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
 }

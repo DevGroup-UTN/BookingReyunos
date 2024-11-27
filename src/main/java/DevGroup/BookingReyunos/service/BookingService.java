@@ -42,6 +42,7 @@ public class BookingService {
         bookingDTO.setCheckOutDate(booking.getCheckOutDate());
         bookingDTO.setCheckInDate(booking.getCheckInDate());
         bookingDTO.setGuestId(booking.getGuest().getId());
+        bookingDTO.setBlocked(booking.isBlocked());
         bookingDTO.setAccommodationId(booking.getAccommodation().getId());
         bookingDTO.setDailyRate(booking.getAccommodation().getPricePerNight()); // Daily rate del alojamiento
         return bookingDTO;
@@ -53,6 +54,7 @@ public class BookingService {
         bookingEntity.setId(bookingDTO.getId());
         bookingEntity.setCheckInDate(bookingDTO.getCheckInDate());
         bookingEntity.setCheckOutDate(bookingDTO.getCheckOutDate());
+        bookingEntity.setBlocked(bookingDTO.isBlocked());
         return bookingEntity;
     }
 
