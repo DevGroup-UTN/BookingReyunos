@@ -142,13 +142,20 @@ public class AccommodationService {
         User user = userRepository.findById(32)
                 .orElseThrow(() -> new IllegalArgumentException("Usuario 'Cerrado' no encontrado"));
     
-        // Crear y guardar bloqueos de fechas
+        // Iterar por las fechas dentro del rango especificado
         LocalDate currentDate = request.getStartDate();
         while (!currentDate.isAfter(request.getEndDate())) {
-            List<Booking> listBooking = bookingRepository.findByAccommodationId(accommodation.getId());
-            // Verificar si ya existe una reserva para esta fecha y este alojamiento
-            if (listBooking != null) {
-                // Si no existe una reserva, crear un bloqueo
+            // Buscar reservas existentes en esta fecha para el alojamiento
+            List<Booking> bookingsOnDate = bookingRepository.findByAccommodationIdAndDate(accommodation.getId(), currentDate);
+    
+            if (!bookingsOnDate.isEmpty()) {
+                // Si ya hay una reserva en esta fecha, marcamos la reserva como bloqueada
+                for (Booking existingBooking : bookingsOnDate) {
+                    existingBooking.setBlocked(true);
+                    bookingRepository.save(existingBooking);
+                }
+            } else {
+                // Si no existe una reserva en esta fecha, crear un nuevo bloqueo
                 Booking booking = new Booking();
                 booking.setAccommodation(accommodation); // Asignar el alojamiento
                 booking.setCheckInDate(currentDate);
@@ -157,9 +164,11 @@ public class AccommodationService {
                 booking.setGuest(user); // Asignar usuario "CERRADO"
                 bookingRepository.save(booking);
             }
+    
             currentDate = currentDate.plusDays(1); // Avanza un día
         }
     }
+    
     
 
     public void openDates(CloseDatesRequest request){

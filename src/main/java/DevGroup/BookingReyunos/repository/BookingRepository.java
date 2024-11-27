@@ -4,6 +4,7 @@ import DevGroup.BookingReyunos.model.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,4 +20,7 @@ public interface BookingRepository extends JpaRepository<Booking,Integer> {
            "AND b.checkInDate >= :startDate AND b.checkOutDate <= :endDate " +
            "AND b.isBlocked = true")
     void deleteByAccommodationIdAndBlockedDates(Integer accommodationId, LocalDate startDate, LocalDate endDate);
+    @Query("SELECT b FROM Booking b WHERE b.accommodation.id = :accommodationId AND :date BETWEEN b.checkInDate AND b.checkOutDate")
+    List<Booking> findByAccommodationIdAndDate(@Param("accommodationId") Integer accommodationId, @Param("date") LocalDate date);
+
 }

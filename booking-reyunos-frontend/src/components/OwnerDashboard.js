@@ -189,10 +189,13 @@ const OwnerDashboard = () => {
   /* Funcion para abrir un modal con los detalles de la reserva */
   const handleOpenModal = (reservation) => {
     setSelectedReservation(reservation);
+    console.log(reservation.blocked);
+
     setIsModalOpen(true);
   };
   /* Funcion para cerrar el modal */
   const handleCloseModal = () => {
+    console.log(selectedReservation);
     setIsModalOpen(false);
     setSelectedReservation(null);
   };  
@@ -222,7 +225,6 @@ const OwnerDashboard = () => {
         new Date(res.checkOutDate + 'T23:59:59') >= formattedDate
     );
     if (reservation) {
-      console.log(reservation.blocked);
       const styleClass = reservation.blocked ? 'blocked' : 'pending';
       return (
         <div className={styleClass} onClick={() => handleOpenModal(reservation)}>
@@ -290,7 +292,12 @@ const OwnerDashboard = () => {
             <p className='owner-p'><strong>Usuario:</strong> {guests[selectedReservation.guestId] || 'Desconocido'}</p>
             <p className='owner-p'><strong>Check-In:</strong> {selectedReservation.checkInDate}</p>
             <p className='owner-p'><strong>Check-Out:</strong> {selectedReservation.checkOutDate}</p>
-            <p className='owner-p'><strong>Estado:</strong> {selectedReservation.blocked}</p>
+            <p className='owner-p'><strong>Estado:</strong> {' '}
+              {selectedReservation.blocked === true
+                ? 'Cerrada'
+                : selectedReservation.blocked === false
+                ? 'Abierta'
+                : 'Estado desconocido'}</p>
             <p className='owner-p'><strong>Alojamiento:</strong> {selectedReservation.accommodationId}</p>
             <button onClick={() => {
               handleEliminarReserva(selectedReservation.accommodationId);
