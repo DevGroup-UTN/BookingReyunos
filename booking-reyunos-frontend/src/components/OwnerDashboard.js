@@ -12,6 +12,7 @@ const OwnerDashboard = () => {
   const [endDate, setEndDate] = useState(''); // Fecha final personalizada
   const [message, setMessage] = useState(''); // Para mostrar mensajes al usuario
   const [guests, setGuests] = useState({}); // Mapeo de guestId a username
+  const [emails, setEmails] = useState({}); // Mapeo de guestId a email
   const [menuVisible, setMenuVisible] = useState(false); // Controlar visibilidad del menú
   const [selectedGuestId, setSelectedGuestId] = useState(null); // ID del guest seleccionado
   const [selectedReservation, setSelectedReservation] = useState(null);
@@ -59,6 +60,11 @@ const OwnerDashboard = () => {
         acc[user.id] = user.username;
         return acc;
       }, {});
+      const usersEmails = response.data.reduce((acc, user) => {
+        acc[user.id] = user.email;
+        return acc;
+      }, {});
+      setEmails(usersEmails);
       setGuests(usersMap);
     } catch (error) {
       console.error('Error al cargar los datos:', error);
@@ -75,7 +81,10 @@ const OwnerDashboard = () => {
     try {
       console.log('sujeto: ' + subject + 'mensaje' + message + "guestID: " + guestId);
       // Lógica para enviar el correo (suponiendo que tengas un endpoint en el backend para ello)
-      await axios.post('https://bookingreyunos-production.up.railway.app/send-email', { guestId, subject, message });
+      await axios.post('https://bookingreyunos-production.up.railway.app/email/send-email', { 
+        to: guestId, 
+        subject, 
+        body: message });
       alert('Correo enviado');
     } catch (error) {
       console.error('Error al enviar correo:', error);
@@ -209,13 +218,10 @@ const OwnerDashboard = () => {
   /* Funcion para abrir un modal con los detalles de la reserva */
   const handleOpenModal = (reservation) => {
     setSelectedReservation(reservation);
-    console.log(reservation.blocked);
-
     setIsModalOpen(true);
   };
   /* Funcion para cerrar el modal */
   const handleCloseModal = () => {
-    console.log(selectedReservation);
     setIsModalOpen(false);
     setSelectedReservation(null);
   };  
@@ -310,6 +316,7 @@ const OwnerDashboard = () => {
           <div className="modal-content">
             <h3>Detalles de la Reserva</h3>
             <p className='owner-p'><strong>Usuario:</strong> {guests[selectedReservation.guestId] || 'Desconocido'}</p>
+            <p className='owner-p'><strong>Correo:</strong> {emails[selectedReservation.guestId] || 'Desconocido'}</p>
             <p className='owner-p'><strong>Check-In:</strong> {selectedReservation.checkInDate}</p>
             <p className='owner-p'><strong>Check-Out:</strong> {selectedReservation.checkOutDate}</p>
             <p className='owner-p'><strong>Estado:</strong> {' '}
