@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: DevGroup.BookingReyunos.BookingReyunosApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 23.10 s -- in DevGroup.BookingReyunos.BookingReyunosApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.17 s -- in DevGroup.BookingReyunos.BookingReyunosApplicationTests
