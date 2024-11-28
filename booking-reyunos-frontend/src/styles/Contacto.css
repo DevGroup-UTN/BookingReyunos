@@ -1,4 +1,6 @@
 #containerUyC {
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,8 +22,8 @@
 }
 
 .contact-map {
-  width: 800px; /* Aumenta el ancho del mapa, ajustable a tus necesidades */
-  height: 600px; /* Ajusta la altura del mapa */
+  width: 40vw; /* Aumenta el ancho del mapa, ajustable a tus necesidades */
+  height: 60vh; /* Ajusta la altura del mapa */
   border: none;
   border-radius: 10px;
   margin-left: 0; /* Mueve el mapa hacia la izquierda si es necesario */
