@@ -12,6 +12,7 @@ const OwnerDashboard = () => {
   const [endDate, setEndDate] = useState(''); // Fecha final personalizada
   const [message, setMessage] = useState(''); // Para mostrar mensajes al usuario
   const [guests, setGuests] = useState({}); // Mapeo de guestId a username
+  const [emails, setEmails] = useState({}); // Mapeo de guestId a email
   const [menuVisible, setMenuVisible] = useState(false); // Controlar visibilidad del menú
   const [selectedGuestId, setSelectedGuestId] = useState(null); // ID del guest seleccionado
   const [selectedReservation, setSelectedReservation] = useState(null);
@@ -59,6 +60,11 @@ const OwnerDashboard = () => {
         acc[user.id] = user.username;
         return acc;
       }, {});
+      const usersEmails = response.data.reduce((acc, user) => {
+        acc[user.id] = user.email;
+        return acc;
+      }, {});
+      setEmails(usersEmails);
       setGuests(usersMap);
     } catch (error) {
       console.error('Error al cargar los datos:', error);
@@ -73,8 +79,12 @@ const OwnerDashboard = () => {
   // Funciones para enviar correos
   const sendEmail = async (subject, message, guestId) => {
     try {
+      console.log('sujeto: ' + subject + 'mensaje' + message + "guestID: " + guestId);
       // Lógica para enviar el correo (suponiendo que tengas un endpoint en el backend para ello)
-      await axios.post('https://bookingreyunos-production.up.railway.app/send-email', { subject, message, guestId });
+      await axios.post('https://bookingreyunos-production.up.railway.app/email/send-email', { 
+        to: guestId, 
+        subject, 
+        body: message });
       alert('Correo enviado');
     } catch (error) {
       console.error('Error al enviar correo:', error);
@@ -121,38 +131,57 @@ const OwnerDashboard = () => {
   }
   const handleConfirmCloseDates = async () => {
     try {
-      // Valida que las fechas estén completas
-      if (!freeStartDate || !freeEndDate) {
-        alert("Por favor, ingrese ambas fechas.");
-        return;
+      let startDate, endDate, accommodationId;
+  
+      // Determinar el rango de fechas y el accommodationId según el contexto
+      if (selectedReservation) {
+        console.log(selectedReservation);
+        // Si hay una reserva seleccionada
+        startDate = selectedReservation.checkInDate;
+        endDate = selectedReservation.checkOutDate;
+        accommodationId = selectedReservation.accommodationId; // Usar el ID del alojamiento de la reserva
+      } else {
+        // Si no hay reserva seleccionada, usar las fechas y el ID manuales
+        if (!freeStartDate || !freeEndDate) {
+          alert("Por favor, ingrese ambas fechas.");
+          return;
+        }
+        startDate = new Date(freeStartDate).toISOString().split('T')[0];
+        endDate = new Date(freeEndDate).toISOString().split('T')[0];
+        accommodationId = selectedAccommodationId; // Usar el ID seleccionado manualmente
       }
   
-      const startDate = new Date(freeStartDate).toISOString().split('T')[0];
-      const endDate = new Date(freeEndDate).toISOString().split('T')[0];
-      // Envía al backend
+      console.log("Datos enviados al backend:", { startDate, endDate, accommodationId });
+  
+      // Enviar solicitud al backend
       const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking/close-dates', {
-        accommodationId: selectedAccommodationId,
+        accommodationId: accommodationId,
         startDate: startDate,
         endDate: endDate,
       });
-
-      console.log(response.data);
-      alert('Fechas cerradas exitosamente.');
-      handleCloseModalFree(); // Cierra el modal después de confirmar
-      fetchDashboardData(); // Refrescar los datos
+  
+      console.log("Respuesta del servidor:", response.data);
+      alert("Fechas cerradas exitosamente.");
+  
+      // Cierra el modal después de confirmar
+      handleCloseModalFree();
+  
+      // Refrescar los datos en el dashboard
+      fetchDashboardData();
     } catch (error) {
-      console.error('Error al cerrar las fechas:', error);
-      alert('No se pudieron cerrar las fechas. Por favor, inténtalo de nuevo.');
+      console.error("Error al cerrar las fechas:", error);
+      alert("No se pudieron cerrar las fechas. Por favor, inténtalo de nuevo.");
     }
   };
+  
   
   
 
 
   // Función para eliminar la reserva
-  const handleEliminarReserva = (bookingId) => {
+  const handleEliminarReserva = (booking) => {
     setMenuVisible(false);
-    sendEmail('Eliminación de Reserva', 'Saludos estimado usuario. Le informamos por el presente que el propietario a pedido la cancelación de la reserva por motivos personales. Para más información por favor comuníquese con nosotros a nuestro whatsapp: +5492604021708. Disculpe las molestia.', selectedGuestId);
+    sendEmail('Eliminación de Reserva', 'Saludos estimado usuario. Le informamos por el presente que el propietario a pedido la cancelación de la reserva por motivos personales. Para más información por favor comuníquese con nosotros a nuestro whatsapp: +5492604021708. Disculpe las molestia.', booking.guestId);
   };
 
 
@@ -222,7 +251,6 @@ const OwnerDashboard = () => {
         new Date(res.checkOutDate + 'T23:59:59') >= formattedDate
     );
     if (reservation) {
-      console.log(reservation.blocked);
       const styleClass = reservation.blocked ? 'blocked' : 'pending';
       return (
         <div className={styleClass} onClick={() => handleOpenModal(reservation)}>
@@ -288,16 +316,23 @@ const OwnerDashboard = () => {
           <div className="modal-content">
             <h3>Detalles de la Reserva</h3>
             <p className='owner-p'><strong>Usuario:</strong> {guests[selectedReservation.guestId] || 'Desconocido'}</p>
+            <p className='owner-p'><strong>Correo:</strong> {emails[selectedReservation.guestId] || 'Desconocido'}</p>
             <p className='owner-p'><strong>Check-In:</strong> {selectedReservation.checkInDate}</p>
             <p className='owner-p'><strong>Check-Out:</strong> {selectedReservation.checkOutDate}</p>
-            <p className='owner-p'><strong>Estado:</strong> {selectedReservation.blocked}</p>
+            <p className='owner-p'><strong>Estado:</strong> {' '}
+              {selectedReservation.blocked === true
+                ? 'Cerrada'
+                : selectedReservation.blocked === false
+                ? 'Abierta'
+                : 'Estado desconocido'}</p>
             <p className='owner-p'><strong>Alojamiento:</strong> {selectedReservation.accommodationId}</p>
             <button onClick={() => {
-              handleEliminarReserva(selectedReservation.accommodationId);
+              handleEliminarReserva(selectedReservation);
               handleCloseModal();
             }}>
               Eliminar Reserva
             </button>
+            <button onClick={handleConfirmCloseDates}>Fijar Reserva</button>
             <button onClick={handleCloseModal}>Cerrar</button>
           </div>
         </div>
