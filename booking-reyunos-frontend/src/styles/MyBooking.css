@@ -1,11 +1,11 @@
 .myBooking-container{
-    width: 60rem;
-    height: 40rem;
+    width: 50rem;
+    height:auto;
     position: relative;
     align-items: center;
     padding: 10px 20px;
     border-radius: 15px;
-    margin-left: 6rem;
+    margin-left: 15rem;
     background-repeat: no-repeat;
     background-size: contain;
     background-color: #aaaaccaa;
@@ -15,10 +15,53 @@
     border: solid var(--font-color) 1px;
     border-radius: 10px;
     max-width:fit-content;
-    margin-left: 30vw;
+    margin-left: 25vw;
     padding: 10px 12px;
     color: #f8f8ff66;
     text-shadow: 6px -4px 2px #11116666;
     -webkit-text-stroke: var(--font-color) 0.5px;
     text-decoration: underline;
 }
+.booking-list{
+    margin-left: 20vw;
+    margin-bottom: 3vh;
+}
+.booking-details{
+    margin: 5px 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #222244aa;
+    border: solid 1px #888;
+    border-radius: 15px;
+    width: 20vw;
+    display: block;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    padding: 10px;
+}
+.booking-details p{
+    background-color: rgba(0, 190, 255, 0.2);
+    border: solid var(--font-color) 1px;
+    padding: 5px ;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    white-space: pre-wrap;
+    color: #05054d;
+}
+.myBooking_message{
+    margin-left: 20.5vw;
+}
+.booking-details button{
+    background-color: var(--button-color);
+    color: white;
+    padding: 8px 15px;
+    margin-left: 6vw;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+

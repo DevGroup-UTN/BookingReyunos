@@ -1,6 +1,7 @@
 /* Estilo base */
 :root {
   --font-color: #10148f;
+  --button-color: #080b64ff;
   --hover-color: #0044ff;
   --card-color: #9795c5;
   --card-color-transparent: #979595dd;
@@ -289,11 +290,53 @@ body {
   .confirm-button{
     margin-left: -85px;
   }
+  /* Estilos para "Mis Reservas" */
+  .myBooking_container{
+    margin-left: -50vw;
+  }
+  .myBooking-container h3{
+    margin-left: 75vw;
+  }
+  .myBooking-container {
+    text-align: center;
+  }
+  .booking-details {
+    width: 75vw !important;
+    margin-left: 130px !important;
+  }
+  /* Estilos para el guest dashboard*/
+  .guest-dashboard-container{
+    width: 180vw !important;
+  }
+  .guest-dashboard-label{
+    margin-left: -23vw !important;
+  }
+  .guest-dashboard-title{
+    margin-left: 60vw !important;
+  }
+  .guest-update-button{
+    margin-left: 35vw !important;
+  }
 }
 
 @media (max-width: 360px) {
   .nav-links{
-    margin-right: 810px;
+    margin-right: 140vw;
     height: 32vh;
+  }
+  /* Estilos para "Mis Reservas" */
+  .myBooking-container{
+    width: 140vw !important;
+    margin-left: 100vw !important;
+  }
+  .booking-details{
+    margin-left: 8vw !important;
+  }
+  .myBooking-container h3{
+    margin-left: 48vw;
+  }
+  /*Footer*/
+  footer{
+    width: 243vw !important;
   }
 }
