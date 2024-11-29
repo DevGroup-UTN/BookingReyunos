@@ -105,3 +105,13 @@
     background-color: var(--hover-color);
   }
 
+  @media (max-width: 780px){
+    .accommodation-container h2{
+      margin-left: 150vw;
+      justify-self: center;
+      text-align: center;
+    }
+    .accommodations-list{
+      width: 234vw !important;
+    }
+  }

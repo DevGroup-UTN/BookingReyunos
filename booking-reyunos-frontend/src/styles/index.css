@@ -250,10 +250,12 @@ body {
     margin-right: 8px;
   }
 
-
+  .user-info div{
+    margin-top: 15px;
+  }
   .nav-links{
     background-color:rgb(161, 161, 161) !important;
-    margin-right: 400px;
+    margin-right: 130vw;
     margin-top: 10px;
     border-radius: 10px;
     height: 28vh;
@@ -276,10 +278,7 @@ body {
     justify-content: center;
     margin-left: 100px;
   }
-  .accommodation-container{
-    width: 200vw;
-    margin-left: 30px;
-  }
+
   .react-calendar.react-calendar--selectRange{
     margin-left: 10px;
   }
