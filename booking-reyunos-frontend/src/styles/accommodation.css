@@ -114,4 +114,13 @@
     .accommodations-list{
       width: 234vw !important;
     }
+    .reservation-calendar-container{
+      justify-items: center !important;
+    }
+    .react-calendar {
+      margin-left: 0 !important;
+    }
+    .reservation-calendar-container h3, button{
+      margin-left: 0 !important;
+    }
   }
