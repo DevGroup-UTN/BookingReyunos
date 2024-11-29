@@ -1,0 +1,24 @@
+.myBooking-container{
+    width: 60rem;
+    height: 40rem;
+    position: relative;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-left: 6rem;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
+}
+.myBooking_title{
+    background-color: #111122f8;
+    border: solid var(--font-color) 1px;
+    border-radius: 10px;
+    max-width:fit-content;
+    margin-left: 30vw;
+    padding: 10px 12px;
+    color: #f8f8ff66;
+    text-shadow: 6px -4px 2px #11116666;
+    -webkit-text-stroke: var(--font-color) 0.5px;
+    text-decoration: underline;
+}

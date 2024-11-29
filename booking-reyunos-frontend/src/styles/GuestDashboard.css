@@ -81,6 +81,7 @@
     margin-left: 215px;
 }
 .guest-update-button{
+    cursor: pointer;
     margin-left: 240px;
     border-radius: 5px;
     border: solid #000 1px;
@@ -98,4 +99,15 @@
 }
 #guest-update-button-1{
     padding-inline: 30px;
+}
+.guest-password-message {
+    margin-left: 15vw;
+    margin-top: 0;
+    position:sticky;
+}
+.message{
+    margin-top: -15px;
+    margin-bottom: 1px;
+    margin-left: 27vw;
+    padding: 0;
 }

@@ -52,6 +52,11 @@ public class BookingController {
         List<BookingDTO> bookings = bookingService.findBookingsByAccommodationId(accommodationId);
         return ResponseEntity.ok(bookings);
     }
+    @GetMapping("/guest/{guestId}")
+    public ResponseEntity<List<BookingDTO>> findBookingsByGuestId(@PathVariable Integer guestId){
+        List<BookingDTO> bookings = bookingService.findBookingsByGuestId(guestId);
+        return ResponseEntity.ok(bookings);
+    }
     @PutMapping("/{id}")
     public ResponseEntity<BookingDTO> updateBooking(@PathVariable Integer id, @RequestBody BookingDTO bookingDetailsDTO) {
         Optional<BookingDTO> updateBooking = bookingService.updateBooking(id, bookingDetailsDTO);
