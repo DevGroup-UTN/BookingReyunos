@@ -114,6 +114,13 @@ public class BookingService {
                 .map(this::convertBookingToDTO)
                 .collect(Collectors.toList());
     }
+    public List<BookingDTO> findBookingsByGuestId(Integer guestId) {
+        Optional<User> guest = userRepository.findById(guestId);
+        List<Booking> bookings = bookingRepository.findByGuest(guest.get());
+        return bookings.stream()
+        .map(this::convertBookingToDTO)
+        .collect(Collectors.toList());
+    }
 
     // Método para buscar una reserva por ID
     public Optional<BookingDTO> findBookingById(Integer id) {

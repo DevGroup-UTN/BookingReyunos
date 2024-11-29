@@ -49,6 +49,7 @@
     position: absolute;
     top: 10px;
     right: 10px;
+    border-radius: 15px !important;
     font-size: 1.5em;
     background: none;
     border: none;
@@ -100,4 +101,9 @@
   .modal-content button:hover, #boton-editar:hover {
     background-color: #0000ff;
   }
-  
+
+@media (max-width: 780px){
+  .accommodations-list{
+    width: 250vw;
+  }
+}

@@ -1,6 +1,8 @@
 package DevGroup.BookingReyunos.repository;
 
 import DevGroup.BookingReyunos.model.Booking;
+import DevGroup.BookingReyunos.model.User;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +16,7 @@ import java.util.List;
 @Repository
 public interface BookingRepository extends JpaRepository<Booking,Integer> {
     List<Booking> findByAccommodationId(Integer accommodationId);
+    List<Booking> findByGuest(User guest);
     @Transactional
     @Modifying
     @Query("DELETE FROM Booking b WHERE b.accommodation.id = :accommodationId " +

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
-import '../styles/MyAccommodation.css'; // Asegúrate de que el archivo CSS esté importado
+import '../styles/MyAccommodation.css';
 
 const MyAccommodation = () => {
   const { user } = useAuth(); // Obtener el usuario desde el contexto

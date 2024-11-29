@@ -81,6 +81,7 @@
     margin-left: 215px;
 }
 .guest-update-button{
+    cursor: pointer;
     margin-left: 240px;
     border-radius: 5px;
     border: solid #000 1px;
@@ -98,4 +99,47 @@
 }
 #guest-update-button-1{
     padding-inline: 30px;
+}
+.guest-password-message {
+    margin-left: 15vw;
+    margin-top: 0;
+    position:sticky;
+}
+.message{
+    margin-top: -15px;
+    margin-bottom: 1px;
+    margin-left: 27vw;
+    padding: 0;
+}
+@media (max-width: 360px){
+    .guest-dashboard-container{
+        width: 173vw;
+      }
+    .guest-dashboard-title{
+        margin-left: 54vw !important;
+    }
+    .guest-update-button{
+        margin-left: 25vw !important;
+    }
+    .guest-dashboard-label{
+        width: 150vw;
+    }
+    #guest-dashboard-input4{
+        margin-left: 93px;
+    }
+    #guest-dashboard-input5{
+        margin-left: 92px;
+    }
+    #guest-dashboard-input1{
+        margin-left: 176px;
+    }
+    #guest-dashboard-input3 {
+        margin-left: 172px;
+    }
+    #guest-dashboard-input2 {
+        margin-left: 185px;
+    }
+    #guest-dashboard-input6 {
+        margin-left: 10px;
+    }
 }
