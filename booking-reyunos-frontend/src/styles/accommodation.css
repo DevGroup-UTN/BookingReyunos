@@ -114,6 +114,10 @@
     .accommodations-list{
       width: 234vw !important;
     }
+    .accommodation{
+      width: 150vw;
+      border-radius: 20px;
+    }
     .reservation-calendar-container{
       justify-items: center !important;
     }
