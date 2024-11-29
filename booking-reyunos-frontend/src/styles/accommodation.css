@@ -112,7 +112,12 @@
       text-align: center;
     }
     .accommodations-list{
+      margin-left: 0 !important;
       width: 234vw !important;
+    }
+    .accommodation{
+      width: 160vw;
+      border-radius: 20px;
     }
     .reservation-calendar-container{
       justify-items: center !important;

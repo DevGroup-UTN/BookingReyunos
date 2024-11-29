@@ -82,7 +82,7 @@ a {
 
 @media (max-width: 780px){
     footer{
-        width: 235vw;
+        width: 250vw;
     }
     .social-icon{
         margin: 0;
@@ -99,11 +99,12 @@ a {
         margin-right: 100px;
     }
     .footer-img {
-        width: 150px;
+        width: 200px !important;
+        padding-right: 10px !important;
         height: 130px;
     }
     .footer-div.socials{
-        margin-inline: -10px;
+        margin-inline: 50px;
         font-size: 0.9em;
     }
 }

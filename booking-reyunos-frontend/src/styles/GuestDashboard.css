@@ -111,10 +111,13 @@
     margin-left: 27vw;
     padding: 0;
 }
-@media (max-width: 360px){
+@media (max-width: 780px){
     .guest-dashboard-container{
         width: 173vw;
-      }
+        align-content: center !important;
+        justify-content: center !important;
+    }
+    
     .guest-dashboard-title{
         margin-left: 54vw !important;
     }
@@ -122,6 +125,8 @@
         margin-left: 25vw !important;
     }
     .guest-dashboard-label{
+        align-self: center !important;
+        margin-left: -80vw !important;
         width: 150vw;
     }
     #guest-dashboard-input4{
