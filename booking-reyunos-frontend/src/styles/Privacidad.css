@@ -1,0 +1,26 @@
+.StylePrivacidad{
+    padding: 50px 20px;
+    align-items: center;
+    width: 90vw;
+    font-size: 14px;
+    margin: 10px auto;
+    display: flexbox;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
+    border-radius: 15px;
+}
+.StylePrivacidad img{
+    max-width: 100%;
+    height: auto;
+}
+.TitulosPrivacidad{
+    text-align: center;
+}
+@media(max-width: 768px) {
+    .StylePrivacidad{
+        width: 200vw;
+        margin-top: 15vh;
+        margin-left: 20vw;
+    }
+}
