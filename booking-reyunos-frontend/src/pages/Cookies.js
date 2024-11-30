@@ -42,6 +42,7 @@ function Cookies() {
   ];
 
   return (
+    <div>
     <div className="styleCookies">
       <FotoLogo/>
       <div>
@@ -174,6 +175,7 @@ function Cookies() {
             <p><strong>Actualización de la política de cookies</strong></p>
             <p>En el caso de que las características o fines de uso de las cookies de esta página web sean modificadas, se le informará acerca de esos cambios con el fin de recabar nuevamente su consentimiento en aquellos casos en que fuese necesario.</p>
         </div>
+    </div>
     </div>
   );
 }
