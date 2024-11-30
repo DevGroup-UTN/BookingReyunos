@@ -13,34 +13,8 @@ export function FotoLogo() {
   );
 }
 
-const TableComponent = ({ data }) => (
-  <table border="1" style={{ width: "100%", textAlign: "center" }}>
-    <thead>
-      <tr>
-        <th><strong>Tipo de Cookie</strong></th>
-        <th><strong>Finalidad</strong></th>
-        <th><strong>Caducidad</strong></th>
-      </tr>
-    </thead>
-    <tbody>
-      {data.map((item, index) => (
-        <tr key={index}>
-          <td>{item.Tipo}</td>
-          <td>{item.Finalidad}</td>
-          <td>{item.Caducidad}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
 
 function Cookies() {
-  const tableData = [
-    { Tipo: "Necesarias para el Funcionamiento: PHPSESSID, _ga, _gid", Finalidad: "Permiten la navegación", Caducidad: "De 1 sesión a 1 día" },
-    { Tipo: "Analíticas: _1P_JAR, APISID, CONSENT, HSID, NID", Finalidad: "Recoger información sobre el uso del sitio", Caducidad: "De 6 meses a 1 año" },
-    { Tipo: "De Personalización: PHPSESSID, CurrencyTk, LngTk", Finalidad: "Recuerdan preferencias", Caducidad: "30 días" },
-  ];
-
   return (
     <div>
     <div className="styleCookies">
