@@ -17,7 +17,7 @@ export function FotoLogo() {
 function Cookies() {
   return (
     <div>
-    <div className="styleCookies">
+    <div className="contenedor_de_Cookies">
       <FotoLogo/>
       <div>
         <h1 class="TituloVentana_terms">

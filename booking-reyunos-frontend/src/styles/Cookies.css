@@ -1,4 +1,4 @@
-.styleCookies {
+.contenedor_de_Cookies {
     padding: 50px 20px;
     align-items: center;
     font-size: 14px;
@@ -20,11 +20,11 @@
     text-align: center;
 }
 
-.styleCookies ul {
+.contenedor_de_Cookies ul {
     padding-left: 20px; /* Asegura que las listas tengan algo de espacio a la izquierda */
 }
 
-.styleCookies li {
+.contenedor_de_Cookies li {
     margin: 0; /* Elimina cualquier margen innecesario en los elementos de lista */
 }
 
@@ -34,54 +34,54 @@
     border: solid var(--font-color) 1px;
     border-radius: 15px !important;
 }
-.styleCookies table{
+.contenedor_de_Cookies table{
     width: 100%; /* Asegura que todos estos elementos ocupen el 100% del ancho del contenedor */
     margin: 0 auto; /* Centra estos elementos dentro del contenedor */
     width: 70vw;
 }
-.styleCookies td {
+.contenedor_de_Cookies td {
     background-color: rgba(0, 190, 255, 0.2);
     text-align: center;
     padding: 5px 0;
     height: auto;
     border: solid var(--font-color) 1px;
 }
-.styleCookies tr td:nth-child(1){
+.contenedor_de_Cookies tr td:nth-child(1){
     width: 20vw;
 }
-.styleCookies tr td:nth-child(2){
+.contenedor_de_Cookies tr td:nth-child(2){
     width: 40vw;
 }
-.styleCookies tr:first-child td:nth-of-type(1){
+.contenedor_de_Cookies tr:first-child td:nth-of-type(1){
     border-top-left-radius: 10px;
 }
-.styleCookies tr:first-child td:nth-of-type(3){
+.contenedor_de_Cookies tr:first-child td:nth-of-type(3){
     border-top-right-radius: 10px;
 }
-.styleCookies tr:last-child td:nth-of-type(1){
+.contenedor_de_Cookies tr:last-child td:nth-of-type(1){
     border-bottom-left-radius: 10px;
 }
-.styleCookies tr:last-child td:nth-child(3){
+contenedor_de_Cookies.contenedor_de_Cookies tr:last-child td:nth-child(3){
     border-bottom-right-radius: 10px;
 }
 /* Para pantallas pequeñas (móviles) */
 @media (max-width: 768px) {
-    .styleCookies {
+    .contenedor_de_Cookies {
         padding: 20px 10px; /* Reduce el relleno */
         font-size: 12px; /* Ajusta el tamaño del texto */
     }
 
-    .styleCookies p,
-    .styleCookies ul,
-    .styleCookies table {
+    .contenedor_de_Cookies p,
+    .contenedor_de_Cookies ul,
+    .contenedor_de_Cookies table {
         text-align: center; /* Centra el texto en pantallas pequeñas */
     }
 
-    .styleCookies ul {
+    .contenedor_de_Cookies ul {
         padding-left: 10px; /* Reduce el margen para listas */
     }
 
-    .styleCookies table {
+    .contenedor_de_Cookies table {
         font-size: 12px; /* Asegura que las tablas sean legibles */
         overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
         display: block; /* Hace que las tablas sean más manejables en pantallas pequeñas */
@@ -90,12 +90,12 @@
 
 /* Para pantallas medianas (tablets) */
 @media (max-width: 1024px) {
-    .styleCookies {
+    .contenedor_de_Cookies {
         padding: 30px 15px; /* Ajusta el relleno */
         font-size: 13px; /* Ajusta el tamaño del texto */
     }
 
-    .styleCookies table {
+    .contenedor_de_Cookies table {
         font-size: 13px;
     }
 }
