@@ -61,41 +61,20 @@
 .contenedor_de_Cookies tr:last-child td:nth-of-type(1){
     border-bottom-left-radius: 10px;
 }
-contenedor_de_Cookies.contenedor_de_Cookies tr:last-child td:nth-child(3){
+.contenedor_de_Cookies tr:last-child td:nth-of-type(3){
     border-bottom-right-radius: 10px;
 }
-/* Para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
-    .contenedor_de_Cookies {
-        padding: 20px 10px; /* Reduce el relleno */
-        font-size: 12px; /* Ajusta el tamaño del texto */
-    }
 
-    .contenedor_de_Cookies p,
-    .contenedor_de_Cookies ul,
+@media (max-width: 768px){
+    .contenedor_de_Cookies{
+        width: 200vw;
+        margin-top: 15vh;
+        margin-left: 20vw;
+    }
     .contenedor_de_Cookies table {
-        text-align: center; /* Centra el texto en pantallas pequeñas */
+        width: 180vw;
     }
-
-    .contenedor_de_Cookies ul {
-        padding-left: 10px; /* Reduce el margen para listas */
-    }
-
-    .contenedor_de_Cookies table {
-        font-size: 12px; /* Asegura que las tablas sean legibles */
-        overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
-        display: block; /* Hace que las tablas sean más manejables en pantallas pequeñas */
-    }
-}
-
-/* Para pantallas medianas (tablets) */
-@media (max-width: 1024px) {
-    .contenedor_de_Cookies {
-        padding: 30px 15px; /* Ajusta el relleno */
-        font-size: 13px; /* Ajusta el tamaño del texto */
-    }
-
-    .contenedor_de_Cookies table {
-        font-size: 13px;
+    .contenedor_de_Cookies tr td:nth-child(3), .contenedor_de_Cookies tr td:nth-child(1){
+        width: 30vw;
     }
 }
