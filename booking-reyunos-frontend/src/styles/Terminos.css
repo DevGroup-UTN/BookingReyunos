@@ -1,0 +1,19 @@
+.styleTermino{
+    padding: 50px 20px;
+    align-items: center;
+    font-size: 14px;
+    max-width: 1180px;
+    margin: 10px auto;
+    display: flexbox;
+    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+    background-color: rgba(130, 158, 235, 0.733);
+    border-radius: 15px;
+}
+.FotoTermino{
+    max-width: 100%;
+    height: auto;
+}
+
+.TituloTermino{
+    text-align: center;
+}

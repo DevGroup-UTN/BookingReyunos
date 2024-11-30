@@ -355,40 +355,40 @@ function Cookies(){
             </p>
             <br></br>
             <p>
-                Google Chrome:<a href="https://support.google.com/chrome/answer/95647?hl=es">https://support.google.com/chrome/answer/95647?hl=es</a>
+                Google Chrome: <a href="https://support.google.com/chrome/answer/95647?hl=es" target="_blank" rel="noopener noreferrer">https://support.google.com/chrome/answer/95647?hl=es</a>
             </p>
             <br></br>
             <p>
                 Mozilla Firefox: 
-                <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we&redirectlocale=es">
+                <a href="https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we&redirectlocale=es" target="_blank" rel="noopener noreferrer">
                     https://support.mozilla.org/es/kb/habilitar-y-deshabilitar-cookies-sitios-web-rastrear-preferencias?redirectslug=habilitar-y-deshabilitar-cookies-que-los-sitios-we&redirectlocale=es
                 </a>
             </p>
             <br></br>
             <p>
                 Internet Explorer: 
-                <a href=" https://support.microsoft.com/es-es/topic/eliminar-y-administrar-cookies-168dab11-0753-043d-7c16-ede5947fc64d">
+                <a href=" https://support.microsoft.com/es-es/topic/eliminar-y-administrar-cookies-168dab11-0753-043d-7c16-ede5947fc64d" target="_blank" rel="noopener noreferrer">
                     https://support.microsoft.com/es-es/topic/eliminar-y-administrar-cookies-168dab11-0753-043d-7c16-ede5947fc64d
                 </a>
             </p>
             <br></br>
             <p>
                 Safari:
-                <a href=" https://support.apple.com/es-es/guide/safari/sfri11471/mac">
+                <a href=" https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">
                     https://support.apple.com/es-es/guide/safari/sfri11471/mac
                 </a>
             </p>
             <br></br>
             <p>
                 Safari / IOS (iPhone y iPad):
-                <a href=" https://support.apple.com/es-es/HT201265">
+                <a href=" https://support.apple.com/es-es/HT201265" target="_blank" rel="noopener noreferrer">
                     https://support.apple.com/es-es/HT201265
                 </a>
             </p>
             <br></br>
             <p>
                 Chrome / Android:
-                <a href=" https://support.google.com/chrome/answer/114662?hl=es&visit_id=637400243735165235-3593560368&rd=1">
+                <a href=" https://support.google.com/chrome/answer/114662?hl=es&visit_id=637400243735165235-3593560368&rd=1" target="_blank" rel="noopener noreferrer">
                     https://support.google.com/chrome/answer/114662?hl=es&visit_id=637400243735165235-3593560368&rd=1
                 </a>
             </p>
