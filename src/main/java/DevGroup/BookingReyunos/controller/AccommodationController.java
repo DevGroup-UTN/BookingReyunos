@@ -105,4 +105,24 @@ public class AccommodationController {
 
     }
 
+    @DeleteMapping("/{id}/deleteImage")
+    public ResponseEntity<String> deleteAccommodationImage(
+            @PathVariable Integer id,
+            @RequestParam("imageUrl") String imageUrl) {
+        try {
+            // Eliminar la imagen del alojamiento
+            accommodationService.removeImageFromAccommodation(id, imageUrl);
+
+            //Eliminamos la imagen de cloudinary
+            cloudinaryService.deleteImage(imageUrl);
+
+            return new ResponseEntity<>("Image deleted successfully.", HttpStatus.OK);
+        } catch (AccommodationNotFoundException e) {
+            return new ResponseEntity<>("Accommodation not found", HttpStatus.NOT_FOUND);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (IOException e) {
+            return new ResponseEntity<>("Error deleting image: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

@@ -40,4 +40,15 @@ public class CloudinaryService {
             throw new IOException("Error al cargar la imagen en Cloudinary.", e);
         }
     }
+
+    public void deleteImage(String imageUrl) throws IOException {
+        String publicId = extractPublicIdFromUrl(imageUrl);
+        cloudinary.uploader().destroy(publicId, ObjectUtils.emptyMap());
+    }
+
+    private String extractPublicIdFromUrl(String imageUrl) {
+        String[] parts = imageUrl.split("/");
+        String filename = parts[parts.length - 1];
+        return filename.split("\\.")[0]; // Extraer el public_id
+    }
 }

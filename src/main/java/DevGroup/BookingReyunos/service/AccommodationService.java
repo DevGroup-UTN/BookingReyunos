@@ -152,4 +152,16 @@ public class AccommodationService {
         
             bookingRepository.deleteByAccommodationIdAndBlockedDates(accommodationId, startDate, endDate);
     }
+    public void removeImageFromAccommodation(Integer id, String imageUrl) {
+        Accommodation accommodation = accommodationRepository.findById(id)
+                .orElseThrow(() -> new AccommodationNotFoundException("Alojamiento no encontrado con ID: " + id));
+
+        // Corroborar  que el alojamiento tenga imágenes asociadas
+        if (accommodation.getImageUrl() == null || !accommodation.getImageUrl().contains(imageUrl)) {
+            throw new IllegalArgumentException("La imagen especificada no pertenece a este alojamiento.");
+        }
+        accommodation.getImageUrl().remove(imageUrl);
+
+        accommodationRepository.save(accommodation);
+    }
 }
