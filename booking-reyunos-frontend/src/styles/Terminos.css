@@ -6,7 +6,9 @@
     margin: 10px auto;
     display: flexbox;
     width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-    background-color: rgba(130, 158, 235, 0.733);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
     border-radius: 15px;
 }
 .FotoTermino{

@@ -5,21 +5,15 @@
     max-width: 1180px;
     margin: 10px auto;
     width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-    background-color: rgba(130, 158, 235, 0.733);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
     border-radius: 15px;
 }
 
 .imgCookies{
     max-width: 100%;
     height: auto;
-}
-
-.styleCookies p,
-.styleCookies ul,
-.styleCookies table {
-    width: 100%; /* Asegura que todos estos elementos ocupen el 100% del ancho del contenedor */
-    margin: 0 auto; /* Centra estos elementos dentro del contenedor */
-    text-align: left; /* Alinea el texto a la izquierda */
 }
 
 .TitulooCookies{
@@ -34,11 +28,42 @@
     margin: 0; /* Elimina cualquier margen innecesario en los elementos de lista */
 }
 
-.styleCookies table {
-    border-collapse: collapse; /* Hace que las tablas colapsen los bordes, si es necesario */
+.cookie-table {
+    border-collapse: collapse; /* Hace que las tablas colapsen los bordes */
     text-align: left; /* Alinea el contenido de las celdas a la izquierda */
+    border: solid var(--font-color) 1px;
+    border-radius: 15px !important;
 }
-
+.styleCookies table{
+    width: 100%; /* Asegura que todos estos elementos ocupen el 100% del ancho del contenedor */
+    margin: 0 auto; /* Centra estos elementos dentro del contenedor */
+    width: 70vw;
+}
+.styleCookies td {
+    background-color: rgba(0, 190, 255, 0.2);
+    text-align: center;
+    padding: 5px 0;
+    height: auto;
+    border: solid var(--font-color) 1px;
+}
+.styleCookies tr td:nth-child(1){
+    width: 20vw;
+}
+.styleCookies tr td:nth-child(2){
+    width: 40vw;
+}
+.styleCookies tr:first-child td:nth-of-type(1){
+    border-top-left-radius: 10px;
+}
+.styleCookies tr:first-child td:nth-of-type(3){
+    border-top-right-radius: 10px;
+}
+.styleCookies tr:last-child td:nth-of-type(1){
+    border-bottom-left-radius: 10px;
+}
+.styleCookies tr:last-child td:nth-child(3){
+    border-bottom-right-radius: 10px;
+}
 /* Para pantallas pequeñas (móviles) */
 @media (max-width: 768px) {
     .styleCookies {
