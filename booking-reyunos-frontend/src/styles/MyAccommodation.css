@@ -49,7 +49,14 @@
     justify-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 60vw;
+    max-height: 80vh;
+    overflow: auto;
     position: relative; /* Para posicionar el botón de cierre */
+  }
+  .modal-content::-webkit-scrollbar{
+    background-color: #adadff; 
+    border-radius: 10px;
+    overflow: auto;
   }
   .modal-content label{
     background-color: rgba(0, 190, 255, 0.2);
@@ -150,5 +157,24 @@
 @media (max-width: 780px){
   .accommodations-list{
     width: 250vw;
+  }
+  .modal-content{
+    width: 180vw !important;
+  }
+  .modal-content label:first-child input{
+    width: 52vw;
+    margin-left: 90vw;
+  }
+  .modal-content label:nth-child(2) textarea{
+    width: 52vw;
+    margin-left: 77.5vw;
+  }
+  .modal-content label:nth-child(3) input{
+    width: 52vw;
+    margin-left: 70.4vw;
+  }
+  .modal-content label:nth-child(4) input{
+    width: 52vw;
+    margin-left: 81vw;
   }
 }
