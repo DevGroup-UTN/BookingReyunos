@@ -54,7 +54,7 @@
     width: 600px;
     padding: 5px ;
     border-radius: 10px;
-    margin-bottom: 5px; /* Espacio entre la etiqueta y el input */
+    margin-bottom: 5px; 
 }
 
 .guest-dashboard-input {

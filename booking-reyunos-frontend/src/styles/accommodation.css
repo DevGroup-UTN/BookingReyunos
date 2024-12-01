@@ -47,7 +47,7 @@
   .accommodation p {
     margin: 5px 0;
     white-space: pre-wrap;
-    color: var(--hover-color);
+    color: #070759;
   }
   
   .accommodation:hover {

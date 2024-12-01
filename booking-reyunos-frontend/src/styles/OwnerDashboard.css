@@ -22,7 +22,7 @@
   margin-left: 40px;
 }
 .calendar-table-owner-container::-webkit-scrollbar{
-  background-color: #adadff; /* Color del "pulgar" */
+  background-color: #adadff; 
   border-radius: 10px; /* Redondear bordes */
   border: 1px solid #f4f4f4; /* Espaciado entre el pulgar y la pista */
 }
