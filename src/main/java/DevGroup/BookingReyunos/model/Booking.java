@@ -29,14 +29,13 @@ public class Booking { // Esta clase entidad representa una reserva hecha por un
     @JoinColumn(name = "guest_id", nullable = false)
     @JsonBackReference
     private User guest;
-
+    private String guestName;
+    private String guestEmail;
     @ManyToOne
     @JoinColumn(name = "accommodation_id", nullable = false)
     @JsonBackReference
     private Accommodation accommodation;
     @Column(name = "is_blocked")
     private boolean isBlocked;
-
-
 }
 

@@ -25,5 +25,7 @@ public class EmailController {
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error al enviar el correo: " + e.getMessage());
         }
-    }    
+    }
+
+
 }
