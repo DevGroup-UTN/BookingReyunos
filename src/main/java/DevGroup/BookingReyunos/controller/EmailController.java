@@ -43,4 +43,5 @@ public class EmailController {
             return ResponseEntity.status(500).body("Error al enviar el correo: " + e.getMessage());
         }
     }
+main
 }

@@ -63,48 +63,47 @@ public class BookingService {
         long days = ChronoUnit.DAYS.between(checkIn, checkout);
         return dailyRate.multiply(BigDecimal.valueOf(days));
     }
-
-    // Método para crear una nueva reserva
     public BookingDTO createBooking(BookingDTO bookingDTO) {
         Booking bookingEntity = convertBookingToEntity(bookingDTO);
 
-        // Obtener el Accommodation correspondiente al booking
-        Integer accommodationId = bookingDTO.getAccommodationId();
-        Optional<Accommodation> accommodation = accommodationRepository.findById(accommodationId);
-        Integer guestId = bookingDTO.getGuestId();
-        Optional<User> user = userRepository.findById(guestId);
-        if (accommodation.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Accommodation not found for the provided ID");
+        //  Para validar y obt. el alojamiento
+        Accommodation accommodation = accommodationRepository.findById(bookingDTO.getAccommodationId())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Accommodation not found for the provided ID"));
+
+        bookingEntity.setAccommodation(accommodation);
+
+        // Manejar el guest
+        if (bookingDTO.getGuestId() != null) {
+            // Buscar el usuario por guestId
+            User guest = userRepository.findById(bookingDTO.getGuestId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Guest not found for the provided ID"));
+            bookingEntity.setGuest(guest);
+        } else if (bookingDTO.getGuestName() != null && bookingDTO.getGuestEmail() != null) {
+            // Usar datos del guest de forma manual para el owner
+            bookingEntity.setGuestName(bookingDTO.getGuestName());
+            bookingEntity.setGuestEmail(bookingDTO.getGuestEmail());
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Debe proporcionar un guestId o los datos del guest (nombre y email).");
         }
 
-        BigDecimal dailyRate = accommodation.get().getPricePerNight();
-
         // Calcular el precio total
+        BigDecimal dailyRate = accommodation.getPricePerNight();
         BigDecimal totalPrice = calcultotalPrice(bookingEntity.getCheckInDate(), bookingEntity.getCheckOutDate(), dailyRate);
-
         bookingEntity.setTotalPrice(totalPrice);
-        bookingEntity.setGuest(user.get());
-        bookingEntity.setAccommodation(accommodation.get());
         // Guardar la reserva
         Booking savedBooking = bookingRepository.save(bookingEntity);
 
-        // Enviar correo de confirmación
-        String userEmail = userRepository.findById(bookingDTO.getGuestId())
-                .map(User::getEmail)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found for the provided ID"));
-
-        String subject = "Confirmación de Reserva";
-        String body = "Estimado usuario, su reserva ha sido confirmada con éxito.\n\n" +
-                "Detalles de la reserva:\n" +
-                "Alojamiento: " + accommodation.get().getName() + "\n" +
-                "Fecha de entrada: " + bookingDTO.getCheckInDate() + "\n" +
-                "Fecha de salida: " + bookingDTO.getCheckOutDate() + "\n" +
-                "Precio total: " + totalPrice + "\n\n" +
-                "Gracias por elegirnos.";
-
-        emailService.sendEmail(userEmail, subject, body);
+        // Enviar correo de confirmación si un email del usuario
+        if (bookingEntity.getGuest() != null) {
+            String userEmail = bookingEntity.getGuest().getEmail();
+            emailService.sendConfirmationEmail(accommodation, bookingEntity, userEmail, totalPrice);
+        } else if (bookingEntity.getGuestEmail() != null) {
+            emailService.sendConfirmationEmail(accommodation, bookingEntity, bookingEntity.getGuestEmail(), totalPrice);
+        }
 
         return convertBookingToDTO(savedBooking);
+
+
     }
 
     // Método para buscar reservas por ID de alojamiento
