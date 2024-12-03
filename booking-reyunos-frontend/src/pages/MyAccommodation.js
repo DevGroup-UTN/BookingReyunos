@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
-import '../styles/MyAccommodation.css'; // Asegúrate de que el archivo CSS esté importado
+import '../styles/MyAccommodation.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 const MyAccommodation = () => {
-  const { user } = useAuth(); // Obtener el usuario desde el contexto
+  const { user } = useAuth();
   const [accommodations, setAccommodations] = useState([]);
-  const [message, setMessage] = useState(''); // Para mostrar mensajes de error
-  const [editingAccommodation, setEditingAccommodation] = useState(null); // Estado para alojamiento en edición
+  const [message, setMessage] = useState('');
+  const [editingAccommodation, setEditingAccommodation] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
     location: '',
     pricePerNight: '',
     image: '',
-  }); // Estado del formulario
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar la visibilidad del modal
+  });
 
   useEffect(() => {
     if (user && user.id) {
@@ -35,7 +37,11 @@ const MyAccommodation = () => {
           if (response.data.length === 0) {
             setMessage('No tienes alojamientos disponibles.');
           } else {
-            setAccommodations(response.data);
+            const accommodationsWithImages = response.data.map((accommodation) => ({
+              ...accommodation,
+              currentImageIndex: 0, // Índice inicial para las imágenes
+            }));
+            setAccommodations(accommodationsWithImages);
           }
         })
         .catch((error) => {
@@ -44,6 +50,35 @@ const MyAccommodation = () => {
         });
     }
   }, [user]);
+
+  const nextImage = (id) => {
+    setAccommodations((prev) =>
+      prev.map((accommodation) =>
+        accommodation.id === id
+          ? {
+              ...accommodation,
+              currentImageIndex:
+                (accommodation.currentImageIndex + 1) % (accommodation.imageUrl.length || 1),
+            }
+          : accommodation
+      )
+    );
+  };
+
+  const prevImage = (id) => {
+    setAccommodations((prev) =>
+      prev.map((accommodation) =>
+        accommodation.id === id
+          ? {
+              ...accommodation,
+              currentImageIndex:
+                (accommodation.currentImageIndex - 1 + (accommodation.imageUrl.length || 1)) %
+                (accommodation.imageUrl.length || 1),
+            }
+          : accommodation
+      )
+    );
+  };
 
   const handleEditClick = (accommodation) => {
     setEditingAccommodation(accommodation);
@@ -54,7 +89,7 @@ const MyAccommodation = () => {
       pricePerNight: accommodation.pricePerNight,
       image: accommodation.image || '',
     });
-    setIsModalOpen(true); // Abrir el modal
+    setIsModalOpen(true);
   };
 
   const handleFormChange = (e) => {
@@ -84,7 +119,6 @@ const MyAccommodation = () => {
           },
         }
       );
-      // Actualizamos la lista de alojamientos después de editar
       setAccommodations((prev) =>
         prev.map((accommodation) =>
           accommodation.id === editingAccommodation.id
@@ -92,7 +126,7 @@ const MyAccommodation = () => {
             : accommodation
         )
       );
-      setIsModalOpen(false); // Cerrar el modal
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Error al actualizar el alojamiento:', error);
       setMessage('Error al actualizar el alojamiento.');
@@ -100,28 +134,46 @@ const MyAccommodation = () => {
   };
 
   const closeModal = () => {
-    setIsModalOpen(false); // Cerrar el modal
+    setIsModalOpen(false);
   };
 
   return (
     <div>
-      <h2>Mis Alojamientos</h2>
+      <h2 className="titulo">Mis Alojamientos</h2>
       {message && <p className="error-message">{message}</p>}
       <div className="accommodations-list">
         {accommodations.map((accommodation) => (
           <div key={accommodation.id} className="my-accommodation">
-            <div className="image-container">
-              <img
-                src={accommodation.image || 'default-image.jpg'}
-                alt={accommodation.name}
-                className="accommodation-image"
-              />
+            <div className="image-container-accommodation">
+              {accommodation.imageUrl?.length > 0 ? (
+                <>
+                  <button
+                    onClick={() => prevImage(accommodation.id)}
+                    className="arrow-button-accommodation"
+                  >
+                    <FontAwesomeIcon icon={faChevronLeft} />
+                  </button>
+                  <img
+                    src={accommodation.imageUrl[accommodation.currentImageIndex]}
+                    alt={accommodation.name}
+                    className="accommodation-image"
+                  />
+                  <button
+                    onClick={() => nextImage(accommodation.id)}
+                    className="arrow-button-accommodation"
+                  >
+                    <FontAwesomeIcon icon={faChevronRight} />
+                  </button>
+                </>
+              ) : (
+                <p>No hay imágenes disponibles</p>
+              )}
             </div>
             <div className="accommodation-details">
               <h3>{accommodation.name}</h3>
               <p>Descripción: {accommodation.description}</p>
               <p>Precio por noche: ${accommodation.pricePerNight}</p>
-              <button id='boton-editar' onClick={() => handleEditClick(accommodation)}>
+              <button id="boton-editar" onClick={() => handleEditClick(accommodation)}>
                 Editar
               </button>
             </div>
@@ -129,12 +181,11 @@ const MyAccommodation = () => {
         ))}
       </div>
 
-      {/* Modal de edición */}
       {isModalOpen && (
         <div className="modal-overlay">
           <div className="modal-content">
             <button className="close-button" onClick={closeModal}>
-              &times; {/* Símbolo de cierre */}
+              &times;
             </button>
             <h3>Editar Alojamiento</h3>
             <form onSubmit={handleFormSubmit}>
@@ -176,7 +227,9 @@ const MyAccommodation = () => {
                   onChange={handleFormChange}
                 />
               </label>
-              <button id='boton-guardar' type="submit">Guardar cambios</button>
+              <button id="boton-guardar" type="submit">
+                Guardar cambios
+              </button>
             </form>
           </div>
         </div>

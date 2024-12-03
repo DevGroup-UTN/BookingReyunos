@@ -126,7 +126,6 @@ const GuestDashboard = () => {
         </div>
         <div className='guest-form-container'>
             <h2 className="guest-dashboard-title">Cambiar Contraseña</h2>
-            {passwordMessage && <p className="message">{passwordMessage}</p>}
             <form className="guest-dashboard-form" onSubmit={handlePasswordSubmit}>
                 <label className='guest-dashboard-label'>
                 Contraseña Actual:
@@ -165,6 +164,7 @@ const GuestDashboard = () => {
                 />
                 </label>
                 <button type="submit" className="guest-update-button" id='guest-update-button-2'>Actualizar Contraseña</button>
+                {passwordMessage && <p className="guest-password-message">{passwordMessage}</p>}
             </form>
         </div>
     </div>

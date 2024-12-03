@@ -12,6 +12,7 @@ const OwnerDashboard = () => {
   const [endDate, setEndDate] = useState(''); // Fecha final personalizada
   const [message, setMessage] = useState(''); // Para mostrar mensajes al usuario
   const [guests, setGuests] = useState({}); // Mapeo de guestId a username
+  const [emails, setEmails] = useState({}); // Mapeo de guestId a email
   const [menuVisible, setMenuVisible] = useState(false); // Controlar visibilidad del menú
   const [selectedGuestId, setSelectedGuestId] = useState(null); // ID del guest seleccionado
   const [selectedReservation, setSelectedReservation] = useState(null);
@@ -22,57 +23,68 @@ const OwnerDashboard = () => {
   const [selectedAccommodationId, setSelectedAccommodationId] = useState(null); // ID del alojamiento
   const [currentAction, setCurrentAction] = useState(null); // Estado para la acción actual ("close" o "open")
 
-  useEffect(() => {
-    const fetchDashboardData = async () => {
-      if (!user) return; // Asegúrate de que el usuario esté definido
+  const fetchDashboardData = async () => {
+    if (!user) return;
 
-      try {
-        // Obtener alojamientos del propietario
-        const accomData = await axios.get(`https://bookingreyunos-production.up.railway.app/accommodations/owner/${user.id}`);
-        setAccommodations(accomData.data);
+    try {
+      const accomData = await axios.get(
+        `https://bookingreyunos-production.up.railway.app/accommodations/owner/${user.id}`
+      );
+      setAccommodations(accomData.data);
 
-        // Obtener reservas de cada alojamiento
-        const allBookings = [];
-        for (const accommodation of accomData.data) {
-          const resData = await axios.get(`https://bookingreyunos-production.up.railway.app/booking/accommodation/${accommodation.id}`);
-          allBookings.push(...resData.data);
-        }
-        setReservations(allBookings);
-
-        // Generar las próximas 7 fechas
-        const startDate = new Date();
-        const datesArray = Array.from({ length: 7 }, (_, i) => {
-          const date = new Date();
-          date.setDate(startDate.getDate() + i);
-          return date.toISOString().split('T')[0];
-        });
-        setDates(datesArray);
-
-        // Obtener todos los guestId de las reservas
-        const guestIds = allBookings.map((booking) => booking.guestId);
-        const uniqueGuestIds = [...new Set(guestIds)]; // Eliminar duplicados
-        // Hacer un POST al backend para obtener los usuarios correspondientes
-        const response = await axios.post('https://bookingreyunos-production.up.railway.app/users/bulk', uniqueGuestIds);
-        const usersMap = response.data.reduce((acc, user) => {
-          acc[user.id] = user.username;
-          return acc;
-        }, {});
-        setGuests(usersMap);
-
-      } catch (error) {
-        console.error('Error al cargar los datos:', error);
-        setMessage('Error al cargar los datos del dashboard.');
+      const allBookings = [];
+      for (const accommodation of accomData.data) {
+        const resData = await axios.get(
+          `https://bookingreyunos-production.up.railway.app/booking/accommodation/${accommodation.id}`
+        );
+        allBookings.push(...resData.data);
       }
-    };
+      setReservations(allBookings);
 
+      const startDate = new Date();
+      const datesArray = Array.from({ length: 7 }, (_, i) => {
+        const date = new Date();
+        date.setDate(startDate.getDate() + i);
+        return date.toISOString().split('T')[0];
+      });
+      setDates(datesArray);
+
+      const guestIds = allBookings.map((booking) => booking.guestId);
+      const uniqueGuestIds = [...new Set(guestIds)];
+
+      const response = await axios.post(
+        'https://bookingreyunos-production.up.railway.app/users/bulk',
+        uniqueGuestIds
+      );
+      const usersMap = response.data.reduce((acc, user) => {
+        acc[user.id] = user.username;
+        return acc;
+      }, {});
+      const usersEmails = response.data.reduce((acc, user) => {
+        acc[user.id] = user.email;
+        return acc;
+      }, {});
+      setEmails(usersEmails);
+      setGuests(usersMap);
+    } catch (error) {
+      console.error('Error al cargar los datos:', error);
+      setMessage('Error al cargar los datos del dashboard.');
+    }
+  };
+
+  useEffect(() => {
     fetchDashboardData();
-  }, [user]); // Dependencia del usuario
+  }, [user]);
 
   // Funciones para enviar correos
   const sendEmail = async (subject, message, guestId) => {
     try {
+      console.log('sujeto: ' + subject + 'mensaje' + message + "guestID: " + guestId);
       // Lógica para enviar el correo (suponiendo que tengas un endpoint en el backend para ello)
-      await axios.post('https://bookingreyunos-production.up.railway.app/send-email', { subject, message, guestId });
+      await axios.post('https://bookingreyunos-production.up.railway.app/email/send-email', { 
+        to: guestId, 
+        subject, 
+        body: message });
       alert('Correo enviado');
     } catch (error) {
       console.error('Error al enviar correo:', error);
@@ -95,40 +107,81 @@ const OwnerDashboard = () => {
     setFreeStartDate(''); // Resetea las fechas
     setFreeEndDate('');
   };
-
-  const handleConfirmCloseDates = async () => {
+  const handleConfirmOpenDates = async () =>{
     try {
-      // Valida que las fechas estén completas
       if (!freeStartDate || !freeEndDate) {
         alert("Por favor, ingrese ambas fechas.");
         return;
       }
-  
       const startDate = new Date(freeStartDate).toISOString().split('T')[0];
       const endDate = new Date(freeEndDate).toISOString().split('T')[0];
-  
       // Envía al backend
-      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking', {
+      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking/open-dates', {
         accommodationId: selectedAccommodationId,
-        checkInDate: startDate,
-        checkOutDate: endDate,
+        startDate: startDate,
+        endDate: endDate,
+      });
+      alert('Fechas abiertas exitosamente.');
+      handleCloseModalFree(); // Cierra el modal después de confirmar
+      fetchDashboardData(); // Refrescar los datos
+      } catch (error) {
+        console.error('Error al abrir las fechas:', error);
+        alert('No se pudieron abrir las fechas. Por favor, inténtalo de nuevo.');
+      }
+  }
+  const handleConfirmCloseDates = async () => {
+    try {
+      let startDate, endDate, accommodationId;
+  
+      // Determinar el rango de fechas y el accommodationId según el contexto
+      if (selectedReservation) {
+        console.log(selectedReservation);
+        // Si hay una reserva seleccionada
+        startDate = selectedReservation.checkInDate;
+        endDate = selectedReservation.checkOutDate;
+        accommodationId = selectedReservation.accommodationId; // Usar el ID del alojamiento de la reserva
+      } else {
+        // Si no hay reserva seleccionada, usar las fechas y el ID manuales
+        if (!freeStartDate || !freeEndDate) {
+          alert("Por favor, ingrese ambas fechas.");
+          return;
+        }
+        startDate = new Date(freeStartDate).toISOString().split('T')[0];
+        endDate = new Date(freeEndDate).toISOString().split('T')[0];
+        accommodationId = selectedAccommodationId; // Usar el ID seleccionado manualmente
+      }
+  
+      console.log("Datos enviados al backend:", { startDate, endDate, accommodationId });
+  
+      // Enviar solicitud al backend
+      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking/close-dates', {
+        accommodationId: accommodationId,
+        startDate: startDate,
+        endDate: endDate,
       });
   
-      alert('Fechas cerradas exitosamente.');
-      handleCloseModalFree(); // Cierra el modal después de confirmar
+      console.log("Respuesta del servidor:", response.data);
+      alert("Fechas cerradas exitosamente.");
+  
+      // Cierra el modal después de confirmar
+      handleCloseModalFree();
+  
+      // Refrescar los datos en el dashboard
+      fetchDashboardData();
     } catch (error) {
-      console.error('Error al cerrar las fechas:', error);
-      alert('No se pudieron cerrar las fechas. Por favor, inténtalo de nuevo.');
+      console.error("Error al cerrar las fechas:", error);
+      alert("No se pudieron cerrar las fechas. Por favor, inténtalo de nuevo.");
     }
   };
+  
   
   
 
 
   // Función para eliminar la reserva
-  const handleEliminarReserva = (bookingId) => {
+  const handleEliminarReserva = (booking) => {
     setMenuVisible(false);
-    sendEmail('Eliminación de Reserva', 'Saludos estimado usuario. Le informamos por el presente que el propietario a pedido la cancelación de la reserva por motivos personales. Para más información por favor comuníquese con nosotros a nuestro whatsapp: +5492604021708. Disculpe las molestia.', selectedGuestId);
+    sendEmail('Eliminación de Reserva', 'Saludos estimado usuario. Le informamos por el presente que el propietario a pedido la cancelación de la reserva por motivos personales. Para más información por favor comuníquese con nosotros a nuestro whatsapp: +5492604021708. Disculpe las molestia.', booking.guestId);
   };
 
 
@@ -189,22 +242,24 @@ const OwnerDashboard = () => {
   };
 
   const renderCellContent = (accommodationId, date) => {
-    const formattedDate = new Date(date + 'T00:00:00'); 
-    
+    const formattedDate = new Date(date + 'T00:00:00');
+
     const reservation = reservations.find(
       (res) =>
         res.accommodationId === accommodationId &&
         new Date(res.checkInDate + 'T00:00:00') <= formattedDate &&
         new Date(res.checkOutDate + 'T23:59:59') >= formattedDate
     );
-  
-    return reservation ? (
-      <div className="reserved" onClick={() => handleOpenModal(reservation)}>
-        {guests[reservation.guestId] || 'Usuario no disponible'}
-      </div>
-    ) : (
-      <div className="available" >Disponible</div>
-    );
+    if (reservation) {
+      const styleClass = reservation.blocked ? 'blocked' : 'pending';
+      return (
+        <div className={styleClass} onClick={() => handleOpenModal(reservation)}>
+          {guests[reservation.guestId] || 'Usuario no disponible'}
+        </div>
+      );
+    }
+
+    return <div className="available">Disponible</div>;
   };
   
 
@@ -245,7 +300,7 @@ const OwnerDashboard = () => {
           <tbody>
             {accommodations.map((accommodation) => (
               <tr key={accommodation.id}>
-                <td className='dashboard-td' ><div className='accomodation-cell' onClick={() => handleOpenModalFree(accommodation.Id)}>{accommodation.name}</div></td>
+                <td className='dashboard-td' ><div className='accomodation-cell' onClick={() => handleOpenModalFree(accommodation.id)}>{accommodation.name}</div></td>
                 {dates.map((date) => (
                   <td className='dashboard-td' key={`${accommodation.id}-${date}`}>
                     {renderCellContent(accommodation.id, date)}
@@ -261,15 +316,23 @@ const OwnerDashboard = () => {
           <div className="modal-content">
             <h3>Detalles de la Reserva</h3>
             <p className='owner-p'><strong>Usuario:</strong> {guests[selectedReservation.guestId] || 'Desconocido'}</p>
+            <p className='owner-p'><strong>Correo:</strong> {emails[selectedReservation.guestId] || 'Desconocido'}</p>
             <p className='owner-p'><strong>Check-In:</strong> {selectedReservation.checkInDate}</p>
             <p className='owner-p'><strong>Check-Out:</strong> {selectedReservation.checkOutDate}</p>
+            <p className='owner-p'><strong>Estado:</strong> {' '}
+              {selectedReservation.blocked === true
+                ? 'Cerrada'
+                : selectedReservation.blocked === false
+                ? 'Abierta'
+                : 'Estado desconocido'}</p>
             <p className='owner-p'><strong>Alojamiento:</strong> {selectedReservation.accommodationId}</p>
             <button onClick={() => {
-              handleEliminarReserva(selectedReservation.accommodationId);
+              handleEliminarReserva(selectedReservation);
               handleCloseModal();
             }}>
               Eliminar Reserva
             </button>
+            <button onClick={handleConfirmCloseDates}>Fijar Reserva</button>
             <button onClick={handleCloseModal}>Cerrar</button>
           </div>
         </div>
@@ -342,7 +405,7 @@ const OwnerDashboard = () => {
             />
           </div>
           <div className="modal-buttons">
-            <button onClick={handleConfirmCloseDates}>Confirmar</button>
+            <button onClick={handleConfirmOpenDates}>Confirmar</button>
             <button onClick={handleResetModal}>Regresar</button>
           </div>
         </div>

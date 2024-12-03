@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmailRequestDTO {
-    private String to;
+    private Integer to;
     private String subject;
     private String body;
 

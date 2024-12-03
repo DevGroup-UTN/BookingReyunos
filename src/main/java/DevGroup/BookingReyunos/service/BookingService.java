@@ -42,6 +42,7 @@ public class BookingService {
         bookingDTO.setCheckOutDate(booking.getCheckOutDate());
         bookingDTO.setCheckInDate(booking.getCheckInDate());
         bookingDTO.setGuestId(booking.getGuest().getId());
+        bookingDTO.setBlocked(booking.isBlocked());
         bookingDTO.setAccommodationId(booking.getAccommodation().getId());
         bookingDTO.setDailyRate(booking.getAccommodation().getPricePerNight()); // Daily rate del alojamiento
         return bookingDTO;
@@ -53,6 +54,7 @@ public class BookingService {
         bookingEntity.setId(bookingDTO.getId());
         bookingEntity.setCheckInDate(bookingDTO.getCheckInDate());
         bookingEntity.setCheckOutDate(bookingDTO.getCheckOutDate());
+        bookingEntity.setBlocked(bookingDTO.isBlocked());
         return bookingEntity;
     }
 
@@ -88,7 +90,6 @@ public class BookingService {
         BigDecimal dailyRate = accommodation.getPricePerNight();
         BigDecimal totalPrice = calcultotalPrice(bookingEntity.getCheckInDate(), bookingEntity.getCheckOutDate(), dailyRate);
         bookingEntity.setTotalPrice(totalPrice);
-
         // Guardar la reserva
         Booking savedBooking = bookingRepository.save(bookingEntity);
 
@@ -111,6 +112,13 @@ public class BookingService {
         return bookings.stream()
                 .map(this::convertBookingToDTO)
                 .collect(Collectors.toList());
+    }
+    public List<BookingDTO> findBookingsByGuestId(Integer guestId) {
+        Optional<User> guest = userRepository.findById(guestId);
+        List<Booking> bookings = bookingRepository.findByGuest(guest.get());
+        return bookings.stream()
+        .map(this::convertBookingToDTO)
+        .collect(Collectors.toList());
     }
 
     // Método para buscar una reserva por ID

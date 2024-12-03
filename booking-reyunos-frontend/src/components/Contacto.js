@@ -10,11 +10,7 @@ function Contacto() {
     Phone: '',
     Country: '',
     State: '',
-    Start: '',
-    End: '',
     Query: '',
-    Group1_Adults: 1,
-    Group1_Children: 0,
   });
 
   const handleChange = (e) => {
@@ -24,14 +20,15 @@ function Contacto() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes enviar el formulario usando fetch o axios
     console.log('Datos enviados:', formData);
+    // Aquí puedes usar fetch o axios para enviar los datos
   };
 
   return (
-    <div id='containerUyC'>
+    <div id="containerUyC">
       <h1>Ubicación y Contacto</h1>
       <div className="container">
+        {/* Contenedor del mapa */}
         <div className="contenedor-contacto">
           <iframe
             title="Ubicación UTN Los Reyunos"
@@ -42,6 +39,7 @@ function Contacto() {
           ></iframe>
         </div>
 
+        {/* Formulario */}
         <form onSubmit={handleSubmit} className="contact-block">
           <div>
             <label>Nombre:</label>
