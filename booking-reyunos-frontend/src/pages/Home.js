@@ -5,12 +5,12 @@ import '../styles/home.css';
 
 function Home() {
   const images = [
-    'https://images.pxsol.com/1472/Reyunos/Homepage/5c49f5cb0b935.jpg?auto=format&browser=Chrome&h=900&ixlib=php-3.3.0&w=1900&s=204c513db12a0fb98df8f0eb736ead74',
-    'https://images.pxsol.com/1472/Reyunos/Homepage/5c49f5cab0328.jpg?auto=format&browser=Chrome&h=900&ixlib=php-3.3.0&w=1900&s=77c5b09343ed74164565a28182a3b2b1',
-    'https://images.pxsol.com/1472/Reyunos/Homepage/5c49f5cab0932.jpg?auto=format&browser=Chrome&h=900&ixlib=php-3.3.0&w=1900&s=86eb1f133e3534444883244f6d5d9cb3',
-    'https://images.pxsol.com/1472/company/library/user/13010516480f5f6acf4ba53580795b64272fb5e26a4.jpg?auto=format&browser=Chrome&h=900&ixlib=php-3.3.0&w=1900&s=bde7d65866bf0eba0213c2bb07925dad',
-    'https://images.pxsol.com/1472/company/library/user/13010491000cfb076bf2005a8441fed7e41eb09d515.jpg?auto=format&browser=Chrome&h=900&ixlib=php-3.3.0&w=1900&s=c73e970d4e0bb42d4c525bf5eb713ea5',
-    'https://images.pxsol.com/1472/Reyunos/Homepage/5c49f5cae12e7.jpg?auto=format&browser=Chrome&h=900&ixlib=php-3.3.0&w=1900&s=39ec2588c3b316a2f7e4dd6e7f17fca6',
+    '/images/home/carrusel-1.avif',
+    '/images/home/carrusel-2.avif',
+    '/images/home/carrusel-3.avif',
+    '/images/home/carrusel-4.avif',
+    '/images/home/carrusel-5.avif',
+    '/images/home/carrusel-6.avif',
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,33 +61,33 @@ function Home() {
           </p>
         </div>
         <div className='imagen-reyunos'>
-          <img src='https://picsv3.pxsol.com/1472/company/library/user/258544286403b9a6f8aadb37860f349819a256dbece.jpg?ixlib=js-2.3.2&s=573a3dde50e2075f34d63a0c513e0ef9'></img>
+          <img src='/images/home/body.jpg'></img>
         </div>
       </div>
       {/* Links con imagenes */}
       <div className='links'>
         <div className='alojamientos'>
           <a href='/accommodations'>
-            <img src='https://picsv3.pxsol.com/1472/company/library/user/80795410155a226e97415dc7d4f5750d658a6cd775.jpg?ixlib=js-2.3.2&s=6f01e022102587fc47034a4a8cb363c1'></img>
+            <img src='/images/home/link-1.jpg'></img>
             <span>Alojamientos</span>
           </a>
         </div>
         <div className='programas'>
           <a href='/programas'>
-            <img src='https://picsv3.pxsol.com/1472/company/library/user/2262271484232ae9e7d0c78d30cc19e80e28a22ab89.jpg?ixlib=js-2.3.2&s=ce433aca27e793f1173ccd6e0b968478'></img>
+            <img src='/images/home/link-2.jpg'></img>
             <span>Programas</span>
           </a>
         </div>
         <div className='contacto'>
           <a href='/contacto'>
-            <img src='https://picsv3.pxsol.com/1472/company/library/user/19390898436cc9d9a8a976c594388dfa7301c02d68d.jpg?ixlib=js-2.3.2&s=df2a7105407b1536bb3f55a81995b8a1'></img>
+            <img src='/images/home/link-3.jpg'></img>
             <span>Contacto</span>
           </a>
         </div>
       </div>
       <div className='flyer-container'>
         <a href='https://www.frsr.utn.edu.ar/desarrollo-territorial/'>
-          <img className='flyer' src='https://picsv3.pxsol.com/1472/company/library/user/9936621264e117bfc35d1de23e14d657994efc4895.jpg?ixlib=js-2.3.2&s=46a1e9c0c724dd4159aafa807532eaa2'></img>
+          <img className='flyer' src='/images/home/flyer.jpg'></img>
         </a>
       </div>
       {/* Mapa de Google */}

@@ -7,13 +7,11 @@
 /* El footer debe estar al final de la página si el contenido es poco, pero desplazarse cuando haya suficiente contenido */
 footer {
     background-color: #333;
-    display: flex;
+    display:flex;
     flex-wrap: wrap;
     color: white;
     padding: 0 0;
     width: 100%;
-    margin-top: auto; /* Esto empuja el footer al fondo si hay poco contenido */
-    position: relative; /* Asegura que no se mueva por encima de otros elementos */
 }
 
 /* Resto de tus estilos de footer (ya lo tienes bien configurado) */
@@ -84,7 +82,7 @@ a {
 
 @media (max-width: 780px){
     footer{
-        width: 213vw;
+        width: 250vw;
     }
     .social-icon{
         margin: 0;
@@ -101,11 +99,12 @@ a {
         margin-right: 100px;
     }
     .footer-img {
-        width: 150px;
+        width: 200px !important;
+        padding-right: 10px !important;
         height: 130px;
     }
     .footer-div.socials{
-        margin-inline: -10px;
+        margin-inline: 50px;
         font-size: 0.9em;
     }
 }

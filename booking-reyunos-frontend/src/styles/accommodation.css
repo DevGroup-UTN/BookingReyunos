@@ -47,7 +47,7 @@
   .accommodation p {
     margin: 5px 0;
     white-space: pre-wrap;
-    color: var(--hover-color);
+    color: #070759;
   }
   
   .accommodation:hover {
@@ -105,3 +105,27 @@
     background-color: var(--hover-color);
   }
 
+  @media (max-width: 780px){
+    .accommodation-container h2{
+      margin-left: 150vw;
+      justify-self: center;
+      text-align: center;
+    }
+    .accommodations-list{
+      margin-left: 0 !important;
+      width: 234vw !important;
+    }
+    .accommodation{
+      width: 160vw;
+      border-radius: 20px;
+    }
+    .reservation-calendar-container{
+      justify-items: center !important;
+    }
+    .react-calendar {
+      margin-left: 0 !important;
+    }
+    .reservation-calendar-container h3, button{
+      margin-left: 0 !important;
+    }
+  }

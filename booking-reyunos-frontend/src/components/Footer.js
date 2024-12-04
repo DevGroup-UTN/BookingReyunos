@@ -19,7 +19,7 @@ function Footer() {
         </a>
       </div>
       <div className='footer-div'>
-        <img className='footer-img' src='https://picsv3.pxsol.com/1472/company/library/user/48477172716cfcc93012c220c6b7b4a03a3b74555e.png?ixlib=js-2.3.2&s=3b9d4cea49113e8ab130ebee8b90e613' alt="Logo" />
+        <img className='footer-img' src='/images/logo-utn.png' alt="Logo" />
       </div>
       <div className='footer-div socials'> {/* Asegúrate de que esta clase se aplique aquí */}
         <a 
@@ -39,13 +39,13 @@ function Footer() {
       <div className='footer-div-4'>
         <div>Al utilizar este sitio web, acepta el uso de cookies. </div>
         <div>
-        <a target="_blank" rel="nofollow" href="/cookies" class="footer_link">Política de cookies</a> 
+        <a target="_blank" rel="nofollow" href="/cookies" className="footer_link">Política de cookies</a> 
         | 
-        <a target="_blank" rel="nofollow" href="/terminos" class="footer_link">Términos y condiciones</a>
+        <a target="_blank" rel="nofollow" href="/terminos" className="footer_link">Términos y condiciones</a>
         |
-        <a target="_blank" rel="nofollow" href="/privacidad" class="footer_link">Política de privacidad</a>
+        <a target="_blank" rel="nofollow" href="/privacidad" className="footer_link">Política de privacidad</a>
         </div>
-        <span class="framework_f">Tag: <span class="tag_cookie">devgroupreyunos</span> </span>
+        <span className="framework_f">Tag: <span className="tag_cookie">devgroupreyunos</span> </span>
       </div>
     </footer>
   );

@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Terminos from './pages/Terminos';
 import MyAccommodation from './pages/MyAccommodation';
+import MyBooking from './pages/MyBooking';
 import Privacidad from './pages/Privacidad';
 import Cookies from './pages/Cookies';
 import Accommodation from './pages/Accommodation';
@@ -33,6 +34,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/accommodations" element={<Accommodation />} />
             <Route path='/myAccommodations' element={<MyAccommodation />} />
+            <Route path='/myBookings' element={<MyBooking />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/terminos" element={<Terminos />} />
             <Route path="/privacidad" element={<Privacidad />} />

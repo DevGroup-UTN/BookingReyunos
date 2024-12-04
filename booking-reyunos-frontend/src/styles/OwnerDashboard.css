@@ -9,16 +9,72 @@
   padding: 20px;
 }
 
+.calendar-table-owner-container {
+  max-width: 1160px;
+  margin-top: 10px;
+  background-color: #0055;
+  border: solid rgb(35, 35, 128) 1px;
+  max-height:min-content;
+  padding: 5px 10px;
+  justify-items: center;
+  border-radius: 15px;
+  overflow-x: auto;
+  margin-left: 40px;
+}
+.calendar-table-owner-container::-webkit-scrollbar{
+  background-color: #adadff; 
+  border-radius: 10px; /* Redondear bordes */
+  border: 1px solid #f4f4f4; /* Espaciado entre el pulgar y la pista */
+}
 /* Estilo para la tabla del calendario */
-.calendar-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+.calendar-table-owner {
+  background-color: #444466aa;
+  border-radius: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: max-content;
+  margin-left: auto;
+}
+.date-range-form{
+  border: solid #adadff 1px;
+  background-color: #9a9aee49;
+  align-items: center;
+  color: #ddd;
+  margin-left: 21vw;
+  border-radius: 10px;
+  padding: 5px 15px;
+  width: fit-content;
+}
+.date-range-form label{
+  margin-right: 20px;
+}
+
+.date-range-form input{
+  background-color: #9292ff;
+  border-radius: 5px;
+  color: #333;
+  margin-left: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  font-variant: small-caps;
+}
+.date-range-form button{
+  background-color: var(--font-color);
+  color: #ddd;
+  padding: 5px 10px;
+  border-radius: 8px;
 }
 
 .dashboard-h2 {
   color: #ddd;
-  text-align: center;
+  background-color: var(--font-color);
+  padding: 5px 20px;
+  margin-left: 35vw;
+  box-shadow: 3px -3px 3px #555555;
+  border-radius: 5px;
+  border: solid #002 1px;
+  max-width: fit-content;
 }
 
 .dashboard-td {
@@ -26,21 +82,46 @@
 }
 
 /* Estilo para las celdas de la tabla (th y td) */
-.calendar-table th,
-.calendar-table td {
-  border: 1px solid #ddd;
+.calendar-table-owner th,
+.calendar-table-owner td {
   padding: 10px;
+  border: solid #222 1px;
   text-align: center;
 }
 
+.calendar-table-owner tr:last-child td:first-child{
+  border-bottom-left-radius: 12px;
+}
+.calendar-table-owner tr:last-child td:last-child{
+  border-bottom-right-radius: 12px;
+}
+
 /* Estilo para los encabezados de la tabla */
-.calendar-table th {
+.calendar-table-owner th {
+  cursor: default;
   background-color: #4CAF50; /* Verde de fondo */
+  border: solid #222 1px;
   color: white; /* Color blanco para el texto */
 }
+.calendar-table-owner th:first-child{
+  border-top-left-radius: 12px;
+}
+.calendar-table-owner th:last-child{
+  border-top-right-radius: 12px;
+}
+.accomodation-cell{
+  cursor: pointer;
+  background-color: #998844;
+  border: solid #222 1px;
+  padding: 5px;
+  border-radius: 5px; /* Bordes redondeados */
+
+}
+
 
 /* Estilo para las celdas disponibles */
 .available {
+  cursor: pointer;
   background-color: #e0ffe0; /* Fondo verde claro */
   color: #2d7a2d; /* Texto verde oscuro */
   padding: 5px;
@@ -48,9 +129,85 @@
 }
 
 /* Estilo para las celdas reservadas */
-.reserved {
+.blocked {
+  cursor: pointer;
   background-color: #ffcccc; /* Fondo rojo claro */
   color: #a33a3a; /* Texto rojo oscuro */
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
+}
+.pending {
+  cursor: pointer;
+  background-color: #ffeecc; /* Fondo rojo claro */
+  color: #a2762e; /* Texto rojo oscuro */
+  padding: 5px;
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.dashboard-container .modal-content{
+  background-color: var(--card-color-transparent);
+  border: solid #002 1px;
+}
+.modal-content button{
+  border-radius: 5px;
+  margin-inline: 5px;
+}
+.dashboard-container .modal-content p, .modal-field{
+  border: solid #002 1px;
+  background-color: #ddddffcc;
+  padding: 4px 8px;
+  margin: 5px;
+}
+.owner-p:first-of-type, .modal-field:first-of-type{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.modal-h3-owner-dashboard{
+  margin-left: 60px !important;
+}
+.owner-p:last-of-type, .modal-field:nth-last-child(2){
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.input-alojamiento-1{
+  margin-left: 182px;
+}
+.input-alojamiento-2{
+  margin-left: 200px;
+}
+.dashboard-container .modal-content h3{
+  max-width: fit-content;
+  padding: 5px 10px;
+  margin-left: 6.5rem;
+  background-color: #aaaaeecc;
+  border: solid #002 1px;
+  border-radius: 5px;
+}
+@media (max-width: 780px){
+  .dashboard-h2{
+    justify-self: center;
+    margin-left: 10vw;
+  }
+  .dashboard-container {
+    display: block;
+    width: 200vw;
+    margin-left: 40px;
+    justify-items: center;
+  }
+  .calendar-table-owner-container{
+    max-width: 200vw;
+  }
+}
+
+@media (max-width: 360px){
+  .dashboard-container {
+    display: block;
+    width: 200vw;
+    margin-left: 40px;
+    justify-items: center;
+  }
+  .calendar-table-owner-container{
+    max-width: 200vw;
+  }
 }

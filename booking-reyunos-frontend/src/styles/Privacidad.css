@@ -1,18 +1,26 @@
 .StylePrivacidad{
     padding: 50px 20px;
     align-items: center;
+    width: 90vw;
     font-size: 14px;
-    max-width: 1180px;
     margin: 10px auto;
     display: flexbox;
-    width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-    background-color: rgba(130, 158, 235, 0.733);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
     border-radius: 15px;
 }
-.fotoPrivacidad{
+.StylePrivacidad img{
     max-width: 100%;
     height: auto;
 }
 .TitulosPrivacidad{
     text-align: center;
+}
+@media(max-width: 768px) {
+    .StylePrivacidad{
+        width: 200vw;
+        margin-top: 15vh;
+        margin-left: 20vw;
+    }
 }
