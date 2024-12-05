@@ -44,7 +44,10 @@ public class BookingService {
         bookingDTO.setGuestId(booking.getGuest().getId());
         bookingDTO.setAccommodationId(booking.getAccommodation().getId());
         bookingDTO.setDailyRate(booking.getAccommodation().getPricePerNight()); // Daily rate del alojamiento
+        bookingDTO.setGuestEmail(booking.getGuestEmail());
+        bookingDTO.setGuestName(booking.getGuestName());
         return bookingDTO;
+
     }
 
     // Método para convertir de BookingDTO a Booking (Entity)
