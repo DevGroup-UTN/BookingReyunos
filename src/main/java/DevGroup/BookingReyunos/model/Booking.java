@@ -39,4 +39,6 @@ public class Booking { // Esta clase entidad representa una reserva hecha por un
     @JoinColumn(name = "accommodation_id", nullable = false)
     @JsonBackReference
     private Accommodation accommodation;
-
+    @Column(name = "is_blocked", nullable = false)
+    private boolean isBlocked = false; // Valor predeterminado en la entidad
+}
