@@ -19,7 +19,7 @@ function Footer() {
         </a>
       </div>
       <div className='footer-div'>
-        <img className='footer-img' src='https://picsv3.pxsol.com/1472/company/library/user/48477172716cfcc93012c220c6b7b4a03a3b74555e.png?ixlib=js-2.3.2&s=3b9d4cea49113e8ab130ebee8b90e613' alt="Logo" />
+        <img className='footer-img' src='/images/logo-utn.png' alt="Logo" />
       </div>
       <div className='footer-div socials'> {/* Asegúrate de que esta clase se aplique aquí */}
         <a 

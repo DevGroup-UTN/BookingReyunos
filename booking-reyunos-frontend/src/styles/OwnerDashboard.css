@@ -22,7 +22,7 @@
   margin-left: 40px;
 }
 .calendar-table-owner-container::-webkit-scrollbar{
-  background-color: #adadff; /* Color del "pulgar" */
+  background-color: #adadff; 
   border-radius: 10px; /* Redondear bordes */
   border: 1px solid #f4f4f4; /* Espaciado entre el pulgar y la pista */
 }
@@ -129,10 +129,17 @@
 }
 
 /* Estilo para las celdas reservadas */
-.reserved {
+.blocked {
   cursor: pointer;
   background-color: #ffcccc; /* Fondo rojo claro */
   color: #a33a3a; /* Texto rojo oscuro */
+  padding: 5px;
+  border-radius: 5px; /* Bordes redondeados */
+}
+.pending {
+  cursor: pointer;
+  background-color: #ffeecc; /* Fondo rojo claro */
+  color: #a2762e; /* Texto rojo oscuro */
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
 }
@@ -176,4 +183,31 @@
   background-color: #aaaaeecc;
   border: solid #002 1px;
   border-radius: 5px;
+}
+@media (max-width: 780px){
+  .dashboard-h2{
+    justify-self: center;
+    margin-left: 10vw;
+  }
+  .dashboard-container {
+    display: block;
+    width: 200vw;
+    margin-left: 40px;
+    justify-items: center;
+  }
+  .calendar-table-owner-container{
+    max-width: 200vw;
+  }
+}
+
+@media (max-width: 360px){
+  .dashboard-container {
+    display: block;
+    width: 200vw;
+    margin-left: 40px;
+    justify-items: center;
+  }
+  .calendar-table-owner-container{
+    max-width: 200vw;
+  }
 }

@@ -1,76 +1,80 @@
-.styleCookies {
+.contenedor_de_Cookies {
     padding: 50px 20px;
     align-items: center;
     font-size: 14px;
     max-width: 1180px;
     margin: 10px auto;
-    display: block !important;
     width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
-    background-color: rgba(130, 158, 235, 0.733);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
     border-radius: 15px;
 }
+
 .imgCookies{
     max-width: 100%;
     height: auto;
-}
-
-.styleCookies p,
-.styleCookies ul,
-.styleCookies table {
-    width: 100%; /* Asegura que todos estos elementos ocupen el 100% del ancho del contenedor */
-    margin: 0 auto; /* Centra estos elementos dentro del contenedor */
-    text-align: left; /* Alinea el texto a la izquierda */
 }
 
 .TitulooCookies{
     text-align: center;
 }
 
-.styleCookies ul {
+.contenedor_de_Cookies ul {
     padding-left: 20px; /* Asegura que las listas tengan algo de espacio a la izquierda */
 }
 
-.styleCookies li {
+.contenedor_de_Cookies li {
     margin: 0; /* Elimina cualquier margen innecesario en los elementos de lista */
 }
 
-.styleCookies table {
-    border-collapse: collapse; /* Hace que las tablas colapsen los bordes, si es necesario */
+.cookie-table {
+    border-collapse: collapse; /* Hace que las tablas colapsen los bordes */
     text-align: left; /* Alinea el contenido de las celdas a la izquierda */
+    border: solid var(--font-color) 1px;
+    border-radius: 15px !important;
+}
+.contenedor_de_Cookies table{
+    width: 100%; /* Asegura que todos estos elementos ocupen el 100% del ancho del contenedor */
+    margin: 0 auto; /* Centra estos elementos dentro del contenedor */
+    width: 70vw;
+}
+.contenedor_de_Cookies td {
+    background-color: rgba(0, 190, 255, 0.2);
+    text-align: center;
+    padding: 5px 0;
+    height: auto;
+    border: solid var(--font-color) 1px;
+}
+.contenedor_de_Cookies tr td:nth-child(1){
+    width: 20vw;
+}
+.contenedor_de_Cookies tr td:nth-child(2){
+    width: 40vw;
+}
+.contenedor_de_Cookies tr:first-child td:nth-of-type(1){
+    border-top-left-radius: 10px;
+}
+.contenedor_de_Cookies tr:first-child td:nth-of-type(3){
+    border-top-right-radius: 10px;
+}
+.contenedor_de_Cookies tr:last-child td:nth-of-type(1){
+    border-bottom-left-radius: 10px;
+}
+.contenedor_de_Cookies tr:last-child td:nth-of-type(3){
+    border-bottom-right-radius: 10px;
 }
 
-/* Para pantallas pequeñas (móviles) */
-@media (max-width: 768px) {
-    .styleCookies {
-        padding: 20px 10px; /* Reduce el relleno */
-        font-size: 12px; /* Ajusta el tamaño del texto */
+@media (max-width: 768px){
+    .contenedor_de_Cookies{
+        width: 200vw;
+        margin-top: 15vh;
+        margin-left: 20vw;
     }
-
-    .styleCookies p,
-    .styleCookies ul,
-    .styleCookies table {
-        text-align: center; /* Centra el texto en pantallas pequeñas */
+    .contenedor_de_Cookies table {
+        width: 180vw;
     }
-
-    .styleCookies ul {
-        padding-left: 10px; /* Reduce el margen para listas */
-    }
-
-    .styleCookies table {
-        font-size: 12px; /* Asegura que las tablas sean legibles */
-        overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
-        display: block; /* Hace que las tablas sean más manejables en pantallas pequeñas */
-    }
-}
-
-/* Para pantallas medianas (tablets) */
-@media (max-width: 1024px) {
-    .styleCookies {
-        padding: 30px 15px; /* Ajusta el relleno */
-        font-size: 13px; /* Ajusta el tamaño del texto */
-    }
-
-    .styleCookies table {
-        font-size: 13px;
+    .contenedor_de_Cookies tr td:nth-child(3), .contenedor_de_Cookies tr td:nth-child(1){
+        width: 30vw;
     }
 }

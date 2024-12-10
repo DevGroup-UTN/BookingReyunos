@@ -1,0 +1,28 @@
+.styleTermino{
+    padding: 50px 20px;
+    align-items: center;
+    font-size: 14px;
+    margin-inline:  auto;
+    margin-top: 15vh;
+    display: box;
+    width: 90vw;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-color: #aaaaccaa;
+    border-radius: 15px;
+}
+.styleTermino img{
+    max-width: 100%;
+    height: auto;
+}
+
+.TituloTermino{
+    text-align: center;
+}
+
+@media (max-width: 768px){
+    .styleTermino{
+        width: 180vw;
+        margin-inline: 30vw;
+    }
+}

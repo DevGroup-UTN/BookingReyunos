@@ -1,6 +1,7 @@
 package DevGroup.BookingReyunos.service;
 
 import DevGroup.BookingReyunos.dto.AccommodationDTO;
+import DevGroup.BookingReyunos.dto.CloseDatesRequest;
 import DevGroup.BookingReyunos.exceptions.AccommodationNotFoundException;
 import DevGroup.BookingReyunos.model.Accommodation;
 import DevGroup.BookingReyunos.model.Booking;
@@ -127,30 +128,56 @@ public class AccommodationService {
         accommodationRepository.save(accommodation);
     }
 
-    public void closeDates(Integer accommodationId, LocalDate startDate, LocalDate endDate) {
+    public void closeDates(CloseDatesRequest request) {
         // Validación de fechas
-        if (startDate.isAfter(endDate)) {
+        if (request.getStartDate().isAfter(request.getEndDate())) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
         }
-
-        // Crear y guardar bloqueos de fechas
-        LocalDate currentDate = startDate;
-        while (!currentDate.isAfter(endDate)) {
-            Booking booking = new Booking();
-            booking.setCheckInDate(currentDate);
-            booking.setCheckOutDate(currentDate); // Puedes ajustar esto según tus necesidades
-            booking.setBlocked(true); // Supongamos que tienes un flag para indicar fechas bloqueadas
-            bookingRepository.save(booking);
+    
+        // Obtener el alojamiento mediante el ID
+        Accommodation accommodation = accommodationRepository.findById(request.getAccommodationId())
+                .orElseThrow(() -> new IllegalArgumentException("Alojamiento no encontrado"));
+    
+        // Obtener el usuario "CERRADO"
+        User user = userRepository.findById(32)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario 'Cerrado' no encontrado"));
+    
+        // Iterar por las fechas dentro del rango especificado
+        LocalDate currentDate = request.getStartDate();
+        while (!currentDate.isAfter(request.getEndDate())) {
+            // Buscar reservas existentes en esta fecha para el alojamiento
+            List<Booking> bookingsOnDate = bookingRepository.findByAccommodationIdAndDate(accommodation.getId(), currentDate);
+    
+            if (!bookingsOnDate.isEmpty()) {
+                // Si ya hay una reserva en esta fecha, marcamos la reserva como bloqueada
+                for (Booking existingBooking : bookingsOnDate) {
+                    existingBooking.setBlocked(true);
+                    bookingRepository.save(existingBooking);
+                }
+            } else {
+                // Si no existe una reserva en esta fecha, crear un nuevo bloqueo
+                Booking booking = new Booking();
+                booking.setAccommodation(accommodation); // Asignar el alojamiento
+                booking.setCheckInDate(currentDate);
+                booking.setCheckOutDate(currentDate);
+                booking.setBlocked(true); // Marcar como bloqueado
+                booking.setGuest(user); // Asignar usuario "CERRADO"
+                bookingRepository.save(booking);
+            }
+    
             currentDate = currentDate.plusDays(1); // Avanza un día
         }
     }
-    public void openDates(Integer accommodationId, LocalDate startDate, LocalDate endDate){
+    
+    
+
+    public void openDates(CloseDatesRequest request){
         // Validación de fechas
-        if (startDate.isAfter(endDate)) {
+        if (request.getStartDate().isAfter(request.getEndDate())) {
             throw new IllegalArgumentException("La fecha de inicio no puede ser posterior a la fecha de fin.");
         }
-        
-            bookingRepository.deleteByAccommodationIdAndBlockedDates(accommodationId, startDate, endDate);
+  
+        bookingRepository.deleteByAccommodationIdAndBlockedDates(request.getAccommodationId(), request.getStartDate(), request.getEndDate());
     }
     public void removeImageFromAccommodation(Integer id, String imageUrl) {
         Accommodation accommodation = accommodationRepository.findById(id)
