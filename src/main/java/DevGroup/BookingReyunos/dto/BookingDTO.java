@@ -24,8 +24,6 @@ public class BookingDTO {
     private LocalDate checkOutDate;
     private BigDecimal totalPrice;
     private Integer guestId; // Referencia al huésped (User)
-    private String guestEmail;
-    private String guestName;
     private Integer accommodationId; // Referencia al alojamiento
     private boolean isBlocked;
 }

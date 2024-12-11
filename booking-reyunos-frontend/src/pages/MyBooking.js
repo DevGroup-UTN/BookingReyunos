@@ -21,7 +21,7 @@ const MyBooking = () => {
         try {
           // Obtener las reservas del usuario
           const bookingResponse = await axios.get(
-            `https://bookingreyunos-production.up.railway.app/booking/guest/${user.id}`,
+            `https://bookingreyunos.onrender.com/booking/guest/${user.id}`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ const MyBooking = () => {
             bookingData.map(async (booking) => {
               try {
                 const accommodationResponse = await axios.get(
-                  `https://bookingreyunos-production.up.railway.app/accommodations/${booking.accommodationId}`,
+                  `localhost:8080/accommodations/${booking.accommodationId}`,
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ const MyBooking = () => {
 
     try {
       await axios.delete(
-        `https://bookingreyunos-production.up.railway.app/booking/${bookingId}`,
+        `https://localhost:8080/booking/${bookingId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

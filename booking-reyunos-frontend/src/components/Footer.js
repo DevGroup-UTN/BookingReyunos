@@ -30,7 +30,7 @@ function Footer() {
         >
           <FontAwesomeIcon icon={faFacebook} />
         </a>
-        <a href="https://www.instagram.com/utn_los_reyunos/" target="_blank" 
+        <a href="https://www.instagram.com/utn_losreyunos/" target="_blank" 
           rel="noopener noreferrer" className="social-icon"
         >
           <FontAwesomeIcon icon={faInstagram} />
