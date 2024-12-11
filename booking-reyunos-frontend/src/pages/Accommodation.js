@@ -11,7 +11,7 @@ function Accommodation() {
 
   useEffect(() => {
     axios
-      .get('https://bookingreyunos-production.up.railway.app/accommodations')
+      .get('https://bookingreyunos.onrender.com/accommodations')
       .then((response) => setAccommodations(response.data))
       .catch((error) => console.error('Error fetching accommodations:', error));
   }, []);

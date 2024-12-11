@@ -1,9 +1,15 @@
 #containerUyC {
-  width: 100%;
+  width: 90%;
+  margin-left: 5vw;
   height: auto;
+  padding: 15px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: #aaaaccaa;
+  border-radius: 15px;
 }
 
 .container {
@@ -26,19 +32,17 @@
   height: 60vh; /* Ajusta la altura del mapa */
   border: none;
   border-radius: 10px;
-  margin-left: 0; /* Mueve el mapa hacia la izquierda si es necesario */
+  margin-left: 5vw; /* Mueve el mapa hacia la izquierda si es necesario */
   position: relative; /* Permite mover el mapa con 'left' si se requiere */
   left: -5rem; /* Desplaza el mapa más a la izquierda si es necesario */
 }
 
 .contact-block {
-  width: 500%; /* Ajusta el ancho del formulario */
-  max-width: 600px; /* Límite máximo de ancho */
-  min-width: 600px; /* Límite mínimo de ancho */
+  width: 40vw; /* Ajusta el ancho del formulario */
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgba(0, 190, 255, 0.4);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-left: -5rem; /* Mueve el formulario hacia la izquierda */
 }

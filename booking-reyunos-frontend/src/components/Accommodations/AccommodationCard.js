@@ -24,7 +24,7 @@ function AccommodationCard({ accommodation, user }) {
     const checkOutDate = endDate.toISOString().split('T')[0];
 
     axios
-      .post('https://bookingreyunos-production.up.railway.app/booking', {
+      .post('https://bookingreyunos.onrender.com/booking', {
         accommodationId: accommodation.id,
         guestId: user.id,
         checkInDate: checkInDate,

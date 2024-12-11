@@ -1,9 +1,3 @@
-/* Estilo base */
-:root{
-  --font-color: #10148f;
-  --hover-color: #0000ff;
-}
-
 /* Contenedor principal del Dashboard */
 .dashboard-container {
   padding: 20px;
@@ -18,22 +12,26 @@
   padding: 5px 10px;
   justify-items: center;
   border-radius: 15px;
-  overflow-x: auto;
+  white-space: nowrap; /* Evita que el contenido se ajuste automáticamente */
   margin-left: 40px;
 }
-.calendar-table-owner-container::-webkit-scrollbar{
+.calendar-table-owner::-webkit-scrollbar{
   background-color: #adadff; 
   border-radius: 10px; /* Redondear bordes */
   border: 1px solid #f4f4f4; /* Espaciado entre el pulgar y la pista */
 }
 /* Estilo para la tabla del calendario */
 .calendar-table-owner {
-  background-color: #444466aa;
+  background-color: #d5d2ffaa;
   border-radius: 15px;
   margin-top: 5px;
   margin-bottom: 5px;
-  width: max-content;
+  overflow: auto;
+  width: 100%;
   margin-left: auto;
+}
+.calendar-table-owner table{
+  width: 100%;
 }
 .date-range-form{
   border: solid #adadff 1px;
@@ -59,7 +57,13 @@
   text-align: center;
   font-variant: small-caps;
 }
-.date-range-form button{
+.date-range-form button {
+  background-color: var(--font-color);
+  color: #ddd;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+.modal-content-owner button{
   background-color: var(--font-color);
   color: #ddd;
   padding: 5px 10px;
@@ -101,7 +105,7 @@
   cursor: default;
   background-color: #4CAF50; /* Verde de fondo */
   border: solid #222 1px;
-  color: white; /* Color blanco para el texto */
+  color: rgb(2, 33, 0); /* Color blanco para el texto */
 }
 .calendar-table-owner th:first-child{
   border-top-left-radius: 12px;
@@ -109,10 +113,12 @@
 .calendar-table-owner th:last-child{
   border-top-right-radius: 12px;
 }
+.calendar-table-owner td:first-child{
+  background-color: #f5de85;
+}
 .accomodation-cell{
   cursor: pointer;
-  background-color: #998844;
-  border: solid #222 1px;
+  color: #2b2301;
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
 
@@ -124,62 +130,79 @@
   cursor: pointer;
   background-color: #e0ffe0; /* Fondo verde claro */
   color: #2d7a2d; /* Texto verde oscuro */
+  border: solid 1px #030;
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
 }
-
+.calendar-table-owner td{
+  width: fit-content;
+  padding: 3px;
+}
 /* Estilo para las celdas reservadas */
 .blocked {
   cursor: pointer;
   background-color: #ffcccc; /* Fondo rojo claro */
   color: #a33a3a; /* Texto rojo oscuro */
+  border: solid 1px #300;
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
+}
+.calendar-table-owner td:nth-child(1), .calendar-table-owner th:nth-child(1){
+  position: sticky;
+  left: 0;
+  z-index: 1;
 }
 .pending {
   cursor: pointer;
   background-color: #ffeecc; /* Fondo rojo claro */
   color: #a2762e; /* Texto rojo oscuro */
+  border: solid 1px #330;
   padding: 5px;
   border-radius: 5px; /* Bordes redondeados */
 }
-
-.dashboard-container .modal-content{
+.modal-content-owner{
   background-color: var(--card-color-transparent);
   border: solid #002 1px;
+  border-radius: 15px;
 }
-.modal-content button{
+
+.modal-content-owner button{
   border-radius: 5px;
   margin-inline: 5px;
 }
-.dashboard-container .modal-content p, .modal-field{
+.modal-content-owner p, .modal-field-owner{
   border: solid #002 1px;
   background-color: #ddddffcc;
   padding: 4px 8px;
   margin: 5px;
 }
-.owner-p:first-of-type, .modal-field:first-of-type{
+.owner-p:first-of-type, .modal-field-owner:first-of-type{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 .modal-h3-owner-dashboard{
   margin-left: 60px !important;
 }
-.owner-p:last-of-type, .modal-field:nth-last-child(2){
+.owner-p:last-of-type, .modal-field-owner:nth-last-child(2){
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-
+.modal-content-owner{
+  width: 40vw;
+  padding-inline: 30px;
+  padding-bottom: 20px;
+  justify-content: center;
+}
 .input-alojamiento-1{
   margin-left: 182px;
 }
 .input-alojamiento-2{
   margin-left: 200px;
 }
-.dashboard-container .modal-content h3{
+.modal-content-owner h3{
   max-width: fit-content;
   padding: 5px 10px;
-  margin-left: 6.5rem;
+  justify-self: center;
   background-color: #aaaaeecc;
   border: solid #002 1px;
   border-radius: 5px;

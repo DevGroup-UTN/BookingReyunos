@@ -40,7 +40,7 @@ const GuestDashboard = () => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `https://bookingreyunos-production.up.railway.app/users/${user.id}`,
+        `https://bookingreyunos.onrender.com/users/${user.id}`,
         formData
       );
       setUser(response.data); // Actualizar el usuario en el contexto
@@ -66,7 +66,7 @@ const GuestDashboard = () => {
     }
     try {
       await axios.put(
-        `https://bookingreyunos-production.up.railway.app/users/${user.id}/change-password`,
+        `https://bookingreyunos.onrender.com/users/${user.id}/change-password`,
         {
           currentPassword: passwordData.currentPassword,
           newPassword: passwordData.newPassword,

@@ -14,7 +14,6 @@ const OwnerDashboard = () => {
   const [guests, setGuests] = useState({}); // Mapeo de guestId a username
   const [emails, setEmails] = useState({}); // Mapeo de guestId a email
   const [menuVisible, setMenuVisible] = useState(false); // Controlar visibilidad del menú
-  const [selectedGuestId, setSelectedGuestId] = useState(null); // ID del guest seleccionado
   const [selectedReservation, setSelectedReservation] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalFreeOpen, setIsModalFreeOpen] = useState(false); // Controla la visibilidad del modal
@@ -22,20 +21,26 @@ const OwnerDashboard = () => {
   const [freeEndDate, setFreeEndDate] = useState(''); // Fecha de fin
   const [selectedAccommodationId, setSelectedAccommodationId] = useState(null); // ID del alojamiento
   const [currentAction, setCurrentAction] = useState(null); // Estado para la acción actual ("close" o "open")
+  // Estados para el modal de crear reserva y sus datos
+const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+const [crearReservasStartDate, setCrearReservasStartDate] = useState(null);
+const [crearReservasEndDate, setCrearReservasEndDate] = useState(null);
+const [newBookingAccommodationId, setNewBookingAccommodationId] = useState(null);
+const [newUsernameBooking, setNewUsernameBooking] = useState('');
 
   const fetchDashboardData = async () => {
     if (!user) return;
 
     try {
       const accomData = await axios.get(
-        `https://bookingreyunos-production.up.railway.app/accommodations/owner/${user.id}`
+        `https://bookingreyunos.onrender.com/accommodations/owner/${user.id}`
       );
       setAccommodations(accomData.data);
 
       const allBookings = [];
       for (const accommodation of accomData.data) {
         const resData = await axios.get(
-          `https://bookingreyunos-production.up.railway.app/booking/accommodation/${accommodation.id}`
+          `https://bookingreyunos.onrender.com/booking/accommodation/${accommodation.id}`
         );
         allBookings.push(...resData.data);
       }
@@ -53,7 +58,7 @@ const OwnerDashboard = () => {
       const uniqueGuestIds = [...new Set(guestIds)];
 
       const response = await axios.post(
-        'https://bookingreyunos-production.up.railway.app/users/bulk',
+        'https://bookingreyunos.onrender.com/users/bulk',
         uniqueGuestIds
       );
       const usersMap = response.data.reduce((acc, user) => {
@@ -81,7 +86,7 @@ const OwnerDashboard = () => {
     try {
       console.log('sujeto: ' + subject + 'mensaje' + message + "guestID: " + guestId);
       // Lógica para enviar el correo (suponiendo que tengas un endpoint en el backend para ello)
-      await axios.post('https://bookingreyunos-production.up.railway.app/email/send-email', { 
+      await axios.post('https://bookingreyunos.onrender.com/email/send-email', { 
         to: guestId, 
         subject, 
         body: message });
@@ -91,6 +96,45 @@ const OwnerDashboard = () => {
       alert('No se pudo enviar el correo');
     }
   };
+  // Función para abrir el modal de crear reserva
+const handleOpenCreateModal = (accommodationId) => {
+  setNewBookingAccommodationId(accommodationId);
+  setIsCreateModalOpen(true);
+};
+
+// Función para cerrar el modal de crear reserva
+const handleCloseCreateModal = () => {
+  setIsCreateModalOpen(false);
+  setNewBookingAccommodationId('');
+  setNewUsernameBooking('');
+  setCrearReservasEndDate('');
+  setCrearReservasStartDate('');
+};
+
+// Funcion para crear la reserva
+const handleCreateReservation = async () => {
+  if (!newUsernameBooking) {
+    alert('Por favor, ingrese nombre del huésped.');
+    return;
+  }
+  const startDate = new Date(freeStartDate).toISOString().split('T')[0];
+  const endDate = new Date(freeEndDate).toISOString().split('T')[0];
+  try {
+    const response = await axios.post('https://bookingreyunos.onrender.com/booking/create', {
+      accommodationId: newBookingAccommodationId,
+      checkInDate: startDate,
+      checkOutDate: endDate,
+      username: newUsernameBooking,
+    });
+
+    alert('Reserva creada exitosamente.');
+    handleCloseCreateModal();
+    fetchDashboardData(); // Refresca los datos en el dashboard
+  } catch (error) {
+    console.error('Error al crear la reserva:', error);
+    alert('No se pudo crear la reserva. Por favor, inténtalo de nuevo.');
+  }
+};
 
   // Manejador de clic fuera del menú
   const handleClickOutside = () => {
@@ -116,7 +160,7 @@ const OwnerDashboard = () => {
       const startDate = new Date(freeStartDate).toISOString().split('T')[0];
       const endDate = new Date(freeEndDate).toISOString().split('T')[0];
       // Envía al backend
-      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking/open-dates', {
+      const response = await axios.post('https://bookingreyunos.onrender.com/booking/open-dates', {
         accommodationId: selectedAccommodationId,
         startDate: startDate,
         endDate: endDate,
@@ -154,7 +198,7 @@ const OwnerDashboard = () => {
       console.log("Datos enviados al backend:", { startDate, endDate, accommodationId });
   
       // Enviar solicitud al backend
-      const response = await axios.post('https://bookingreyunos-production.up.railway.app/booking/close-dates', {
+      const response = await axios.post('https://bookingreyunos.onrender.com/booking/close-dates', {
         accommodationId: accommodationId,
         startDate: startDate,
         endDate: endDate,
@@ -243,7 +287,6 @@ const OwnerDashboard = () => {
 
   const renderCellContent = (accommodationId, date) => {
     const formattedDate = new Date(date + 'T00:00:00');
-
     const reservation = reservations.find(
       (res) =>
         res.accommodationId === accommodationId &&
@@ -258,8 +301,55 @@ const OwnerDashboard = () => {
         </div>
       );
     }
-
-    return <div className="available">Disponible</div>;
+    // Si está disponible, se abre el modal de creación
+    return (
+      <div
+        className="available"
+        onClick={(event) => {
+          event.stopPropagation(); // Detener propagación del evento
+          handleOpenModalFree(accommodationId);
+        }}
+      >
+        Disponible
+      </div>
+    );
+};
+  const groupDates = (accommodationId) => {
+    const groups = [];
+    let currentGroup = [];
+    let currentType = null;
+  
+    dates.forEach((date) => {
+      const formattedDate = new Date(date + "T00:00:00");
+      const reservation = reservations.find(
+        (res) =>
+          res.accommodationId === accommodationId &&
+          new Date(res.checkInDate + "T00:00:00") <= formattedDate &&
+          new Date(res.checkOutDate + "T23:59:59") >= formattedDate
+      );
+  
+      const type = reservation
+        ? reservation.blocked
+          ? "blocked"
+          : "pending"
+        : "available";
+  
+      if (type === currentType) {
+        currentGroup.push(date);
+      } else {
+        if (currentGroup.length > 0) {
+          groups.push({ type: currentType, dates: currentGroup });
+        }
+        currentGroup = [date];
+        currentType = type;
+      }
+    });
+  
+    if (currentGroup.length > 0) {
+      groups.push({ type: currentType, dates: currentGroup });
+    }
+  
+    return groups;
   };
   
 
@@ -288,7 +378,8 @@ const OwnerDashboard = () => {
         <button type="submit">Actualizar Fechas</button>
       </form>
       <div className='calendar-table-owner-container' style={{backgroundImage: "url('/images/logo-utn-nav.png')"}}>
-        <table className="calendar-table-owner">
+        <div className="calendar-table-owner">
+        <table >
           <thead className='thead-owner'>
             <tr>
               <th className='th-1'>Alojamiento</th>
@@ -297,23 +388,64 @@ const OwnerDashboard = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
-            {accommodations.map((accommodation) => (
-              <tr key={accommodation.id}>
-                <td className='dashboard-td' ><div className='accomodation-cell' onClick={() => handleOpenModalFree(accommodation.id)}>{accommodation.name}</div></td>
-                {dates.map((date) => (
-                  <td className='dashboard-td' key={`${accommodation.id}-${date}`}>
-                    {renderCellContent(accommodation.id, date)}
+            <tbody>
+            {accommodations.map((accommodation) => {
+              const groupedDates = groupDates(accommodation.id);
+              return (
+                <tr key={accommodation.id}>
+                  <td className="dashboard-td">
+                    <div
+                      className="accomodation-cell"
+                      onClick={() => handleOpenModalFree(accommodation.id)}
+                    >
+                      {accommodation.name}
+                    </div>
                   </td>
-                ))}
-              </tr>
-            ))}
+                  {groupedDates.map((group, index) => (
+                    <td
+                      key={`${accommodation.id}-${index}`}
+                      className='celdas-contenedoras'
+                      colSpan={group.dates.length}
+                      onClick={() => {
+                        if (group.type === "pending" || group.type === "blocked") {
+                          const reservation = reservations.find(
+                            (res) =>
+                              res.accommodationId === accommodation.id &&
+                              new Date(res.checkInDate + "T00:00:00") <=
+                                new Date(group.dates[0] + "T00:00:00") &&
+                              new Date(res.checkOutDate + "T23:59:59") >=
+                                new Date(group.dates[0] + "T23:59:59")
+                          );
+                          handleOpenModal(reservation);
+                        }
+                      }}
+                    >
+                      <div className={group.type}>{group.type === "available"
+                        ? "Disponible"
+                        : guests[
+                            reservations.find(
+                              (res) =>
+                                res.accommodationId === accommodation.id &&
+                                new Date(res.checkInDate + "T00:00:00") <=
+                                  new Date(group.dates[0] + "T00:00:00") &&
+                                new Date(res.checkOutDate + "T23:59:59") >=
+                                  new Date(group.dates[0] + "T23:59:59")
+                            )?.guestId
+                          ] || "Desconocido"}
+                        </div>
+                      
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
+        </div>
       </div>
       {isModalOpen && selectedReservation && (
         <div className="modal-overlay">
-          <div className="modal-content">
+          <div className="modal-content-owner">
             <h3>Detalles de la Reserva</h3>
             <p className='owner-p'><strong>Usuario:</strong> {guests[selectedReservation.guestId] || 'Desconocido'}</p>
             <p className='owner-p'><strong>Correo:</strong> {emails[selectedReservation.guestId] || 'Desconocido'}</p>
@@ -338,26 +470,64 @@ const OwnerDashboard = () => {
         </div>
       )}
       {isModalFreeOpen && (
-  <div className="modal-overlay">
-    <div className="modal-content">
-      {/* Estado inicial con los botones */}
-      {currentAction === null && (
-        <div className="modal-buttons">
-          <button onClick={handleCloseReservations}>
-            Cerrar Reservas
-          </button>
-          <button onClick={handleOpenReservations}>
-            Abrir Reservas
-          </button>
-          <button onClick={handleCloseModalFree}>Cancelar</button>
+      <div className="modal-overlay-owner">
+        <div className="modal-content-owner">
+          {/* Estado inicial con los botones */}
+          {currentAction === null && (
+            <div className="modal-buttons">
+              <button onClick={handleCloseReservations}>
+                Cerrar Reservas
+              </button>
+              <button onClick={handleOpenReservations}>
+                Abrir Reservas
+              </button>
+              <button onClick={handleCloseModalFree}>Cancelar</button>
+            </div>
+          )}
+        {/* Modal para crear reservas */}
+        {isCreateModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content-owner">
+            <h3>Crear Reserva</h3>
+            <p><strong>Alojamiento:</strong> {newBookingAccommodationId}</p>
+              <div>
+              <label>Fecha Inicio:</label>
+              <input
+                className="input-alojamiento-1"
+                type="date"
+                value={crearReservasStartDate}
+                onChange={(e) => setCrearReservasStartDate(e.target.value)}
+              />
+            </div>
+            <div>
+              <label>Fecha Fin:</label>
+              <input
+                type="date"
+                className="input-alojamiento-2"
+                value={crearReservasEndDate}
+                onChange={(e) => setCrearReservasEndDate(e.target.value)}
+              />
+            </div>
+            <label>
+              Nombre del huésped:
+              <input
+                type="text"
+                value={newUsernameBooking}
+                onChange={(e) => setNewUsernameBooking(e.target.value)}
+              />
+            </label>
+            <div className="modal-buttons">
+              <button onClick={handleCreateReservation}>Crear</button>
+              <button onClick={handleCloseCreateModal}>Cancelar</button>
+            </div>
+          </div>
         </div>
       )}
-
       {/* Formulario para cerrar reservas */}
       {currentAction === "close" && (
         <div className="cerrar-reservas">
           <h3 className="modal-h3-owner-dashboard">Cerrar Fechas para el Alojamiento</h3>
-          <div className="modal-field">
+          <div className="modal-field-owner">
             <label>Fecha Inicio:</label>
             <input
               className="input-alojamiento-1"
@@ -366,7 +536,7 @@ const OwnerDashboard = () => {
               onChange={(e) => setFreeStartDate(e.target.value)}
             />
           </div>
-          <div className="modal-field">
+          <div className="modal-field-owner">
             <label>Fecha Fin:</label>
             <input
               type="date"
@@ -381,12 +551,11 @@ const OwnerDashboard = () => {
           </div>
         </div>
       )}
-
       {/* Formulario para abrir reservas */}
       {currentAction === "open" && (
         <div className="abrir-reservas">
           <h3 className="modal-h3-owner-dashboard">Abrir Fechas para el Alojamiento</h3>
-          <div className="modal-field">
+          <div className="modal-field-owner">
             <label>Fecha Inicio:</label>
             <input
               className="input-alojamiento-1"
@@ -395,7 +564,7 @@ const OwnerDashboard = () => {
               onChange={(e) => setFreeStartDate(e.target.value)}
             />
           </div>
-          <div className="modal-field">
+          <div className="modal-field-owner">
             <label>Fecha Fin:</label>
             <input
               type="date"
@@ -404,7 +573,7 @@ const OwnerDashboard = () => {
               onChange={(e) => setFreeEndDate(e.target.value)}
             />
           </div>
-          <div className="modal-buttons">
+          <div className="modal-buttons-owner">
             <button onClick={handleConfirmOpenDates}>Confirmar</button>
             <button onClick={handleResetModal}>Regresar</button>
           </div>
@@ -413,6 +582,7 @@ const OwnerDashboard = () => {
     </div>
   </div>
   )}
+  
 
     </div>
   );
