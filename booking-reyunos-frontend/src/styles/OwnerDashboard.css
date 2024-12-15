@@ -63,12 +63,6 @@
   padding: 5px 10px;
   border-radius: 8px;
 }
-.modal-content-owner button{
-  background-color: var(--font-color);
-  color: #ddd;
-  padding: 5px 10px;
-  border-radius: 8px;
-}
 
 .dashboard-h2 {
   color: #ddd;
@@ -165,16 +159,39 @@
   border: solid #002 1px;
   border-radius: 15px;
 }
+.modal-createBooking{
+  background-color: var(--card-color-transparent);
+  border: solid #002 1px;
+  border-radius: 15px;
+  width: 40vw;
+  height: 45vh;
+  padding-inline: 30px;
+  padding-bottom: 20px;
+  justify-content: center;
+}
 
-.modal-content-owner button{
+.modal-content-owner button, .modal-createBooking button{
   border-radius: 5px;
   margin-inline: 5px;
+  background-color: var(--font-color);
+  color: #ddd;
+  padding: 5px 10px;
+  border-radius: 8px;
 }
-.modal-content-owner p, .modal-field-owner{
+.modal-content-owner p, .modal-field-owner, .modal-createBooking p, .label-createBooking{
   border: solid #002 1px;
   background-color: #ddddffcc;
   padding: 4px 8px;
   margin: 5px;
+}
+.label-createBooking:nth-of-type(3) input{
+  margin-left: 7.8vw;
+}
+.label-createBooking:nth-of-type(2) input{
+  margin-left: 18.2vw;
+}
+.label-createBooking:nth-of-type(1) input{
+  margin-left: 17vw;
 }
 .owner-p:first-of-type, .modal-field-owner:first-of-type{
   border-top-left-radius: 10px;
@@ -199,7 +216,7 @@
 .input-alojamiento-2{
   margin-left: 200px;
 }
-.modal-content-owner h3{
+.modal-content-owner h3, .modal-createBooking h3{
   max-width: fit-content;
   padding: 5px 10px;
   justify-self: center;
