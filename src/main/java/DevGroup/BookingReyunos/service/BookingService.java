@@ -112,6 +112,7 @@ public class BookingService {
             User temporaryGuest = new User();
             temporaryGuest.setUsername(bookingDTO.getGuestName());
             temporaryGuest.setEmail(bookingDTO.getGuestEmail());
+            temporaryGuest.setPassword("123456");
             guest = userRepository.save(temporaryGuest); // Guardar el usuario en la base de datos
         }
     
