@@ -27,6 +27,7 @@ const [crearReservasStartDate, setCrearReservasStartDate] = useState(null);
 const [crearReservasEndDate, setCrearReservasEndDate] = useState(null);
 const [newBookingAccommodationId, setNewBookingAccommodationId] = useState(null);
 const [newUsernameBooking, setNewUsernameBooking] = useState('');
+const [newEmailBooking, setNewEmailBooking] = useState('');
 
   const fetchDashboardData = async () => {
     if (!user) return;
@@ -99,6 +100,7 @@ const [newUsernameBooking, setNewUsernameBooking] = useState('');
   // Función para abrir el modal de crear reserva
 const handleOpenCreateModal = (accommodationId) => {
   setNewBookingAccommodationId(accommodationId);
+  console.log("abriendo modal" + isCreateModalOpen);
   setIsCreateModalOpen(true);
 };
 
@@ -117,16 +119,18 @@ const handleCreateReservation = async () => {
     alert('Por favor, ingrese nombre del huésped.');
     return;
   }
-  const startDate = new Date(freeStartDate).toISOString().split('T')[0];
-  const endDate = new Date(freeEndDate).toISOString().split('T')[0];
+  const start = new Date(crearReservasStartDate).toISOString().split('T')[0];
+  const end = new Date(crearReservasEndDate).toISOString().split('T')[0];
+  console.log("Inicio: " + start + " FIN: " + end);
   try {
-    const response = await axios.post('https://bookingreyunos.onrender.com/booking/create', {
+    const response = await axios.post('https://bookingreyunos.onrender.com/booking', {
       accommodationId: newBookingAccommodationId,
-      checkInDate: startDate,
-      checkOutDate: endDate,
-      username: newUsernameBooking,
+      checkInDate: start,
+      checkOutDate: end,
+      guestName: newUsernameBooking,
+      guestEmail: newEmailBooking
     });
-
+    console.log(response.data);
     alert('Reserva creada exitosamente.');
     handleCloseCreateModal();
     fetchDashboardData(); // Refresca los datos en el dashboard
@@ -301,18 +305,13 @@ const handleCreateReservation = async () => {
         </div>
       );
     }
-    // Si está disponible, se abre el modal de creación
-    return (
-      <div
-        className="available"
-        onClick={(event) => {
-          event.stopPropagation(); // Detener propagación del evento
-          handleOpenModalFree(accommodationId);
-        }}
-      >
-        Disponible
-      </div>
-    );
+    if (!reservation){
+      return (
+        <div className='available' onClick={() => handleOpenCreateModal(accommodationId)}>
+          Disponible
+        </div>
+      )
+    }
 };
   const groupDates = (accommodationId) => {
     const groups = [];
@@ -402,24 +401,27 @@ const handleCreateReservation = async () => {
                     </div>
                   </td>
                   {groupedDates.map((group, index) => (
-                    <td
-                      key={`${accommodation.id}-${index}`}
-                      className='celdas-contenedoras'
-                      colSpan={group.dates.length}
-                      onClick={() => {
-                        if (group.type === "pending" || group.type === "blocked") {
-                          const reservation = reservations.find(
-                            (res) =>
-                              res.accommodationId === accommodation.id &&
-                              new Date(res.checkInDate + "T00:00:00") <=
-                                new Date(group.dates[0] + "T00:00:00") &&
-                              new Date(res.checkOutDate + "T23:59:59") >=
-                                new Date(group.dates[0] + "T23:59:59")
-                          );
-                          handleOpenModal(reservation);
-                        }
-                      }}
-                    >
+                     <td
+                     key={`${accommodation.id}-${index}`}
+                     className='celdas-contenedoras'
+                     colSpan={group.dates.length}
+                     onClick={() => {
+                       if (group.type === "pending" || group.type === "blocked") {
+                         const reservation = reservations.find(
+                           (res) =>
+                             res.accommodationId === accommodation.id &&
+                             new Date(res.checkInDate + "T00:00:00") <=
+                               new Date(group.dates[0] + "T00:00:00") &&
+                             new Date(res.checkOutDate + "T23:59:59") >=
+                               new Date(group.dates[0] + "T23:59:59")
+                         );
+                         handleOpenModal(reservation);
+                       }
+                       else if (group.type === "available") {
+                         handleOpenCreateModal(accommodation.id);
+                       }
+                     }}
+                   >
                       <div className={group.type}>{group.type === "available"
                         ? "Disponible"
                         : guests[
@@ -469,8 +471,59 @@ const handleCreateReservation = async () => {
           </div>
         </div>
       )}
+      {/* Modal para crear reservas */}
+      {isCreateModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-createBooking">
+            <h3>Crear Reserva</h3>
+            <p><strong>Alojamiento:</strong> {newBookingAccommodationId}</p>
+              <div className='label-createBooking'>
+              <label>Fecha Inicio:</label>
+              <input
+                className="input-alojamiento-1"
+                type="date"
+                value={crearReservasStartDate}
+                onChange={(e) => setCrearReservasStartDate(e.target.value)}
+              />
+            </div>
+            <div className='label-createBooking'>
+              <label>Fecha Fin:</label>
+              <input
+                type="date"
+                className="input-alojamiento-2"
+                value={crearReservasEndDate}
+                onChange={(e) => setCrearReservasEndDate(e.target.value)}
+              />
+            </div>
+            <div className="label-createBooking">
+              <label>
+                Nombre del huésped:
+                <input
+                  type="text"
+                  value={newUsernameBooking}
+                  onChange={(e) => setNewUsernameBooking(e.target.value)}
+                />
+              </label>
+            </div>
+            <div>
+              <label>
+                Email del huésped:
+                <input
+                type='email'
+                value={newEmailBooking}
+                onChange={(e) => setNewEmailBooking(e.target.value)}
+                />
+              </label>
+            </div>
+            <div className="modal-buttons">
+              <button onClick={handleCreateReservation}>Crear</button>
+              <button onClick={handleCloseCreateModal}>Cancelar</button>
+            </div>
+          </div>
+        </div>
+      )}
       {isModalFreeOpen && (
-      <div className="modal-overlay-owner">
+      <div className="modal-overlay">
         <div className="modal-content-owner">
           {/* Estado inicial con los botones */}
           {currentAction === null && (
@@ -484,45 +537,6 @@ const handleCreateReservation = async () => {
               <button onClick={handleCloseModalFree}>Cancelar</button>
             </div>
           )}
-        {/* Modal para crear reservas */}
-        {isCreateModalOpen && (
-        <div className="modal-overlay">
-          <div className="modal-content-owner">
-            <h3>Crear Reserva</h3>
-            <p><strong>Alojamiento:</strong> {newBookingAccommodationId}</p>
-              <div>
-              <label>Fecha Inicio:</label>
-              <input
-                className="input-alojamiento-1"
-                type="date"
-                value={crearReservasStartDate}
-                onChange={(e) => setCrearReservasStartDate(e.target.value)}
-              />
-            </div>
-            <div>
-              <label>Fecha Fin:</label>
-              <input
-                type="date"
-                className="input-alojamiento-2"
-                value={crearReservasEndDate}
-                onChange={(e) => setCrearReservasEndDate(e.target.value)}
-              />
-            </div>
-            <label>
-              Nombre del huésped:
-              <input
-                type="text"
-                value={newUsernameBooking}
-                onChange={(e) => setNewUsernameBooking(e.target.value)}
-              />
-            </label>
-            <div className="modal-buttons">
-              <button onClick={handleCreateReservation}>Crear</button>
-              <button onClick={handleCloseCreateModal}>Cancelar</button>
-            </div>
-          </div>
-        </div>
-      )}
       {/* Formulario para cerrar reservas */}
       {currentAction === "close" && (
         <div className="cerrar-reservas">

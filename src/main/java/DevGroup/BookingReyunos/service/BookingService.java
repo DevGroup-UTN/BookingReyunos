@@ -108,11 +108,11 @@ public class BookingService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "GuestName and GuestEmail must be provided if GuestId is not present");
             }
     
-            // Crear un objeto User temporal para asociar al booking
-            guest = new User();
-            guest.setUsername(bookingDTO.getGuestName());
-            guest.setEmail(bookingDTO.getGuestEmail());
-            // No se guarda en la base de datos, ya que es temporal
+            // Crear un objeto User temporal y guardarlo en la base de datos
+            User temporaryGuest = new User();
+            temporaryGuest.setUsername(bookingDTO.getGuestName());
+            temporaryGuest.setEmail(bookingDTO.getGuestEmail());
+            guest = userRepository.save(temporaryGuest); // Guardar el usuario en la base de datos
         }
     
         BigDecimal dailyRate = accommodation.get().getPricePerNight();
@@ -142,7 +142,6 @@ public class BookingService {
     
         return convertBookingToDTO(savedBooking);
     }
-    
 
     // Método para buscar reservas por ID de alojamiento
     public List<BookingDTO> findBookingsByAccommodationId(Integer accommodationId) {
