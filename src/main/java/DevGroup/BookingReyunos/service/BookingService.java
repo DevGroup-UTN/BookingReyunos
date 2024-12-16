@@ -58,6 +58,8 @@ public class BookingService {
         bookingEntity.setCheckInDate(bookingDTO.getCheckInDate());
         bookingEntity.setCheckOutDate(bookingDTO.getCheckOutDate());
         bookingEntity.setBlocked(bookingDTO.isBlocked());
+        bookingEntity.setGuestName(bookingDTO.getGuestName());
+        bookingEntity.setGuestEmail(bookingDTO.getGuestEmail());
         return bookingEntity;
     }
 

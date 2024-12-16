@@ -27,8 +27,9 @@ public class EmailService {
                 "Precio total: " + totalPrice + "\n\n" +
                 "Gracias por elegirnos.";
 
-        emailService.sendEmail(email, subject, body);
+        this.sendEmail(email, subject, body); // Usamos "this" para llamar al método local
     }
+
     public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
@@ -36,7 +37,8 @@ public class EmailService {
         message.setText(body);
         mailSender.send(message);
     }
-    public void sendCancellationEmail(String to){
+
+    public void sendCancellationEmail(String to) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("Cancelación de la Reserva");
