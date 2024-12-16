@@ -28,7 +28,7 @@ const MyAccommodation = () => {
       }
 
       axios
-        .get(`https://bookingreyunos-production.up.railway.app/accommodations/owner/${user.id}`, {
+        .get(`https://bookingreyunos.onrender.com/accommodations/owner/${user.id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -111,7 +111,7 @@ const MyAccommodation = () => {
 
     try {
       await axios.put(
-        `https://bookingreyunos-production.up.railway.app/accommodations/${editingAccommodation.id}`,
+        `https://localhost:8080/accommodations/${editingAccommodation.id}`,
         formData,
         {
           headers: {

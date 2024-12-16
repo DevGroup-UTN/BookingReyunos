@@ -12,7 +12,7 @@ function Registro({ onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://bookingreyunos-production.up.railway.app/users/register', {
+      const response = await axios.post('https://bookingreyunos.onrender.com/users/register', {
         username,
         email,
         password,

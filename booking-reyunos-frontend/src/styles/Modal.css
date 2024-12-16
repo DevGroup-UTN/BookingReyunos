@@ -1,0 +1,82 @@
+/* Modal básico */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Modal contenido */
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    width: 40vw;
+    max-width: 500px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: solid #002 1px;
+  }
+  
+  /* Título del modal */
+  .modal-content h3 {
+    background-color: #aaaaeecc;
+    border: solid #002 1px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* Botón de cerrar modal */
+  .close-modal-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: #ddd;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  /* Ajustes para el contenido del modal */
+  .modal-content p,
+  .modal-field-owner {
+    border: solid #002 1px;
+    background-color: #ddddffcc;
+    padding: 4px 8px;
+    margin: 5px;
+    color: #333;
+  }
+  
+  .modal-field-owner {
+    border-radius: 10px;
+  }
+  
+  .modal-content button {
+    background-color: var(--font-color);
+    color: #ddd;
+    padding: 5px 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .modal-content-owner {
+    padding: 15px;
+  }
+  
+  /* Modal de detalles */
+  .modal-h3-owner-dashboard {
+    text-align: center;
+    font-weight: bold;
+  }
+  
