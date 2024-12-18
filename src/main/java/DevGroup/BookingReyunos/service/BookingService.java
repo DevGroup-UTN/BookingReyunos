@@ -1,6 +1,7 @@
 package DevGroup.BookingReyunos.service;
 
 import DevGroup.BookingReyunos.dto.BookingDTO;
+import DevGroup.BookingReyunos.exceptions.AccommodationNotFoundException;
 import DevGroup.BookingReyunos.model.Booking;
 import DevGroup.BookingReyunos.repository.BookingRepository;
 import DevGroup.BookingReyunos.model.User;
@@ -9,6 +10,7 @@ import DevGroup.BookingReyunos.model.Accommodation;
 import DevGroup.BookingReyunos.repository.AccommodationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -27,6 +29,9 @@ public class BookingService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private AccommodationRepository accommodationRepository;
@@ -64,8 +69,8 @@ public class BookingService {
         // Manejar el caso del guest
         if (bookingDTO.getGuestId() != null) {
             // Si hay guestId, asignar un placeholder (se actualizará en el servicio si es válido)
-            User guest = new User();
-            guest.setId(bookingDTO.getGuestId());
+            User guest = userRepository.findById(bookingDTO.getGuestId())
+            .orElseThrow(() -> new AccommodationNotFoundException("Owner not found"));
             bookingEntity.setGuest(guest);
         } else if (bookingDTO.getGuestName() != null && bookingDTO.getGuestEmail() != null) {
             // Si no hay guestId, crear un usuario temporal
@@ -109,11 +114,21 @@ public class BookingService {
             }
     
             // Crear un objeto User temporal y guardarlo en la base de datos
-            User temporaryGuest = new User();
-            temporaryGuest.setUsername(bookingDTO.getGuestName());
-            temporaryGuest.setEmail(bookingDTO.getGuestEmail());
-            temporaryGuest.setPassword("123456");
-            guest = userRepository.save(temporaryGuest); // Guardar el usuario en la base de datos
+            // Comprobar si ya existe un usuario con ese email
+            guest = userRepository.findByEmail(bookingDTO.getGuestEmail())
+            .orElseGet(() -> {
+                // Crear un objeto User temporal
+                User temporaryGuest = new User();
+                temporaryGuest.setUsername(bookingDTO.getGuestName());
+                temporaryGuest.setEmail(bookingDTO.getGuestEmail());
+                
+                // Generar una contraseña segura
+                String securePassword = passwordEncoder.encode("temporaryPassword123"); // Usa un PasswordEncoder
+                temporaryGuest.setPassword(securePassword);
+
+                // Guardar el usuario temporal en la base de datos
+                return userRepository.save(temporaryGuest);
+            });
         }
     
         BigDecimal dailyRate = accommodation.get().getPricePerNight();
