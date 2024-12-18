@@ -49,7 +49,20 @@
     white-space: pre-wrap;
     color: #070759;
   }
-  
+  .accommodation-description{
+    height: 25vh;
+    overflow: auto;
+  }
+  .accommodation-description::-webkit-scrollbar{
+    background-color: #adadff; 
+    border-radius: 10px; /* Redondear bordes */
+    border: 1px solid #f4f4f4; /* Espaciado entre el pulgar y la pista */
+  }
+  .accommodation-description::-webkit-scrollbar-thumb{
+    background-color: #070759;
+    border-radius: 8px;
+    border: 1px solid #f4f4f4;
+  }
   .accommodation:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

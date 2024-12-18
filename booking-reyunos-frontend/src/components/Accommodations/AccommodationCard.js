@@ -65,8 +65,7 @@ function AccommodationCard({ accommodation, user }) {
       </div>
       <div className="accommodation-details">
         <h3>{accommodation.name}</h3>
-        <p>Descripción: {accommodation.description}</p>
-        <p>Precio: $ {accommodation.pricePerNight} / noche</p>
+        <p className='accommodation-description'>Descripción: {accommodation.description}</p>
         {user?.role === 'GUEST' && (
           <>
             <button onClick={() => setShowCalendar(!showCalendar)} className="reserve-button">

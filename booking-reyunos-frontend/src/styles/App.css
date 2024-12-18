@@ -196,6 +196,8 @@
     width: 60px; /* Tamaño fijo */
     height: 60px; /* Tamaño fijo */
     font-size: 30px; /* Ajustamos el tamaño del icono */
+    bottom: 1vh;
+    right: 1vw;
   }
   .login-form h2{
     margin-right: 50%;
