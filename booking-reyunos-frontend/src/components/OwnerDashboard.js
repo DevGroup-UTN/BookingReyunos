@@ -505,7 +505,7 @@ const handleCreateReservation = async () => {
                 />
               </label>
             </div>
-            <div>
+            <div className="label-createBooking">
               <label>
                 Email del huésped:
                 <input
