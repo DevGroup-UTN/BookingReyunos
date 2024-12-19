@@ -7,10 +7,14 @@ import DevGroup.BookingReyunos.service.AccommodationService;
 import DevGroup.BookingReyunos.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -90,5 +94,12 @@ public class BookingController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al abrir las fechas: " + e.getMessage());
         }
+    }
+    @GetMapping("/accommodation-stats")
+    public ResponseEntity<List<Map<String, Object>>> getAccommodationStats(
+        @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+        @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+    ) {
+        return ResponseEntity.ok(bookingService.getAccommodationStats(startDate, endDate));
     }
 }

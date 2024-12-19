@@ -18,6 +18,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -260,6 +261,12 @@ public class BookingService {
         }
 
         return false;
+    }
+    public List<Map<String, Object>> getAccommodationStats(LocalDate startDate, LocalDate endDate) {
+        List<Object[]> results = bookingRepository.findAccommodationStats(startDate, endDate);
+        return results.stream()
+                .map(result -> Map.of("name", result[0], "count", result[1]))
+                .collect(Collectors.toList());
     }
 
 }
