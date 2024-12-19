@@ -23,7 +23,13 @@ public interface BookingRepository extends JpaRepository<Booking,Integer> {
            "AND b.checkInDate >= :startDate AND b.checkOutDate <= :endDate " +
            "AND b.isBlocked = true")
     void deleteByAccommodationIdAndBlockedDates(Integer accommodationId, LocalDate startDate, LocalDate endDate);
+    
     @Query("SELECT b FROM Booking b WHERE b.accommodation.id = :accommodationId AND :date BETWEEN b.checkInDate AND b.checkOutDate")
     List<Booking> findByAccommodationIdAndDate(@Param("accommodationId") Integer accommodationId, @Param("date") LocalDate date);
-
+    
+    @Query("SELECT b.accommodation.name AS name, COUNT(b) AS count FROM Booking b " +
+    "WHERE b.startDate >= :startDate AND b.endDate <= :endDate " +
+    "GROUP BY b.accommodation.name " +
+    "ORDER BY count DESC")
+    List<Object[]> findAccommodationStats(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }
