@@ -4,27 +4,38 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    height: 80vh;
+    min-height: 80vh;
     align-items: center;
     color: #ddd;
     justify-self: center;
     border-radius: 10px;
     padding: 8px 15px;
-    width: 70;
+    width: 70vw;
 }
+.grafico h3 {
+    font-variant: small-caps;
+    font-size: 1.5em;
+    text-align: center;
+}
+.grafico canvas{
+    max-height: 50vh;
+}
+
 .accommodation-stats h2 {
     text-align: center;
+    text-decoration:underline;
+    font-size: 2em;
     font-variant: small-caps;
 }
-.accommodation-stats label{
-    margin-right: 20px;
+.accommodation-stats_date-form {
+    justify-self: center;
 }
 
 .accommodation-stats input{
     background-color: #9292ff;
     border-radius: 5px;
     color: #333;
-    margin-left: 5px;
+    margin-inline: 1vw;
     font-size: 1.2rem;
     font-weight: bold;
     text-align: center;
@@ -33,7 +44,7 @@
 .accommodation-stats button {
     width: 9vw;
     border: #99c 1px solid;
-    margin: auto;
+    margin-inline: 1vw;
     background-color: var(--font-color);
     color: #ddd;
     padding: 5px 10px;
