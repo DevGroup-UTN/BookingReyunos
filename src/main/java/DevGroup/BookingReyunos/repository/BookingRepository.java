@@ -28,8 +28,8 @@ public interface BookingRepository extends JpaRepository<Booking,Integer> {
     List<Booking> findByAccommodationIdAndDate(@Param("accommodationId") Integer accommodationId, @Param("date") LocalDate date);
     
     @Query("SELECT b.accommodation.name AS name, COUNT(b) AS count FROM Booking b " +
-    "WHERE b.startDate >= :startDate AND b.endDate <= :endDate " +
+    "WHERE b.checkInDate >= :checkInDate AND b.checkOutDate <= :checkOutDate " +
     "GROUP BY b.accommodation.name " +
     "ORDER BY count DESC")
-    List<Object[]> findAccommodationStats(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+    List<Object[]> findAccommodationStats(@Param("checkInDate") LocalDate checkInDate, @Param("checkOutDate") LocalDate checkOutDate);
 }

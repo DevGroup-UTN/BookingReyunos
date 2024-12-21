@@ -3,7 +3,7 @@
     padding: 10px 10px;
     border-radius: 15px;
     width: 80%;
-    background-color: #bbbbbbb5;
+    background-color: #7a7a7ab5;
     margin-left: 10vw;
     padding-bottom: 7vh;
 }
@@ -12,16 +12,23 @@
 .infra-h1 {
     -webkit-text-stroke: var(--font-color) 1.5px;
     text-align: center;
+    background-color: #1a1a2faa;
+    border-radius: 10px;
+    width: fit-content;
+    justify-self: center;
+    padding: 8px 15px;
     text-shadow: 6px -4px 2px #11116666;
     margin-top: 20px;
     color:var(--font-color);
 }
 .infra-h2{
-    text-decoration: underline #b7b700;
+    text-decoration: underline #5800e7;
     text-align: center;
-    color: #b7b700;
-    -webkit-text-stroke: #550 0.5px;
+    font-variant: small-caps;
     font-weight: bold;
+    font-size: 2em;
+    color: #5800e7;
+    -webkit-text-stroke: #509 0.5px;
 }
 
 /* Contenedor de imágenes con flexbox, centradas */

@@ -11,9 +11,9 @@
   .accommodation {
     display: flex;
     align-items: flex-start;
-    border: 1px solid #ddd;
+    border: 1px solid #003;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 10px 8px 8px rgba(0, 0, 0, 1);
     padding: 20px;
     margin: 10px;
     width: 700px;
@@ -21,9 +21,10 @@
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
-  .accommodation h3 {
+  .accommodation h3, .myAccommodation h3 {
     margin: 10px 0 5px;
-    color: var(--font-color);
+    color: #070729;
+    font-variant: small-caps;
     font-size: 1.5em;
     font-weight: bold;
     text-align: left;
@@ -65,7 +66,7 @@
   }
   .accommodation:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 8px 8px rgba(0, 0, 0, 1);
   }
   
   /* Contenedor para la imagen y botones */
@@ -95,12 +96,23 @@
     color: #bbbbff;
   }
 
-  .titulo {
+  .accommodation-container .titulo, .myAccommodation .titulo {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: 2em;
-    color: #bbbbff;
+    color: #cbcbff;
+    background-color: #070712;
+    width: fit-content;
+    justify-self: center;
+    padding-block: 8px;
+    border: solid #aaf 1px;
+    border-radius: 10px;
     text-align: center;
     margin-bottom: 20px;
+    font-variant: small-caps;
+  }
+
+  .accommodation-container .titulo{
+    padding-inline: 50px;
   }
   
   .reserve-button {
@@ -119,6 +131,10 @@
   }
 
   @media (max-width: 780px){
+    .myAccommodation .titulo {
+      width: max-content;
+      margin-left: 150vw;
+    }
     .accommodation-container h2{
       margin-left: 150vw;
       justify-self: center;

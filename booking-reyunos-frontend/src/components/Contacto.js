@@ -25,7 +25,7 @@ function Contacto() {
   };
 
   return (
-    <div id="containerUyC" style={{backgroundImage: "url('/images/logo-utn-nav.png')"}}>
+    <div className="containerUyC" style={{backgroundImage: "url('/images/logo-utn-nav.png')"}}>
       <h1>Ubicación y Contacto</h1>
       <div className="container">
         {/* Contenedor del mapa */}

@@ -138,7 +138,7 @@ const MyAccommodation = () => {
   };
 
   return (
-    <div>
+    <div className='myAccommodation'>
       <h2 className="titulo">Mis Alojamientos</h2>
       {message && <p className="error-message">{message}</p>}
       <div className="accommodations-list">

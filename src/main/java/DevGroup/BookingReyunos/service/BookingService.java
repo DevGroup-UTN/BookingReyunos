@@ -262,8 +262,8 @@ public class BookingService {
 
         return false;
     }
-    public List<Map<String, Object>> getAccommodationStats(LocalDate startDate, LocalDate endDate) {
-        List<Object[]> results = bookingRepository.findAccommodationStats(startDate, endDate);
+    public List<Map<String, Object>> getAccommodationStats(LocalDate checkInDate, LocalDate checkOutDate) {
+        List<Object[]> results = bookingRepository.findAccommodationStats(checkInDate, checkOutDate);
         return results.stream()
                 .map(result -> Map.of("name", result[0], "count", result[1]))
                 .collect(Collectors.toList());
