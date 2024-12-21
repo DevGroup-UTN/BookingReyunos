@@ -12,7 +12,8 @@ function Home() {
     '/images/home/carrusel-5.avif',
     '/images/home/carrusel-6.avif',
   ];
-
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState("");  
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const goToPrevious = () => {
@@ -27,6 +28,16 @@ function Home() {
     );
   };
 
+  const openModal = (image) => {
+    setSelectedImage(image);
+    setModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedImage("");
+  };  
+
   return (
     <div className="home-container">
       {/* Carrusel de imágenes */}
@@ -37,14 +48,34 @@ function Home() {
         <img
           src={images[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
+          onClick={() => openModal(images[currentIndex])}
           className="carrusel-image"
         />
         <button onClick={goToNext} className="arrow-button">
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
       </div>
-
-      {/* Texto descriptivo */}
+      {isModalOpen && (
+        <div className="modal-overlay" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+          <button onClick={goToPrevious} className="arrow-button">
+          <FontAwesomeIcon icon={faChevronLeft} />
+          </button>
+          <img
+            src={images[currentIndex]}
+            alt={`Slide ${currentIndex + 1}`}
+            onClick={() => openModal(images[currentIndex])}
+            className="modal-image"
+          />
+          <button onClick={goToNext} className="arrow-button">
+            <FontAwesomeIcon icon={faChevronRight} />
+          </button>
+            <button className="close-button" onClick={closeModal}>
+              &times;
+            </button>
+          </div>
+        </div>
+      )}
       <div className="main-container">
         <div className="CTDR-container">
           <h3 className='bienvenida'>Bienvenido a</h3>

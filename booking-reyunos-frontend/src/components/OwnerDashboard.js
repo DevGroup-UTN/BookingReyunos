@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../styles/OwnerDashboard.css';
 import { useAuth } from '../context/AuthContext';
+import AccommodationStats from './AccommodationStats';
 
 const OwnerDashboard = () => {
   const { user } = useAuth(); // Obtener el usuario desde el AuthContext
@@ -354,8 +355,11 @@ const handleCreateReservation = async () => {
 
   return (
     <div className="dashboard-container" onClick={handleClickOutside}>
-      <h2 className='dashboard-h2'>Dashboard del Propietario</h2>
+      <h2 className='dashboard-h2'>Panel de Control</h2>
       {message && <p className="error-message">{message}</p>} {/* Mensaje de error */}
+        <div className='accommodation-stats'>
+          <AccommodationStats/>
+        </div>
        {/* Formulario para cambiar el rango de fechas */}
        <form onSubmit={handleDateRangeSubmit} className="date-range-form">
         <label>

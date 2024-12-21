@@ -19,7 +19,7 @@ function Cookies() {
     <div className="contenedor_de_Cookies">
       <FotoLogo/>
       <div>
-        <h1 class="TituloVentana_terms">
+        <h1 class="TitulooCookies">
             Políticas de Privacidad y Cookies
         </h1>
         <p><strong>POLÍTICA DE PRIVACIDAD Y RESGUARDO DE DATOS</strong></p>

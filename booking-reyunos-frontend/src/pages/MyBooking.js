@@ -41,7 +41,7 @@ const MyBooking = () => {
             bookingData.map(async (booking) => {
               try {
                 const accommodationResponse = await axios.get(
-                  `localhost:8080/accommodations/${booking.accommodationId}`,
+                  `https://bookingreyunos.onrender.com/accommodations/${booking.accommodationId}`,
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,
@@ -81,7 +81,7 @@ const MyBooking = () => {
 
     try {
       await axios.delete(
-        `https://localhost:8080/booking/${bookingId}`,
+        `https://bookingreyunos.onrender.com/booking/${bookingId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -8,7 +8,7 @@
     width: 90vw;
     background-repeat: no-repeat;
     background-size: contain;
-    background-color: #aaaaccaa;
+    background-color: #8888aaaa;
     border-radius: 15px;
 }
 .styleTermino img{
@@ -18,6 +18,8 @@
 
 .TituloTermino{
     text-align: center;
+    font-size: 2.5em;
+    font-variant: small-caps;
 }
 
 @media (max-width: 768px){
