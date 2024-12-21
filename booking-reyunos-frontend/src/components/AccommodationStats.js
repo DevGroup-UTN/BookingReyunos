@@ -10,8 +10,11 @@ function AccommodationStats() {
 
   const fetchData = async () => {
     try {
+      const start = new Date(startDate).toISOString().split('T')[0];
+      const end = new Date(endDate).toISOString().split('T')[0];
       const response = await axios.get("https://bookingreyunos.onrender.com/bookings/accommodation-stats", {
-        params: { startDate, endDate },
+        startDate : start,
+        endDate : end
       });
       const data = response.data;
       setChartData({
