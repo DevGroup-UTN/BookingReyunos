@@ -97,9 +97,9 @@ public class BookingController {
     }
     @GetMapping("/accommodation-stats")
     public ResponseEntity<List<Map<String, Object>>> getAccommodationStats(
-        @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-        @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate
+        @RequestParam("checkInDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkInDate,
+        @RequestParam("checkOutDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate checkOutDate
     ) {
-        return ResponseEntity.ok(bookingService.getAccommodationStats(startDate, endDate));
+        return ResponseEntity.ok(bookingService.getAccommodationStats(checkInDate, checkOutDate));
     }
 }

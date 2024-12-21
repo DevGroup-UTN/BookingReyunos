@@ -357,7 +357,7 @@ const handleCreateReservation = async () => {
     <div className="dashboard-container" onClick={handleClickOutside}>
       <h2 className='dashboard-h2'>Panel de Control</h2>
       {message && <p className="error-message">{message}</p>} {/* Mensaje de error */}
-        <div className='accommodation-stats'>
+        <div className='accommodation-stats' style={{backgroundImage: "url('/images/logo-utn-nav.png')"}}>
           <AccommodationStats/>
         </div>
        {/* Formulario para cambiar el rango de fechas */}

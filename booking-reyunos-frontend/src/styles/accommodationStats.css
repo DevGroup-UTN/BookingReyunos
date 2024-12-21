@@ -1,0 +1,41 @@
+.accommodation-stats {
+    border: solid #adadff 1px;
+    background-color: #35536ecc;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 80vh;
+    align-items: center;
+    color: #ddd;
+    justify-self: center;
+    border-radius: 10px;
+    padding: 8px 15px;
+    width: 70;
+}
+.accommodation-stats h2 {
+    text-align: center;
+    font-variant: small-caps;
+}
+.accommodation-stats label{
+    margin-right: 20px;
+}
+
+.accommodation-stats input{
+    background-color: #9292ff;
+    border-radius: 5px;
+    color: #333;
+    margin-left: 5px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    font-variant: small-caps;
+}
+.accommodation-stats button {
+    width: 9vw;
+    border: #99c 1px solid;
+    margin: auto;
+    background-color: var(--font-color);
+    color: #ddd;
+    padding: 5px 10px;
+    border-radius: 8px;
+}
