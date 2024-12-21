@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto"; // Importación para gráficos con Chart.js
+import '../styles/accommodationStats.css';
 
 function AccommodationStats() {
   const [startDate, setStartDate] = useState("");
@@ -13,8 +14,8 @@ function AccommodationStats() {
       const start = new Date(startDate).toISOString().split('T')[0];
       const end = new Date(endDate).toISOString().split('T')[0];
       const response = await axios.get("https://bookingreyunos.onrender.com/bookings/accommodation-stats", {
-        startDate : start,
-        endDate : end
+        checkInDate : start,
+        checkOutDate : end
       });
       const data = response.data;
       setChartData({
@@ -51,6 +52,7 @@ function AccommodationStats() {
     <div>
       <h2>Estadísticas de Reservas</h2>
       <form
+        className="accommodation-stats_date-form"
         onSubmit={(e) => {
           e.preventDefault();
           fetchData();
