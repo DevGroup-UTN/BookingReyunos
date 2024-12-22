@@ -20,8 +20,16 @@
   border-radius: 10px; /* Redondear bordes */
   border: 1px solid #f4f4f4; /* Espaciado entre el pulgar y la pista */
 }
+.calendar-table-owner::-webkit-scrollbar-thumb{
+  background-color: #070759;
+  border-radius: 8px;
+  border: 1px solid #f4f4f4;
+}
+
 /* Estilo para la tabla del calendario */
 .calendar-table-owner {
+  font-variant: small-caps;
+  font-weight: bold;
   background-color: #d5d2ffaa;
   border-radius: 15px;
   margin-top: 5px;
@@ -35,12 +43,12 @@
 }
 .date-range-form{
   border: solid #adadff 1px;
-  background-color: #9a9aee49;
+  background-color: #1a1a2e;
   align-items: center;
   color: #ddd;
   margin-left: 21vw;
   border-radius: 10px;
-  padding: 5px 15px;
+  padding: 8px 15px;
   width: fit-content;
 }
 .date-range-form label{
@@ -58,6 +66,8 @@
   font-variant: small-caps;
 }
 .date-range-form button {
+  border: #99c 1px solid;
+  margin: auto;
   background-color: var(--font-color);
   color: #ddd;
   padding: 5px 10px;
@@ -66,9 +76,11 @@
 
 .dashboard-h2 {
   color: #ddd;
-  background-color: var(--font-color);
-  padding: 5px 20px;
-  margin-left: 35vw;
+  background-color: #1a1a2e;
+  font-variant: small-caps;
+  font-size: 2em;
+  padding: 5px 30px;
+  justify-self: center;
   box-shadow: 3px -3px 3px #555555;
   border-radius: 5px;
   border: solid #002 1px;
@@ -156,6 +168,8 @@
 }
 .modal-content-owner{
   background-color: var(--card-color-transparent);
+  padding-top: 20px;
+  justify-items: center;
   border: solid #002 1px;
   border-radius: 15px;
 }
@@ -163,17 +177,17 @@
   background-color: var(--card-color-transparent);
   border: solid #002 1px;
   border-radius: 15px;
-  width: 40vw;
-  height: 45vh;
+  width: 45vw;
+  height: 50vh;
   padding-inline: 30px;
   padding-bottom: 20px;
   justify-content: center;
 }
 
 .modal-content-owner button, .modal-createBooking button{
-  border-radius: 5px;
   margin-inline: 5px;
-  background-color: var(--font-color);
+  background-color: #1a1a2e;
+  border: #000 1px solid;
   color: #ddd;
   padding: 5px 10px;
   border-radius: 8px;
@@ -184,14 +198,32 @@
   padding: 4px 8px;
   margin: 5px;
 }
+.modal-content-owner p{
+  width: 30vw;
+}
+.modal-content-owner button{
+  margin-top: 1vh;
+}
+
+.modal-createBooking p{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.label-createBooking:nth-of-type(4){
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
 .label-createBooking:nth-of-type(3) input{
-  margin-left: 7.8vw;
+  margin-left: 12.8vw;
 }
 .label-createBooking:nth-of-type(2) input{
-  margin-left: 18.2vw;
+  margin-left: 23.2vw;
 }
 .label-createBooking:nth-of-type(1) input{
-  margin-left: 17vw;
+  margin-left: 21.8vw;
+}
+.label-createBooking:nth-of-type(4) input{
+  margin-left: 14.2vw;
 }
 .owner-p:first-of-type, .modal-field-owner:first-of-type{
   border-top-left-radius: 10px;
@@ -238,6 +270,36 @@
   .calendar-table-owner-container{
     max-width: 200vw;
   }
+  .modal-createBooking{
+    width: 100vw;
+    height: 45vh;
+    justify-items: center;
+    padding: 5vh 10vw;
+  }
+  .modal-createBooking .label-createBooking, .modal-createBooking p{
+    width: 90vw;
+  }
+  .modal-createBooking h3{
+    margin-top: auto;
+  }
+  .label-createBooking:nth-of-type(3) input{
+    margin-left: 2.7vw;
+  }
+  .label-createBooking:nth-of-type(2) input{
+    margin-left: 25.1vw;
+  }
+  .label-createBooking:nth-of-type(1) input{
+    margin-left: 22.5vw;
+  }
+  .label-createBooking:nth-of-type(4) input{
+    margin-left: 5.5vw;
+  }
+  .modal-content-owner{
+    width: 100vw;
+  }
+  .modal-content-owner p{
+    width: 85vw;
+  }
 }
 
 @media (max-width: 360px){
@@ -247,7 +309,44 @@
     margin-left: 40px;
     justify-items: center;
   }
+  .date-range-form{
+  width: 195vw;
+  margin-left: 12vw;
+  }
+  .modal-overlay{
+    max-height: 150vh;
+  }
   .calendar-table-owner-container{
     max-width: 200vw;
+  }
+  .modal-content-owner button{
+    width: 50vw;
+    margin-left: 15vw !important;
+  }
+  .modal-createBooking{
+    width: 100vw;
+    height: 45vh;
+    justify-items: center;
+    padding: 5vh 10vw;
+  }
+  .modal-createBooking .label-createBooking{
+    width: 90vw;
+  }
+  .modal-createBooking h3{
+    margin-top: auto;
+  }
+  .label-createBooking:nth-of-type(3) input{
+    width: 40vw;
+    margin-left: 2vw;
+  }
+  .label-createBooking:nth-of-type(2) input{
+    margin-left: 31.5vw;
+  }
+  .label-createBooking:nth-of-type(1) input{
+    margin-left: 27vw;
+  }
+  .label-createBooking:nth-of-type(4) input{
+    width: 40vw;
+    margin-left: 6.8vw;
   }
 }

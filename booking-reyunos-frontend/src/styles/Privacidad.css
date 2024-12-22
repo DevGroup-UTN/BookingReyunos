@@ -7,14 +7,16 @@
     display: flexbox;
     background-repeat: no-repeat;
     background-size: contain;
-    background-color: #aaaaccaa;
+    background-color: #8888aaaa;
     border-radius: 15px;
 }
 .StylePrivacidad img{
     max-width: 100%;
     height: auto;
 }
-.TitulosPrivacidad{
+.TitulosPrivacidad {
+    font-variant: small-caps;
+    font-size: 2.5em;
     text-align: center;
 }
 @media(max-width: 768px) {

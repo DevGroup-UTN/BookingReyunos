@@ -7,7 +7,7 @@
     margin-left: 6rem;
     background-repeat: no-repeat;
     background-size: contain;
-    background-color: #aaaaccaa;
+    background-color: #8888aaaa;
 }
 .guest-form-container{
     width: 100%;
@@ -16,10 +16,11 @@
     background-color: #111122f8;
     border: solid var(--font-color) 1px;
     border-radius: 10px;
+    font-variant: small-caps;
     max-width:fit-content;
     margin-left: 350px;
     padding: 10px 12px;
-    color: #f8f8ff66;
+    color: #a8a8cf;
     text-shadow: 6px -4px 2px #11116666;
     -webkit-text-stroke: var(--font-color) 0.5px;
     text-decoration: underline;
@@ -65,20 +66,18 @@
     border: 1px solid #ddd;
     border-radius: 8px;
 }
-#guest-dashboard-input4{
-    margin-left: 123px;
+#guest-dashboard-input4, #guest-dashboard-input5{
+    margin-left: 9.6vw;
 }
-#guest-dashboard-input5{
-    margin-left: 122px;
-}
+
 #guest-dashboard-input1{
-    margin-left: 206px;
+    margin-left: 16vw;
 }
 #guest-dashboard-input3 {
-    margin-left: 202px;
+    margin-left: 15.5vw;
 }
 #guest-dashboard-input2 {
-    margin-left: 215px;
+    margin-left: 16.8vw;
 }
 .guest-update-button{
     cursor: pointer;

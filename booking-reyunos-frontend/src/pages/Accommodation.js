@@ -18,7 +18,7 @@ function Accommodation() {
 
   return (
     <div className='accommodation-container'>
-      <h2 className="titulo">Alojamientos Disponibles</h2>
+      <h2 className="titulo">Alojamientos</h2>
       <div className="accommodations-list">
         {accommodations.map((acc) => (
           <AccommodationCard key={acc.id} accommodation={acc} user={user} />

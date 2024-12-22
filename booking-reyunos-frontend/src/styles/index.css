@@ -3,12 +3,22 @@
   --font-color: #10148f;
   --button-color: #080b64ff;
   --hover-color: #0044ff;
-  --card-color: #9795c5;
+  --card-color: #b1b0e0;
   --card-color-transparent: #979595dd;
 }
 *{
   box-sizing: border-box;
 }
+html{
+  font-family: "Roboto", serif;
+}
+h1{
+  color: #3354af !important;
+}
+p{
+  color: #000 !important;
+}
+
 html, body {
   width: 100%;
   height: 100%;
@@ -21,10 +31,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: rgba(3, 1, 11, 0.925);
+  background-color: rgba(205, 193, 255, 0.825);
   background-attachment:fixed;
   background-blend-mode: overlay;
-  font-family: Arial, sans-serif;
 }
 
 /* Navbar */

@@ -1,15 +1,22 @@
-#containerUyC {
+.containerUyC {
   width: 90%;
   margin-left: 5vw;
   height: auto;
-  padding: 15px 5px;
+  padding: 30px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: #aaaaccaa;
+  background-color: #8888aaaa;
+  border: solid #9e9eaf 1px;
   border-radius: 15px;
+}
+
+.containerUyC h1 {
+  font-variant: small-caps;
+  color: #0e0e2f !important;
+  font-size: 3em;
 }
 
 .container {
@@ -70,4 +77,24 @@
 
 .contact-block button:hover {
   background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+  .containerUyC {
+    width: 200vw;
+    margin-left: 25vw;
+    justify-items: center;
+  }
+  .contenedor-contacto {
+    margin-left: 25vw;
+    padding-right: 0;
+  }
+  .contact-map{
+    width: 100%;
+  }
+  .contact-block {
+    width: 43%;
+    align-self: 0;
+    margin-right: 10vw;
+  }
 }
