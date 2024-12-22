@@ -25,10 +25,13 @@ public class EmailService {
                 "Fecha de entrada: " + booking.getCheckInDate() + "\n" +
                 "Fecha de salida: " + booking.getCheckOutDate() + "\n" +
                 "Precio total: " + totalPrice + "\n\n" +
+                "Tenga en cuenta que su reserva *NO ES SEGURA*, ya que se priorizan las actividades educativas. En caso de cambios en su reserva se le comunicará.\n" +
                 "Gracias por elegirnos.";
 
-        emailService.sendEmail(email, subject, body);
+        System.out.println(body); // Debug
+        this.sendEmail(email, subject, body);
     }
+
     public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
@@ -36,7 +39,8 @@ public class EmailService {
         message.setText(body);
         mailSender.send(message);
     }
-    public void sendCancellationEmail(String to){
+
+    public void sendCancellationEmail(String to) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("Cancelación de la Reserva");
