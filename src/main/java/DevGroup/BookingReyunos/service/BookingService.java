@@ -43,7 +43,7 @@ public class BookingService {
         bookingDTO.setCheckInDate(booking.getCheckInDate());
         bookingDTO.setAccommodationId(booking.getAccommodation().getId());
         bookingDTO.setDailyRate(booking.getAccommodation().getPricePerNight());
-    
+
         // Manejar guest
         if (booking.getGuest() != null) {
             bookingDTO.setGuestId(booking.getGuest().getId());
@@ -51,7 +51,8 @@ public class BookingService {
             bookingDTO.setGuestEmail(booking.getGuest().getEmail());
         }
         return bookingDTO;
-    }    
+    }
+
 
     // Método para convertir de BookingDTO a Booking (Entity)
     private Booking convertBookingToEntity(BookingDTO bookingDTO) {
@@ -60,11 +61,7 @@ public class BookingService {
         bookingEntity.setCheckInDate(bookingDTO.getCheckInDate());
         bookingEntity.setCheckOutDate(bookingDTO.getCheckOutDate());
         bookingEntity.setBlocked(bookingDTO.isBlocked());
-<<<<<<< HEAD
-        bookingEntity.setGuestName(bookingDTO.getGuestName());
-        bookingEntity.setGuestEmail(bookingDTO.getGuestEmail());
-=======
-    
+
         // Manejar el caso del guest
         if (bookingDTO.getGuestId() != null) {
             // Si hay guestId, asignar un placeholder (se actualizará en el servicio si es válido)
@@ -78,11 +75,9 @@ public class BookingService {
             temporaryGuest.setEmail(bookingDTO.getGuestEmail());
             bookingEntity.setGuest(temporaryGuest); // Usuario temporal
         }
-    
->>>>>>> aafdaf32698d31f736f797c4f96a5b4ecf65c429
         return bookingEntity;
     }
-    
+
 
     // Método para calcular el precio total en base a los días y la tarifa diaria
     public BigDecimal calcultotalPrice(LocalDate checkIn, LocalDate checkout, BigDecimal dailyRate) {
@@ -93,14 +88,14 @@ public class BookingService {
     // Método para crear una nueva reserva
     public BookingDTO createBooking(BookingDTO bookingDTO) {
         Booking bookingEntity = convertBookingToEntity(bookingDTO);
-    
+
         // Obtener el Accommodation correspondiente al booking
         Integer accommodationId = bookingDTO.getAccommodationId();
         Optional<Accommodation> accommodation = accommodationRepository.findById(accommodationId);
         if (accommodation.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Accommodation not found for the provided ID");
         }
-    
+
         // Manejar el caso del guest
         User guest = null;
         if (bookingDTO.getGuestId() != null) {
@@ -112,7 +107,7 @@ public class BookingService {
             if (bookingDTO.getGuestName() == null || bookingDTO.getGuestEmail() == null) {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "GuestName and GuestEmail must be provided if GuestId is not present");
             }
-    
+
             // Crear un objeto User temporal y guardarlo en la base de datos
             User temporaryGuest = new User();
             temporaryGuest.setUsername(bookingDTO.getGuestName());
@@ -120,19 +115,20 @@ public class BookingService {
             temporaryGuest.setPassword("123456");
             guest = userRepository.save(temporaryGuest); // Guardar el usuario en la base de datos
         }
-    
+
         BigDecimal dailyRate = accommodation.get().getPricePerNight();
-    
+
         // Calcular el precio total
         BigDecimal totalPrice = calcultotalPrice(bookingEntity.getCheckInDate(), bookingEntity.getCheckOutDate(), dailyRate);
-    
+
         bookingEntity.setTotalPrice(totalPrice);
         bookingEntity.setGuest(guest);
         bookingEntity.setAccommodation(accommodation.get());
-    
+
         // Guardar la reserva
         Booking savedBooking = bookingRepository.save(bookingEntity);
-    
+
+        /*
         // Enviar correo de confirmación
         String userEmail = guest.getEmail();
         String subject = "Confirmación de Reserva";
@@ -142,10 +138,11 @@ public class BookingService {
                 "Fecha de entrada: " + bookingDTO.getCheckInDate() + "\n" +
                 "Fecha de salida: " + bookingDTO.getCheckOutDate() + "\n" +
                 "Precio total: " + totalPrice + "\n\n" +
+                "Tenga en cuenta que su reserva *NO ES SEGURA*, ya que se priorizan las actividades educativas. En caso de cambios en su reserva se le comunicará.\n" +
                 "Gracias por elegirnos.";
-    
+
         emailService.sendEmail(userEmail, subject, body);
-    
+*/
         return convertBookingToDTO(savedBooking);
     }
 
@@ -182,7 +179,7 @@ public class BookingService {
         return bookingRepository.findById(id).map(existingBooking -> {
             existingBooking.setCheckInDate(bookingDetailsDTO.getCheckInDate());
             existingBooking.setCheckOutDate(bookingDetailsDTO.getCheckOutDate());
-    
+
             // Manejar el caso del guest
             if (bookingDetailsDTO.getGuestId() != null) {
                 // Buscar el usuario en la base de datos
@@ -197,23 +194,23 @@ public class BookingService {
                 if (bookingDetailsDTO.getGuestName() == null || bookingDetailsDTO.getGuestEmail() == null) {
                     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "GuestName and GuestEmail must be provided if GuestId is not present");
                 }
-    
+
                 // Crear un objeto User temporal
                 User temporaryGuest = new User();
                 temporaryGuest.setUsername(bookingDetailsDTO.getGuestName());
                 temporaryGuest.setEmail(bookingDetailsDTO.getGuestEmail());
                 existingBooking.setGuest(temporaryGuest); // No persiste, solo se usa para la reserva
             }
-    
+
             // Obtener el Accommodation correspondiente
             Integer accommodationId = bookingDetailsDTO.getAccommodationId();
             Optional<Accommodation> accommodation = accommodationRepository.findById(accommodationId);
             if (accommodation.isEmpty()) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Accommodation not found for the provided ID");
             }
-    
+
             BigDecimal dailyRate = accommodation.get().getPricePerNight();
-    
+
             // Calcular el precio total
             BigDecimal totalPrice = calcultotalPrice(
                     bookingDetailsDTO.getCheckInDate(),
@@ -222,13 +219,13 @@ public class BookingService {
             );
             existingBooking.setTotalPrice(totalPrice);
             existingBooking.setAccommodation(accommodation.get());
-    
+
             Booking updatedBooking = bookingRepository.save(existingBooking);
             return convertBookingToDTO(updatedBooking);
         });
     }
-    
-    
+
+
 
     // Método para eliminar una reserva por ID
     public boolean deleteBooking(Integer id) {

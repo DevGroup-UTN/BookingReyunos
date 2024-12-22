@@ -25,9 +25,11 @@ public class EmailService {
                 "Fecha de entrada: " + booking.getCheckInDate() + "\n" +
                 "Fecha de salida: " + booking.getCheckOutDate() + "\n" +
                 "Precio total: " + totalPrice + "\n\n" +
+                "Tenga en cuenta que su reserva *NO ES SEGURA*, ya que se priorizan las actividades educativas. En caso de cambios en su reserva se le comunicará.\n" +
                 "Gracias por elegirnos.";
 
-        this.sendEmail(email, subject, body); // Usamos "this" para llamar al método local
+        System.out.println(body); // Debug
+        this.sendEmail(email, subject, body);
     }
 
     public void sendEmail(String to, String subject, String body) {
