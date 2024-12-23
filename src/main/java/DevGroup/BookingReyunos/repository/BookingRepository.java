@@ -28,7 +28,7 @@ public interface BookingRepository extends JpaRepository<Booking,Integer> {
     List<Booking> findByAccommodationIdAndDate(@Param("accommodationId") Integer accommodationId, @Param("date") LocalDate date);
     
     @Query(value = "SELECT b.accommodation_name AS name, COUNT(b.id) AS count, STRING_AGG(b.id::text, ',') AS bookingIds " +
-    "FROM bookings b " +
+    "FROM Booking b " +
     "WHERE b.check_in_date >= :checkInDate AND b.check_out_date <= :checkOutDate " +
     "GROUP BY b.accommodation_name " +
     "ORDER BY count DESC", 
