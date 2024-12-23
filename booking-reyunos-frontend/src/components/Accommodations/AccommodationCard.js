@@ -32,7 +32,11 @@ function AccommodationCard({ accommodation, user }) {
       })
       .then(() => {
         alert(
-          `Su reserva se ha creado correctamente. Para confirmarla, por favor comuníquese a nuestro WhatsApp: +5492604021708, o haga clic en el ícono que se encuentra en la esquina inferior derecha. Muchas Gracias!`
+          `¡Reserva creada correctamente! 
+    
+Para confirmar su reserva, comuníquese a nuestro WhatsApp: +5492604021708 o haga clic en el ícono en la esquina inferior derecha.
+Tenga en cuenta que su reserva *NO ES SEGURA* , ya que se priorizan las actividades educativas. En caso de cambios en su reserva se le comunicará
+¡Muchas gracias!.`
         );
         setShowCalendar(false);
       })
