@@ -34,7 +34,7 @@ const Programas = () => {
             <div className="programa-content">
               <h2>{programa.titulo}</h2>
               <p>{programa.descripcion}</p>
-              <Link to={`/programas/${programa.id}`} className="leer-mas">
+              <Link to={`/${programa.id}`} className="leer-mas">
                 Leer más »
               </Link>
             </div>
