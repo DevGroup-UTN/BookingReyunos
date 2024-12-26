@@ -186,8 +186,8 @@ function AccommodationStats() {
               <tbody>
                 {Object.entries(reservationDetails).map(([key, value]) => (
                   <tr key={key}>
-                    <td className="key-column">{key}</td>
-                    <td className="value-column">{value}</td>
+                    <td className="key-column">{key === "blocked" ? "Estado" : key}</td>
+                    <td className="value-column">{key === "blocked" ? (value ? "Cerrado" : "Abierto") : value}</td>
                   </tr>
                 ))}
               </tbody>
