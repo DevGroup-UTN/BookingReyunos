@@ -49,7 +49,7 @@ public class BookingService {
         bookingDTO.setCheckInDate(booking.getCheckInDate());
         bookingDTO.setAccommodationId(booking.getAccommodation().getId());
         bookingDTO.setDailyRate(booking.getAccommodation().getPricePerNight());
-
+        bookingDTO.setBlocked(booking.isBlocked());
         // Manejar guest
         if (booking.getGuest() != null) {
             bookingDTO.setGuestId(booking.getGuest().getId());
