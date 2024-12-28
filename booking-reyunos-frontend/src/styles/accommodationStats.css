@@ -6,19 +6,104 @@
     background-repeat: no-repeat;
     min-height: 80vh;
     align-items: center;
+    margin-bottom: 2vh;
     color: #ddd;
     justify-self: center;
     border-radius: 10px;
     padding: 8px 15px;
     width: 70vw;
 }
+
 .grafico h3 {
     font-variant: small-caps;
     font-size: 1.5em;
     text-align: center;
 }
 .grafico canvas{
+    display: flex !important;
+    justify-self: center;
+    height: 50vh !important;
     max-height: 50vh;
+}
+
+.grafico .detalles{
+    display: block;
+    margin-block: 2vh;
+    justify-items: center;
+}
+.reservation-details {
+    display:flexbox;
+    margin-block: 5px;
+    justify-self: center;
+    align-items: center;
+    border-radius: 8px;
+    border: #333 solid 1px;
+    padding: 4px;
+    background-color: #528bdfaa;
+    width: fit-content;
+}
+.reservation-details h3{
+    text-align: center;
+    max-height:min-content;
+    font-variant: small-caps;
+    font-size: 1.6em;
+    -webkit-text-stroke: #333 0.3px;
+    font-weight: bold;
+    margin-block: 5px;
+}
+.reservation-table tr:last-child td:last-of-type, .tabla-detalles tr:last-child td:last-of-type {
+    border-bottom-right-radius: 8px;
+}
+.reservation-table tr:last-child td:nth-last-child(2), .tabla-detalles tr:last-child td:nth-last-of-type(2) {
+    border-bottom-left-radius: 8px;
+}
+.reservation-table td{
+    text-transform: capitalize;
+    padding: 2px 5px;
+    border: #333 solid 1px;
+}
+.tabla-detalles {
+    background-color: #528bdfaa;
+    border-radius: 10px;
+    color: #dedeff;
+    border: #333 solid 1px;
+    justify-items: center;
+    justify-self: center;
+    max-width: fit-content;
+    padding: 5px;
+}
+.boton-detalles {
+    display: flex;  
+    justify-self: center;
+    justify-content: center;
+    margin-block: 1vw;
+    width: 10vw !important;
+}
+.tabla-detalles .titulo-detalles {
+    margin-block: 0;
+    text-align: center;
+    max-height:min-content;
+    font-variant: small-caps;
+    font-size: 1.4em;
+    -webkit-text-stroke: #333 0.3px;
+    font-weight: bold;
+}
+
+.tabla-detalles h3{
+    margin-block: 0;
+}
+.tabla-detalles th {
+    border: #333 solid 1px;
+    font-weight: bold;
+}
+.tabla-detalles td{
+    font-weight: bold;
+    border: solid #333 1px;
+    padding: 4px 8px;
+}
+
+.reserva {
+    cursor: pointer;
 }
 
 .accommodation-stats h2 {

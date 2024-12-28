@@ -1,0 +1,64 @@
+.programas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .programas-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .programas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .programa-card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .programa-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .programa-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .programa-content {
+    padding: 15px;
+  }
+  
+  .programa-content h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .programa-content p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .leer-mas {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .leer-mas:hover {
+    text-decoration: underline;
+  }
+  

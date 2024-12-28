@@ -49,7 +49,7 @@ public class BookingService {
         bookingDTO.setCheckInDate(booking.getCheckInDate());
         bookingDTO.setAccommodationId(booking.getAccommodation().getId());
         bookingDTO.setDailyRate(booking.getAccommodation().getPricePerNight());
-
+        bookingDTO.setBlocked(booking.isBlocked());
         // Manejar guest
         if (booking.getGuest() != null) {
             bookingDTO.setGuestId(booking.getGuest().getId());
@@ -264,7 +264,12 @@ public class BookingService {
     public List<Map<String, Object>> getAccommodationStats(LocalDate checkInDate, LocalDate checkOutDate) {
         List<Object[]> results = bookingRepository.findAccommodationStats(checkInDate, checkOutDate);
         return results.stream()
-                .map(result -> Map.of("name", result[0], "count", result[1]))
+                .map(result -> Map.of(
+                        "accommodationId", result[0], // ID del alojamiento
+                        "name", result[1],            // Nombre del alojamiento
+                        "count", result[2],           // Conteo de reservas
+                        "bookingIds", result[3]       // IDs de reservas
+                ))
                 .collect(Collectors.toList());
     }
 

@@ -1,26 +1,29 @@
 import { useState } from "react";
 import axios from "axios";
 import { Pie } from "react-chartjs-2";
-import "chart.js/auto"; // Importación para gráficos con Chart.js
-import '../styles/accommodationStats.css';
+import "chart.js/auto";
+import "../styles/accommodationStats.css";
 
 function AccommodationStats() {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [chartData, setChartData] = useState(null);
+  const [showDetails, setShowDetails] = useState(false);
+  const [reservationDetails, setReservationDetails] = useState(null);
 
   const fetchData = async () => {
     try {
-      const start = new Date(startDate).toISOString().split('T')[0];
-      const end = new Date(endDate).toISOString().split('T')[0];
-      const response = await axios.get("https://bookingreyunos.onrender.com/booking/accommodation-stats", {
-        params : {
-          checkInDate : start,
-          checkOutDate : end
+      const start = new Date(startDate).toISOString().split("T")[0];
+      const end = new Date(endDate).toISOString().split("T")[0];
+      const response = await axios.get(
+        "https://bookingreyunos.onrender.com/booking/accommodation-stats",
+        {
+          params: {
+            checkInDate: start,
+            checkOutDate: end,
+          },
         }
-        
-      });
-      console.log(response.data);
+      );
       const data = response.data;
       setChartData({
         labels: data.map((item) => item.name),
@@ -46,10 +49,31 @@ function AccommodationStats() {
             ],
           },
         ],
+        rawData: data,
       });
     } catch (error) {
       console.error("Error fetching data", error);
     }
+  };
+
+  const fetchReservationDetails = async (reservationId) => {
+    try {
+      const response = await axios.get(
+        `https://bookingreyunos.onrender.com/booking/${reservationId}`
+      );
+      setReservationDetails(response.data);
+    } catch (error) {
+      console.error("Error fetching reservation details", error);
+    }
+  };
+
+  const toggleDetails = () => {
+    setShowDetails((prevShowDetails) => {
+      if (prevShowDetails) {
+        setReservationDetails(null); // Limpia los detalles si ocultamos la tabla
+      }
+      return !prevShowDetails;
+    });
   };
 
   return (
@@ -83,38 +107,94 @@ function AccommodationStats() {
         <button type="submit">Consultar</button>
       </form>
       {chartData && (
-        <div className="grafico">
-          <h3>Gráfico de Reservas</h3>
-          <Pie
-          data={chartData}
-          options={{
-            plugins: {
-              legend: {
-                labels: {
-                  font: {
-                    size: 14, // Tamaño de la fuente de la leyenda
-                    family: 'Arial', // Familia de la fuente
-                    weight: 'bold', // Peso de la fuente
+        <>
+          <div className="grafico">
+            <Pie
+              data={chartData}
+              options={{
+                plugins: {
+                  legend: {
+                    labels: {
+                      font: {
+                        size: 14,
+                        family: "Arial",
+                        weight: "bold",
+                      },
+                      color: "#fff",
+                    },
                   },
-                  color: '#fff', // Color del texto de la leyenda
-                },
-              },
-              tooltip: {
-                backgroundColor: '#222', // Fondo del tooltip
-                titleColor: '#fff', // Color del título del tooltip
-                bodyColor: '#fff', // Color del cuerpo del tooltip
-                callbacks: {
-                  label: function (tooltipItem) {
-                    const label = tooltipItem.label || '';
-                    const value = tooltipItem.raw;
-                    return `${label}: ${value} reservas`; // Texto del tooltip
+                  tooltip: {
+                    backgroundColor: "#222",
+                    titleColor: "#fff",
+                    bodyColor: "#fff",
+                    callbacks: {
+                      label: function (tooltipItem) {
+                        const label = tooltipItem.label || "";
+                        const value = tooltipItem.raw;
+                        return `${label}: ${value} reservas`;
+                      },
+                    },
                   },
                 },
-              },
-            },
-          }}
-        />
-        </div>
+              }}
+            />
+          </div>
+          <button className="boton-detalles" onClick={toggleDetails}>
+            {showDetails ? "Ocultar Detalles" : "Más Detalles"}
+          </button>
+          {showDetails && (
+            <div className="tabla-detalles">
+              <div className="titulo-detalles">
+                <h3>Detalles de Reservas</h3>
+              </div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Alojamiento</th>
+                    <th>Ids de Reservas</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {chartData.rawData.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.name}</td>
+                      <td>
+                        {item.bookingIds.split(",").map((bookingId) => (
+                          <span
+                            key={bookingId}
+                            className="reserva"
+                            onClick={() => fetchReservationDetails(bookingId)}
+                          >
+                            {bookingId}, 
+                          </span>
+                        ))}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
+      )}
+      {reservationDetails && (
+        <div className="reservation-details">
+          <h3>Detalles de la Reserva</h3>
+          <div className="reservation-table-div">
+            {reservationDetails && (
+            <table className="reservation-table">
+              <tbody>
+                {Object.entries(reservationDetails).map(([key, value]) => (
+                  <tr key={key}>
+                    <td className="key-column">{key === "blocked" ? "Estado" : key}</td>
+                    <td className="value-column">{key === "blocked" ? (value ? "Cerrado" : "Abierto") : value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          </div>
+      </div>
       )}
     </div>
   );
