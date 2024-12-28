@@ -143,8 +143,6 @@ public class BookingService {
 
         // Guardar la reserva
         Booking savedBooking = bookingRepository.save(bookingEntity);
-
-        /*
         // Enviar correo de confirmación
         String userEmail = guest.getEmail();
         String subject = "Confirmación de Reserva";
@@ -158,7 +156,6 @@ public class BookingService {
                 "Gracias por elegirnos.";
 
         emailService.sendEmail(userEmail, subject, body);
-*/
         return convertBookingToDTO(savedBooking);
     }
 

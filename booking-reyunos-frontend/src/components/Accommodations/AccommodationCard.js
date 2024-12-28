@@ -6,9 +6,9 @@ import ReservationCalendar from './ReservationCalendar'; // Importar el componen
 
 function AccommodationCard({ accommodation, user }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [showCalendar, setShowCalendar] = useState(false); // Estado para mostrar/ocultar el calendario
+  const [showCalendar, setShowCalendar] = useState(false);
 
-  const images = accommodation.imageUrl || []; // imágenes del backend
+  const images = accommodation.imageUrl || [];
 
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -31,18 +31,32 @@ function AccommodationCard({ accommodation, user }) {
         checkOutDate: checkOutDate,
       })
       .then(() => {
-        alert(
-          `¡Reserva creada correctamente! 
-    
-Para confirmar su reserva, comuníquese a nuestro WhatsApp: +5492604021708 o haga clic en el ícono en la esquina inferior derecha.
+        alert(`¡Reserva creada correctamente! Para confirmar su reserva, comuníquese a nuestro WhatsApp: +5492604021708 o haga clic en el ícono en la esquina inferior derecha.
 Tenga en cuenta que su reserva *NO ES SEGURA* , ya que se priorizan las actividades educativas. En caso de cambios en su reserva se le comunicará
-¡Muchas gracias!.`
-        );
+¡Muchas gracias!.`);
         setShowCalendar(false);
+        sendEmailConfirmation(checkInDate, checkOutDate);
       })
       .catch((error) => {
         console.error('Error creating reservation:', error);
         alert('Hubo un error al procesar su reserva. Por favor, inténtelo nuevamente.');
+      });
+  };
+
+  const sendEmailConfirmation = (checkInDate, checkOutDate) => {
+    const totalPrice = accommodation.pricePerNight ? accommodation.pricePerNight * 10 : 0;
+  
+    axios
+      .post('https://bookingreyunos.onrender.com/email/send-email', {
+        to: user.id,
+        subject: 'Confirmación de Reserva',
+        body: `Detalles de la reserva:\nAlojamiento: ${accommodation.name}\nCheck-in: ${checkInDate}\nCheck-out: ${checkOutDate}\nTotal: ${totalPrice}
+       \nTenga en cuenta que su reserva *NO ES SEGURA*, ya que se priorizan las actividades educativas. En caso de cambios en su reserva se le comunicará.
+  ¡Muchas gracias!`
+      })
+      .catch((error) => {
+        console.error('Error sending email:', error.response?.data || error.message);
+        alert('Hubo un error al enviar el correo de confirmación.');
       });
   };
 
@@ -69,7 +83,7 @@ Tenga en cuenta que su reserva *NO ES SEGURA* , ya que se priorizan las activida
       </div>
       <div className="accommodation-details">
         <h3>{accommodation.name}</h3>
-        <p className='accommodation-description'>Descripción: {accommodation.description}</p>
+        <p className="accommodation-description">Descripción: {accommodation.description}</p>
         {user?.role === 'GUEST' && (
           <>
             <button onClick={() => setShowCalendar(!showCalendar)} className="reserve-button">

@@ -4,7 +4,7 @@
     font-size: 14px;
     margin-inline:  auto;
     margin-top: 15vh;
-    display: box;
+    display: flex;
     width: 90vw;
     background-repeat: no-repeat;
     background-size: contain;
