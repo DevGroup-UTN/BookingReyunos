@@ -24,19 +24,40 @@ function Contacto() {
     // Aquí puedes usar fetch o axios para enviar los datos
   };
 
+  const distancias = [
+    { lugar: "Ciudad San Rafael, Mendoza", distancia: "32 km" },
+    { lugar: "Villa 25 de Mayo", distancia: "8 km" },
+    { lugar: "Las Leñas", distancia: "235 km" },
+    { lugar: "Valle Grande", distancia: "68 km" },
+    { lugar: "Represa El Nihuil", distancia: "65 km" },
+    { lugar: "Bodega Bianchi", distancia: "22.5 km" },
+    { lugar: "Aeropuerto de San Rafael 'Santiago Germanó'", distancia: "24.2 km" },
+    { lugar: "Terminal De Omnibus San Rafael", distancia: "32 km" },
+  ];
+
   return (
-    <div className="containerUyC" style={{backgroundImage: "url('/images/logo-utn-nav.png')"}}>
+    <div className="containerUyC" style={{ backgroundImage: "url('/images/logo-utn-nav.png')" }}>
       <h1>Ubicación y Contacto</h1>
       <div className="container">
-        {/* Contenedor del mapa */}
-        <div className="contenedor-contacto">
+
+        <div className="contenedor-contacto"> 
           <iframe
             title="Ubicación UTN Los Reyunos"
             className="contact-map"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6568.637855826389!2d-68.642394!3d-34.596096!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28e87ee99f8e2789!2sUTN%20-%20Los%20Reyunos!5e0!3m2!1ses!2sar!4v1615907804207!5m2!1ses!2sar"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6568.637855826389!2d-68.642394!3d-34.596096!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28e87ee99f8e2789!2sUTN%20-%20Los%20Reyunos!5e0!3m2!1ses!2sar!4v1615907804207!5m2!1ses!2sar" 
             allowFullScreen
             loading="lazy"
           ></iframe>
+          {/* Sección de Distancias */}
+          <div className="distancias-container">
+            <h2>Distancias</h2>
+            {distancias.map((item, index) => (
+              <div className="distancia" key={index}>
+                <span>{item.lugar}:</span>
+                <span>{item.distancia}</span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Formulario */}
@@ -119,6 +140,7 @@ function Contacto() {
           </div>
           <button type="submit">Enviar Consulta</button>
         </form>
+
       </div>
     </div>
   );

@@ -21,40 +21,38 @@
 
 .container {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start; /* Alinea los elementos al inicio */
-  align-items: flex-start; /* Mantén la alineación superior */
-  gap: 2rem; /* Espacio entre el mapa y el formulario */
+  flex-direction: row; /* Distribución horizontal */
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
 }
-
 
 .contenedor-contacto {
   display: flex;
-  flex: 1; /* Permite que el mapa ocupe espacio dinámico */
-  justify-content: flex-start; /* Posiciona el mapa a la izquierda */
+  flex-direction: column; /* ¡Añadido! Para que el mapa y las distancias se apilen verticalmente */
+  /* flex: 1; */ 
+  justify-content: flex-start;
 }
 
 .contact-map {
-  width: 40vw; /* Aumenta el ancho del mapa, ajustable a tus necesidades */
-  height: 60vh; /* Ajusta la altura del mapa */
+  width: 35vw; /* ¡Modificado! Reducido el ancho del mapa */
+  height: 40vh;
   border: none;
   border-radius: 10px;
-  margin-left: 5vw; /* Mueve el mapa hacia la izquierda si es necesario */
-  position: relative; /* Permite mover el mapa con 'left' si se requiere */
-  left: -5rem; /* Desplaza el mapa más a la izquierda si es necesario */
+  margin-left: 5vw;
+  position: relative;
+  left: -5rem;
 }
 
 .contact-block {
-  width: 40vw; /* Ajusta el ancho del formulario */
+  width: 35vw; /* ¡Modificado! Reducido el ancho del formulario */
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: rgba(0, 190, 255, 0.4);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-left: -5rem; /* Mueve el formulario hacia la izquierda */
+  /* margin-left: -5rem; */ /* ¡Eliminado!  */ 
 }
-
-
 
 .contact-block input,
 .contact-block textarea {
@@ -77,6 +75,21 @@
 
 .contact-block button:hover {
   background-color: #0056b3;
+}
+
+.distancias-container {
+  width: 35vw; /* ¡Modificado! Ajustado el ancho */
+  margin-top: 2rem;
+  margin-left: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.distancia {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
 }
 
 @media (max-width: 768px) {
