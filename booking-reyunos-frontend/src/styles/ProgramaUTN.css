@@ -1,0 +1,19 @@
+.programa-utn-container {
+    width: 60%;  /* Ajusta el ancho de la imagen */
+    margin: 0 auto; /* Centra la imagen */
+  }
+  
+  .programa-utn-container img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .programa-utn-container h2 {
+    font-size: 1.5rem; /* Ajusta el tamaño del título */
+    margin-top: 1rem; /* Espacio superior */
+  }
+  
+  .programa-utn-container p {
+    text-align: justify; /* Justifica el texto */
+    line-height: 1.5; /* Ajusta el interlineado */
+  }
