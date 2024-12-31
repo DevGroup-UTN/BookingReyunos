@@ -17,3 +17,11 @@
     text-align: justify; /* Justifica el texto */
     line-height: 1.5; /* Ajusta el interlineado */
   }
+
+  .volver-programas {
+    color: #5800e7;
+    display: block; /* Para que ocupe todo el ancho */
+    text-align: left; /* Alinea el texto a la izquierda */
+    margin-bottom: 1rem; /* Espacio inferior */
+    /* ... otros estilos que desees ... */
+  }
