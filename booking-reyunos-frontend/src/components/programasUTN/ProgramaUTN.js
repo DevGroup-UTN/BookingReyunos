@@ -1,9 +1,14 @@
 import React from 'react';
 import '../../styles/ProgramaUTN.css'; // Importa el archivo CSS
+import { Link } from 'react-router-dom';
 
 function ProgramaUTN() {
   return (
     <div className="programa-utn-container">
+      <Link to="/programas" className="volver-programas">
+        &lt;&lt;&lt; Volver a Programas
+      </Link> 
+
        <img src="/images/programas/programas1.png" alt="Programa UTN" />
 
       <h2>Módulos Académicos Acreditables - UTN</h2>
@@ -18,10 +23,10 @@ function ProgramaUTN() {
       <p>La actividad se desarrolla en una (1) semana, comenzando los días lunes a las 09:00 hs (pudiendo arribar la delegación en la noche del domingo previo) y finalizando el día viernes siguiente a las 16:00 hs (inicio viaje de regreso de la delegación).</p>
 
       <h3>Destinación:</h3>
-      <p>Para alumnos avanzados de cualquiera de las carreras acreditadas de las Facultades Regionales que lo soliciten, cursando 3er año o más de la carrera. Cada Facultad Regional establecerá los criterios de selección para el otorgamiento de las becas a sus alumnos. Los mismos podrán ser utilizados en actividades de "Extensión", "Cultura", "Deporte", etc.</p>
+      <p>Para alumnos avanzados de cualquiera de las especialidades de las carreras de Ingeniería que estén cursando materias de los últimos años de la carrera. Cada Facultad resolverá la selección definitiva siguiendo parámetros propios a cada realidad local (promedios, participación en actividades de la Facultad, condición de becario, etc.)</p>
 
       <h3>Modalidad:</h3>
-      <p>Cada viaje será realizado con una carrera en particular de una (1) Facultad Regional, a fin de definir los ejes del viaje y favorecer la integración y el trabajo grupal a la par que los trabajos de desarrollo del programa y la visita profesional a los emprendimientos productivos y/o proyectos de desarrollo de la Región. (Coordinación de las becas, etc.)</p>
+      <p>Cada viaje será realizado de manera compartida por dos (2) Facultades Regionales de distintos lugares del país, para favorecer la integración y dar lugar a la participación de todas las sedes de la UTN, una vez por año, durante los años subsiguientes.)</p>
 
       <h3>Matrícula:</h3>
       <p>Se establece, por cada Facultad, un cupo de veintidós (20) personas en total, dentro del cual se consideran incluidos 1 o 2 docentes a cargo de la delegación y los choferes de los medios de movilidad para el traslado; en el caso que así lo hubiere resuelto la Facultad.</p>
