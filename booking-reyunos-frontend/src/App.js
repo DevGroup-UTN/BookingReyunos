@@ -15,6 +15,7 @@ import Infraestructura from './components/Infraestructura';
 import Programas from './components/Programas';
 import ProgramaUTN from './components/programasUTN/ProgramaUTN';
 import ProgramaVEA from './components/programasUTN/ProgramaVEA';
+import ProgramaRecreativo from './components/programasUTN/ProgramaRE';
 import LoginForm from './components/loginForms';
 import RegisterForm from './components/RegisterForm';
 import ForgotPassword from './components/ForgotPassword';
@@ -46,6 +47,7 @@ function App() {
             <Route path="/programas" element={<Programas />} />
             <Route path="/programas/utn" element={<ProgramaUTN />} />
             <Route path="/programas/vea" element={<ProgramaVEA />} />
+            <Route path="/programas/recreativo" element={<ProgramaRecreativo />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
