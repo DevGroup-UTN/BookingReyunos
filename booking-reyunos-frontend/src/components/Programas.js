@@ -7,19 +7,22 @@ const programas = [
     id: "utn",
     titulo: "Programa UTN",
     descripcion: "Módulos Académicos Acreditables – UTN.",
-    img: "https://via.placeholder.com/300x200?text=Programa+UTN",
+    img: "/images/programas/programas1.png",
+    portada: "/images/programas/programas1.png", // Misma imagen que img
   },
   {
     id: "vea",
     titulo: "Programa VEA",
     descripcion: "Viajes de Estudios Académicos – VEA.",
-    img: "https://via.placeholder.com/300x200?text=Programa+VEA",
+    img: "/images/programas/programa-vea-imagen.jpg",
+    portada: "/images/programas/programa-vea-portada.jpg",
   },
   {
     id: "recreativo",
     titulo: "Programa Recreativo",
     descripcion: "Turismo Académico Recreativo.",
-    img: "https://via.placeholder.com/300x200?text=Programa+Recreativo",
+    img: "/images/programas/programa-recreativo-imagen.jpg",
+    portada: "/images/programas/programa-recreativo-portada.jpg",
   },
 ];
 
@@ -29,17 +32,15 @@ const Programas = () => {
       <h1>Programas</h1>
       <div className="programas-grid">
         {programas.map((programa) => (
-          <div key={programa.id} className="programa-card">
-            <img src={programa.img} alt={programa.titulo} />
+          <Link key={programa.id} to={`/programas/${programa.id}`} className="programa-card">
+            <img src={programa.portada} alt={programa.titulo} className="portada" />
             <div className="programa-content">
               <h2>{programa.titulo}</h2>
               <p>{programa.descripcion}</p>
-              <Link to={`/programas/${programa.id}`} className="leer-mas">
-                Leer más »
-              </Link>
             </div>
-          </div>
-        ))}
+          </Link>
+        ))
+        }
       </div>
     </div>
   );

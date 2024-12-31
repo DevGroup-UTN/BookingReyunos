@@ -13,6 +13,7 @@ import Dashboard from './pages/Dashboard';
 import Contacto from './components/Contacto';
 import Infraestructura from './components/Infraestructura';
 import Programas from './components/Programas';
+import ProgramaUTN from './components/programasUTN/ProgramaUTN';
 import LoginForm from './components/loginForms';
 import RegisterForm from './components/RegisterForm';
 import ForgotPassword from './components/ForgotPassword';
@@ -42,6 +43,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/infraestructura" element={<Infraestructura />} />
             <Route path="/programas" element={<Programas />} />
+            <Route path="/programas/utn" element={<ProgramaUTN />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
