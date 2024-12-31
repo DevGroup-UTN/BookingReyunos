@@ -8,7 +8,7 @@
   align-items: center;
   background-repeat: no-repeat;
   background-size: contain;
-  background-color: #8888aaaa;
+  background-color: #7a7a7ab5;
   border: solid #9e9eaf 1px;
   border-radius: 15px;
 }
@@ -49,7 +49,7 @@
   padding: 2rem;
   border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: rgba(0, 190, 255, 0.4);
+  background-color: r7a7a7ab5(0, 190, 255, 0.4);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   /* margin-left: -5rem; */ /* ¡Eliminado!  */ 
 }
