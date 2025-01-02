@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Asegúrate de tener axios instalado
 import '../styles/Contacto.css';
 
 function Contacto() {
@@ -18,37 +19,50 @@ function Contacto() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Datos enviados:', formData);
-    // Aquí puedes usar fetch o axios para enviar los datos
+    try {
+      const response = await axios.post('https://tu-backend.com/contact/send', formData);
+      alert('Consulta enviada con éxito. Nos pondremos en contacto contigo pronto.');
+      setFormData({
+        FirstName: '',
+        LastName: '',
+        Email1: '',
+        Email2: '',
+        Phone: '',
+        Country: '',
+        State: '',
+        Query: '',
+      });
+    } catch (error) {
+      console.error('Error al enviar la consulta:', error.response?.data || error.message);
+      alert('Hubo un error al enviar la consulta. Por favor, inténtelo nuevamente.');
+    }
   };
 
   const distancias = [
-    { lugar: "Ciudad San Rafael, Mendoza", distancia: "32 km" },
-    { lugar: "Villa 25 de Mayo", distancia: "8 km" },
-    { lugar: "Las Leñas", distancia: "235 km" },
-    { lugar: "Valle Grande", distancia: "68 km" },
-    { lugar: "Represa El Nihuil", distancia: "65 km" },
-    { lugar: "Bodega Bianchi", distancia: "22.5 km" },
-    { lugar: "Aeropuerto de San Rafael 'Santiago Germanó'", distancia: "24.2 km" },
-    { lugar: "Terminal De Omnibus San Rafael", distancia: "32 km" },
+    { lugar: 'Ciudad San Rafael, Mendoza', distancia: '32 km' },
+    { lugar: 'Villa 25 de Mayo', distancia: '8 km' },
+    { lugar: 'Las Leñas', distancia: '235 km' },
+    { lugar: 'Valle Grande', distancia: '68 km' },
+    { lugar: 'Represa El Nihuil', distancia: '65 km' },
+    { lugar: 'Bodega Bianchi', distancia: '22.5 km' },
+    { lugar: 'Aeropuerto de San Rafael "Santiago Germanó"', distancia: '24.2 km' },
+    { lugar: 'Terminal De Omnibus San Rafael', distancia: '32 km' },
   ];
 
   return (
     <div className="containerUyC" style={{ backgroundImage: "url('/images/logo-utn-nav.png')" }}>
       <h1>Ubicación y Contacto</h1>
       <div className="container">
-
-        <div className="contenedor-contacto"> 
+        <div className="contenedor-contacto">
           <iframe
             title="Ubicación UTN Los Reyunos"
             className="contact-map"
-            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6568.637855826389!2d-68.642394!3d-34.596096!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28e87ee99f8e2789!2sUTN%20-%20Los%20Reyunos!5e0!3m2!1ses!2sar!4v1615907804207!5m2!1ses!2sar" 
+            src="https://www.google.com/maps/embed?...etc"
             allowFullScreen
             loading="lazy"
           ></iframe>
-          {/* Sección de Distancias */}
           <div className="distancias-container">
             <h2>Distancias</h2>
             {distancias.map((item, index) => (
@@ -140,7 +154,6 @@ function Contacto() {
           </div>
           <button type="submit">Enviar Consulta</button>
         </form>
-
       </div>
     </div>
   );
