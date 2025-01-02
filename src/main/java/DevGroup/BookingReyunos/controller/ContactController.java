@@ -32,7 +32,7 @@ public class ContactController {
             );
 
             // Enviar el correo
-            emailService.sendEmail("destinatario@tu-dominio.com", subject, body);
+            emailService.sendEmail("angelovellar24@gmail.com", subject, body);
 
             return ResponseEntity.ok("Mensaje enviado con éxito.");
         } catch (Exception e) {
@@ -40,4 +40,3 @@ public class ContactController {
         }
         }
     }
-}

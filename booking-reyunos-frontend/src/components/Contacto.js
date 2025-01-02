@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Asegúrate de tener axios instalado
+import axios from 'axios';
 import '../styles/Contacto.css';
 
 function Contacto() {
@@ -21,8 +21,18 @@ function Contacto() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validar que ambos correos coincidan
+    if (formData.Email1 !== formData.Email2) {
+      alert('Los correos electrónicos no coinciden. Por favor, verifícalos.');
+      return;
+    }
+
     try {
-      const response = await axios.post('https://tu-backend.com/contact/send', formData);
+      // Enviar los datos al backend
+      await axios.post('http://localhost:8080/contact/send', formData);
+
+      // Mostrar mensaje de éxito y limpiar formulario
       alert('Consulta enviada con éxito. Nos pondremos en contacto contigo pronto.');
       setFormData({
         FirstName: '',
@@ -35,31 +45,33 @@ function Contacto() {
         Query: '',
       });
     } catch (error) {
+      // Manejar errores
       console.error('Error al enviar la consulta:', error.response?.data || error.message);
       alert('Hubo un error al enviar la consulta. Por favor, inténtelo nuevamente.');
     }
   };
 
   const distancias = [
-    { lugar: 'Ciudad San Rafael, Mendoza', distancia: '32 km' },
-    { lugar: 'Villa 25 de Mayo', distancia: '8 km' },
-    { lugar: 'Las Leñas', distancia: '235 km' },
-    { lugar: 'Valle Grande', distancia: '68 km' },
-    { lugar: 'Represa El Nihuil', distancia: '65 km' },
-    { lugar: 'Bodega Bianchi', distancia: '22.5 km' },
-    { lugar: 'Aeropuerto de San Rafael "Santiago Germanó"', distancia: '24.2 km' },
-    { lugar: 'Terminal De Omnibus San Rafael', distancia: '32 km' },
+    { lugar: "Ciudad San Rafael, Mendoza", distancia: "32 km" },
+    { lugar: "Villa 25 de Mayo", distancia: "8 km" },
+    { lugar: "Las Leñas", distancia: "235 km" },
+    { lugar: "Valle Grande", distancia: "68 km" },
+    { lugar: "Represa El Nihuil", distancia: "65 km" },
+    { lugar: "Bodega Bianchi", distancia: "22.5 km" },
+    { lugar: "Aeropuerto de San Rafael 'Santiago Germanó'", distancia: "24.2 km" },
+    { lugar: "Terminal De Omnibus San Rafael", distancia: "32 km" },
   ];
 
   return (
     <div className="containerUyC" style={{ backgroundImage: "url('/images/logo-utn-nav.png')" }}>
       <h1>Ubicación y Contacto</h1>
       <div className="container">
-        <div className="contenedor-contacto">
+
+        <div className="contenedor-contacto"> 
           <iframe
             title="Ubicación UTN Los Reyunos"
             className="contact-map"
-            src="https://www.google.com/maps/embed?...etc"
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6568.637855826389!2d-68.642394!3d-34.596096!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x28e87ee99f8e2789!2sUTN%20-%20Los%20Reyunos!5e0!3m2!1ses!2sar!4v1615907804207!5m2!1ses!2sar" 
             allowFullScreen
             loading="lazy"
           ></iframe>
@@ -74,7 +86,6 @@ function Contacto() {
           </div>
         </div>
 
-        {/* Formulario */}
         <form onSubmit={handleSubmit} className="contact-block">
           <div>
             <label>Nombre:</label>
@@ -154,6 +165,7 @@ function Contacto() {
           </div>
           <button type="submit">Enviar Consulta</button>
         </form>
+
       </div>
     </div>
   );
