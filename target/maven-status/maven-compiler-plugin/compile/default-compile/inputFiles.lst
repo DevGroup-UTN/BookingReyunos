@@ -1,4 +1,5 @@
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\ResetPasswordRequest.java
+C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\dto\ContactRequestDTO.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\model\Review.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\BookingController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\security\JwtUtil.java
@@ -31,6 +32,7 @@ C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingRey
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\model\User.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\exceptions\InvalidCredentialsException.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\model\UserBuyer.java
+C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\controller\ContactController.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\model\Accommodation.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\security\SecurityConfig.java
 C:\Users\enzo_\Segundo_Semestre\BookingReyunos\src\main\java\DevGroup\BookingReyunos\service\AccommodationService.java

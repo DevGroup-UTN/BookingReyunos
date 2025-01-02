@@ -26,7 +26,9 @@ DevGroup\BookingReyunos\dto\UserDTO.class
 DevGroup\BookingReyunos\model\Accommodation.class
 DevGroup\BookingReyunos\controller\MercadoPagoController.class
 DevGroup\BookingReyunos\BookingReyunosApplication.class
+DevGroup\BookingReyunos\controller\ContactController.class
 DevGroup\BookingReyunos\dto\TokenDTO.class
+DevGroup\BookingReyunos\dto\ContactRequestDTO.class
 DevGroup\BookingReyunos\exceptions\InvalidCredentialsException.class
 DevGroup\BookingReyunos\model\UserBuyer.class
 DevGroup\BookingReyunos\dto\AccommodationDTO.class
