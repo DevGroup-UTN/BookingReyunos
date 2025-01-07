@@ -1,14 +1,17 @@
 .programas-container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
   text-align: center;
   min-height: 60vh;
+  position: relative;
+  background-color: #8888aaaa;
+  
 }
 
 .programas-container h1 {
   font-size: 2rem;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .programas-grid {
@@ -46,10 +49,12 @@
   left: 0;
   width: 100%;
   color: white; /* Color del texto */
+  position: relative;
+  z-index: 1;
 }
 
 .programa-content h2 {
-  font-size: 1.25rem;
+  font-size: 1rem;
   margin-bottom: 10px;
   color: rgb(7, 7, 7); /* Color del texto */
 }
@@ -57,4 +62,50 @@
 .programa-content p {
   font-size: 0.9rem;
   color: white; /* Color del texto */
+}
+
+.fondo-programas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5; /* Ajusta la opacidad de la imagen */
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+  
+  .programas-grid {
+    /* ... ajusta el número de columnas de la grilla ... */
+    flex-direction: column; /* Muestra las tarjetas en una sola columna */
+  }
+
+  .programa-card {
+    /* ... ajusta el ancho de las tarjetas ... */
+    width: 90%; /* Ocupa el 90% del ancho de la pantalla */
+    margin-left: 0;
+  }
+
+  .programa-content h2 {
+    /* ... ajusta el tamaño de la fuente ... */
+    font-size: 1rem; 
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* ... estilos para tablets ... */
+}
+
+/* Pantallas pequeñas */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  /* ... estilos para pantallas pequeñas ... */
+}
+
+/* Pantallas grandes */
+@media (min-width: 1366px) {
+  /* ... estilos para pantallas grandes ... */
 }
