@@ -4,6 +4,19 @@ import { Link } from 'react-router-dom';
 function ProgramaUTN() {
   return (
     <div className="programa-utn-container">
+      <img
+        src="/images/logo-utn-nav.png"
+        alt="Fondo Programas"
+        className="fondo-programas"
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          width: "110%",
+          height: "80%",
+          objectFit: "cover",
+        }}
+      />
         <Link to="/programas" className="volver-programas">
         &lt;&lt;&lt; Volver a Programas
       </Link> 

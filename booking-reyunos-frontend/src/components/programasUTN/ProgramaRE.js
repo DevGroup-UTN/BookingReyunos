@@ -5,12 +5,25 @@ import { Link } from 'react-router-dom';
 function ProgramaUTN() {
   return (
     <div className="programa-utn-container">
+      <img
+        src="/images/logo-utn-nav.png"
+        alt="Fondo Programas"
+        className="fondo-programas"
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          width: "110%",
+          height: "80%",
+          objectFit: "cover",
+        }}
+      />
+      <div className="contenido-programa-re"></div>
         <Link to="/programas" className="volver-programas">
         &lt;&lt;&lt; Volver a Programas
       </Link> 
        <img src="/images/programas/programas3.png" alt="Programa UTN" />
        <h2>Turismo Académico Recreativo – Primarios y Secundarios</h2>
-
       <h3>Objetivos:</h3>
       <p>Realizar una combinación de actividades recreativas, formativas y educativas para los alumnos, con actividades académicas acordes a su edad, permitiendo incorporar conocimientos sobre la realidad de nuestro territorio, en cuanto a las industrias regionales, generación de energía y la distribución del agua. Además de conocer las bellezas de nuestros paisajes y poder disfrutar junto a sus compañeros de una estadía placentera.</p>
       <h3>Metodología:</h3>
